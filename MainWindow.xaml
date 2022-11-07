@@ -4,9 +4,121 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SlidingTile_LevelEditor"
+        xmlns:icons ="clr-namespace:SlidingTile_LevelEditor.IconXMAL"
         mc:Ignorable="d"
-        Title="Sliding Tile - Level Editor" Height="450" Width="800">
+        Title="Sliding Tile - PC Level Editor" Height="720" Width="1280">
+    <Window.CommandBindings>
+        <CommandBinding x:Name="commandBinding_New" Command="New" CanExecute="commandBinding_New_CanExecute" Executed="commandBinding_New_Executed"/>
+        <CommandBinding x:Name="commandBinding_Exit" Command="local:CustomCommands.Exit" CanExecute="commandBinding_Exit_CanExecute" Executed="commandBinding_Exit_Executed"/>
+        <CommandBinding x:Name="commandBinding_AboutProgram" Command="local:CustomCommands.AboutProgram" CanExecute="commandBinding_AboutProgram_CanExecute" Executed="commandBinding_AboutProgram_Executed"/>
+    </Window.CommandBindings>
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Command="New">
+                        <MenuItem.Icon>
+                            <Viewbox Stretch="Uniform" Width="16" Height="16">
+                                <icons:NewIcon/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="local:CustomCommands.Exit">
+                        <MenuItem.Icon>
+                            <Viewbox Stretch="Uniform" Width="16" Height="16">
+                                <icons:QuitIcon/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Command="local:CustomCommands.AboutProgram">
+                        <MenuItem.Icon>
+                            <Viewbox Stretch="Uniform" Width="16" Height="16">
+                                <icons:AboutProgramIcon/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <ToolBar Grid.Row="1">
+            <Button Command="New" ToolTip="New">
+                <Viewbox Width="24" Height="24" Stretch="Uniform">
+                    <icons:NewIcon/>
+                </Viewbox>
+            </Button>
+            <Separator/>
+            <Button Command="local:CustomCommands.AboutProgram" ToolTip="About program">
+                <Viewbox Width="24" Height="24" Stretch="Uniform">
+                    <icons:AboutProgramIcon/>
+                </Viewbox>
+            </Button>
+        </ToolBar>
+        <Grid Name="gMainGrid"  Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="260"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="5"/>
+            <Viewbox Name="vPlaceAllCells" Grid.Column="2" Stretch="Uniform">
+                <Grid Name="gMainPlaceGrid" ShowGridLines="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Height="100" Width="100" Content="Button [0,0]"/>
+                    <Button Height="100" Width="100" Content="Button [1,0]" Grid.Row="1"/>
+                    <Button Height="100" Width="100" Content="Button [2,0]" Grid.Row="2"/>
+                    <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="1"/>
+                    <Button Height="100" Width="100" Grid.Column="1" Grid.Row="1">
+                        <Grid>
+                            <Image Source="Graphics/Tiles/Normal.png" />
+                            <Viewbox>
+                                <TextBlock TextWrapping="Wrap" Text="Start" Padding="5,0,5,0" Foreground="Red" FontWeight="Bold"/>
+                            </Viewbox>
+                        </Grid>
+                    </Button>
+                    <Button Height="100" Width="100" Content="Button [2,1]" Grid.Column="1" Grid.Row="2"/>
+                    <Button Height="100" Width="100" Content="Button [0,2]" Grid.Column="2"/>
+                    <Button Height="100" Width="100" Content="Button [1,2]" Grid.Column="2" Grid.Row="1"/>
+                    <Button Height="100" Width="100" Content="Button [2,2]" Grid.Column="2" Grid.Row="2"/>
+                </Grid>
+            </Viewbox>
+            <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="3" ResizeBehavior="PreviousAndNext" Width="5"/>
+        </Grid>
+        <StatusBar Grid.Row="3">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem>
+                <TextBlock Text="Current Tile"/>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>

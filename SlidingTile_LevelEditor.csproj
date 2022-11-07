@@ -5,6 +5,21 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+	<Version>0.0.0.1</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Graphics\Tiles\Ice.png" />
+    <None Remove="Graphics\Tiles\Normal.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Graphics\Tiles\Ice.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Graphics\Tiles\Normal.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
 
 </Project>
