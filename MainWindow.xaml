@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SlidingTile_LevelEditor"
-        xmlns:icons ="clr-namespace:SlidingTile_LevelEditor.IconXMAL"
+        xmlns:icons="clr-namespace:SlidingTile_LevelEditor.IconXMAL"
+        xmlns:model="clr-namespace:SlidingTile_LevelEditor.Models"
         mc:Ignorable="d"
         Title="Sliding Tile - PC Level Editor" Height="720" Width="1280">
     <Window.CommandBindings>
         <CommandBinding x:Name="commandBinding_New" Command="New" CanExecute="commandBinding_New_CanExecute" Executed="commandBinding_New_Executed"/>
+        <CommandBinding x:Name="commandBinding_Undo" Command="Undo" CanExecute="commandBinding_Undo_CanExecute" Executed="commandBinding_Undo_Executed"/>
+        <CommandBinding x:Name="commandBinding_Redo" Command="Redo" CanExecute="commandBinding_Redo_CanExecute" Executed="commandBinding_Redo_Executed"/>
         <CommandBinding x:Name="commandBinding_Exit" Command="local:CustomCommands.Exit" CanExecute="commandBinding_Exit_CanExecute" Executed="commandBinding_Exit_Executed"/>
         <CommandBinding x:Name="commandBinding_AboutProgram" Command="local:CustomCommands.AboutProgram" CanExecute="commandBinding_AboutProgram_CanExecute" Executed="commandBinding_AboutProgram_Executed"/>
     </Window.CommandBindings>
@@ -37,6 +40,22 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem Command="Undo">
+                        <MenuItem.Icon>
+                            <Viewbox Stretch="Uniform" Width="16" Height="16">
+                                <icons:UndoIcon/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="Redo">
+                        <MenuItem.Icon>
+                            <Viewbox Stretch="Uniform" Width="16" Height="16">
+                                <icons:RedoIcon/>
+                            </Viewbox>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Command="local:CustomCommands.AboutProgram">
                         <MenuItem.Icon>
@@ -55,6 +74,13 @@
                 </Viewbox>
             </Button>
             <Separator/>
+            <Button Command="Undo" ToolTip="Undo">
+                <icons:UndoIcon/>
+            </Button>
+            <Button Command="Redo" ToolTip="Redo">
+                <icons:RedoIcon/>
+            </Button>
+            <Separator/>
             <Button Command="local:CustomCommands.AboutProgram" ToolTip="About program">
                 <Viewbox Width="24" Height="24" Stretch="Uniform">
                     <icons:AboutProgramIcon/>
@@ -68,6 +94,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="5"/>
             <Viewbox Name="vPlaceAllCells" Grid.Column="2" Stretch="Uniform">
@@ -82,8 +110,8 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Height="100" Width="100" Content="Button [0,0]"/>
-                    <Button Height="100" Width="100" Content="Button [1,0]" Grid.Row="1"/>
+                    <Button Height="100" Width="100" Content="Button [0,0]" Click="Button_Click"/>
+                    <Button Height="100" Width="100" Content="Button [1,0]" Grid.Row="1" Click="Button_Click_1"/>
                     <Button Height="100" Width="100" Content="Button [2,0]" Grid.Row="2"/>
                     <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="1"/>
                     <Button Height="100" Width="100" Grid.Column="1" Grid.Row="1">
@@ -101,6 +129,31 @@
                 </Grid>
             </Viewbox>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="3" ResizeBehavior="PreviousAndNext" Width="5"/>
+            <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="5" ResizeBehavior="PreviousAndNext" Width="5"/>
+            <StackPanel Grid.Column="6">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Commands count: " HorizontalAlignment="Right"/>
+                    <TextBox Name="tbCommandsCount" Text="Nothing" Grid.Column="1" IsReadOnly="True"/>
+                    <TextBlock Text="Commands index: " Grid.Row="1" HorizontalAlignment="Right"/>
+                    <TextBox Name="tbCommandsIndex" Text="-1" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
+                </Grid>
+                <GroupBox Header="List of commands">
+                    <StackPanel>
+                        <ListView Name="lvCommans">
+                        </ListView>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+           
+           
         </Grid>
         <StatusBar Grid.Row="3">
             <StatusBar.ItemsPanel>

@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="SlidingTile_LevelEditor.Models.CommendListElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ListViewItem>
+        <StackPanel Orientation="Horizontal">
+            <Ellipse Width="8" Height="8" Fill="White" Margin="2,0" VerticalAlignment="Center"/>
+            <TextBlock Name="tbCommandText" Text="Some text" Margin="2,0" VerticalAlignment="Center"/>
+        </StackPanel>
+    </ListViewItem>
+</UserControl>

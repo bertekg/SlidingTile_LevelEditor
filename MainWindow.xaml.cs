@@ -1,4 +1,5 @@
-﻿using SlidingTile_LevelEditor.Windows;
+﻿using SlidingTile_LevelEditor.Commands;
+using SlidingTile_LevelEditor.Windows;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,10 +24,13 @@ namespace SlidingTile_LevelEditor
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Command> _commands = new List<Command>();
+        private int _indexCommand = -1;
         public MainWindow()
         {
             SetCultureInfo("en-EN");
             InitializeComponent();
+            lvCommans.ItemsSource = _commands;
         }
         private static void SetCultureInfo(string cultureInfoToSet)
         {
@@ -58,6 +62,70 @@ namespace SlidingTile_LevelEditor
         {
             AboutProgram apWindow = new AboutProgram();
             apWindow.ShowDialog();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new IncNormalCommand(_commands, new Point(0, 0), _indexCommand);
+            PostAddCommandUpdate();
+        }
+
+        private void PostAddCommandUpdate()
+        {
+            _indexCommand = _commands.Count - 1;
+            foreach (IncNormalCommand item in _commands)
+            {
+                item._isCurrentCommand = false;
+            }
+            ((IncNormalCommand)_commands[^1])._isCurrentCommand = true;
+            lvCommans.Items.Refresh();
+            tbCommandsCount.Text = _commands.Count.ToString();
+            tbCommandsIndex.Text = _indexCommand.ToString();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new IncNormalCommand(_commands, new Point(0, 1), _indexCommand);
+            PostAddCommandUpdate();
+        }
+
+        private void commandBinding_Undo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = _indexCommand >= 0;
+        }
+
+        private void commandBinding_Undo_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _indexCommand--;
+            PostUndoRedoCommandsList();
+        }
+
+        private void PostUndoRedoCommandsList()
+        {
+            for (int i = 0; i < _commands.Count; i++)
+            {
+                if (_indexCommand != i)
+                {
+                    ((IncNormalCommand)_commands[i])._isCurrentCommand = false;
+                }
+                else
+                {
+                    ((IncNormalCommand)_commands[i])._isCurrentCommand = true;
+                }
+            }
+            tbCommandsIndex.Text = _indexCommand.ToString();
+            lvCommans.Items.Refresh();
+        }
+
+        private void commandBinding_Redo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = _indexCommand < (_commands.Count - 1);
+        }
+
+        private void commandBinding_Redo_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _indexCommand++;
+            PostUndoRedoCommandsList();
         }
     }
     public static class CustomCommands
