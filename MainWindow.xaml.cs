@@ -1,4 +1,5 @@
-﻿using SlidingTile_LevelEditor.Commands;
+﻿using SlidingTile_LevelEditor.Class;
+using SlidingTile_LevelEditor.Commands;
 using SlidingTile_LevelEditor.Windows;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace SlidingTile_LevelEditor
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<FloorTile> _floorTiles = new List<FloorTile>();
         private List<Command> _commands = new List<Command>();
         private int _indexCommand = -1;
         public MainWindow()
@@ -31,6 +33,7 @@ namespace SlidingTile_LevelEditor
             SetCultureInfo("en-EN");
             InitializeComponent();
             lvCommans.ItemsSource = _commands;
+            lvFloorTiles.ItemsSource = _floorTiles;
         }
         private static void SetCultureInfo(string cultureInfoToSet)
         {
@@ -63,13 +66,29 @@ namespace SlidingTile_LevelEditor
             AboutProgram apWindow = new AboutProgram();
             apWindow.ShowDialog();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new IncNormalCommand(_commands, new Point(0, 0), _indexCommand);
+            Button button = sender as Button;
+            string cont = button.Content.ToString();
+            new IncNormalCommand(_commands, _floorTiles, TEMP_DetectButtonLoc(cont), _indexCommand);
             PostAddCommandUpdate();
         }
-
+        private Point TEMP_DetectButtonLoc(string content)
+        {
+            Point point = new Point(0, 0);
+            if (content.Contains("Button"))
+            {
+                int openBrackIndex = content.IndexOf('[');
+                int comaIndex = content.IndexOf(',');
+                int closeBrackIndex = content.IndexOf(']');
+                string strPosX = content.Substring(openBrackIndex + 1, comaIndex - openBrackIndex);
+                string strPosY = content.Substring(comaIndex + 1, closeBrackIndex - comaIndex - 1);
+                double posX = Convert.ToDouble(strPosX);
+                double posY = Convert.ToDouble(strPosY);
+                point = new Point(posX, posY);
+            }
+            return point;
+        }
         private void PostAddCommandUpdate()
         {
             _indexCommand = _commands.Count - 1;
@@ -81,14 +100,9 @@ namespace SlidingTile_LevelEditor
             lvCommans.Items.Refresh();
             tbCommandsCount.Text = _commands.Count.ToString();
             tbCommandsIndex.Text = _indexCommand.ToString();
+            lvFloorTiles.Items.Refresh();
+            tbFloorTileCount.Text = _floorTiles.Count.ToString();
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            new IncNormalCommand(_commands, new Point(0, 1), _indexCommand);
-            PostAddCommandUpdate();
-        }
-
         private void commandBinding_Undo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = _indexCommand >= 0;

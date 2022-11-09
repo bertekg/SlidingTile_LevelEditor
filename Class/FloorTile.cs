@@ -7,5 +7,9 @@
         public int PosY { get; set; }
         public FloorTileType Type { get; set; }
         public int Number { get; set; }
+        public override string ToString()
+        {
+            return "[" + PosX.ToString() + "," + PosY.ToString() + "], Number: " + Number.ToString() + ", Type: " + Type.ToString();
+        }
     }
 }

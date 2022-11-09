@@ -139,11 +139,11 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Height="100" Width="100" Content="Button [0,0]" Click="Button_Click"/>
-                    <Button Height="100" Width="100" Content="Button [1,0]" Grid.Row="1" Click="Button_Click_1"/>
-                    <Button Height="100" Width="100" Content="Button [2,0]" Grid.Row="2"/>
-                    <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="1"/>
-                    <Button Height="100" Width="100" Grid.Column="1" Grid.Row="1">
+                    <Button Height="100" Width="100" Content="Button [-1,1]" Grid.Column="0" Grid.Row="0" Click="Button_Click"/>
+                    <Button Height="100" Width="100" Content="Button [-1,0]" Grid.Column="0" Grid.Row="1" Click="Button_Click"/>
+                    <Button Height="100" Width="100" Content="Button [-1,-1]" Grid.Column="0" Grid.Row="2" Click="Button_Click"/>
+                    <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="1" Grid.Row="0" Click="Button_Click"/>
+                    <Button Height="100" Width="100" Grid.Column="1" Grid.Row="1" Click="Button_Click">
                         <Grid>
                             <Image Source="Graphics/Tiles/Normal.png" />
                             <Viewbox>
@@ -151,38 +151,62 @@
                             </Viewbox>
                         </Grid>
                     </Button>
-                    <Button Height="100" Width="100" Content="Button [2,1]" Grid.Column="1" Grid.Row="2"/>
-                    <Button Height="100" Width="100" Content="Button [0,2]" Grid.Column="2"/>
-                    <Button Height="100" Width="100" Content="Button [1,2]" Grid.Column="2" Grid.Row="1"/>
-                    <Button Height="100" Width="100" Content="Button [2,2]" Grid.Column="2" Grid.Row="2"/>
+                    <Button Height="100" Width="100" Content="Button [0,-1]" Grid.Column="1" Grid.Row="2" Click="Button_Click"/>
+                    <Button Height="100" Width="100" Content="Button [1,1]" Grid.Column="2" Grid.Row="0" Click="Button_Click"/>
+                    <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="2" Grid.Row="1" Click="Button_Click"/>
+                    <Button Height="100" Width="100" Content="Button [1,-1]" Grid.Column="2" Grid.Row="2" Click="Button_Click"/>
                 </Grid>
             </Viewbox>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="3" ResizeBehavior="PreviousAndNext" Width="5"/>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="5" ResizeBehavior="PreviousAndNext" Width="5"/>
-            <StackPanel Grid.Column="6">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="Commands count: " HorizontalAlignment="Right"/>
-                    <TextBox Name="tbCommandsCount" Text="Nothing" Grid.Column="1" IsReadOnly="True"/>
-                    <TextBlock Text="Commands index: " Grid.Row="1" HorizontalAlignment="Right"/>
-                    <TextBox Name="tbCommandsIndex" Text="-1" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
-                </Grid>
-                <GroupBox Header="List of commands">
-                    <StackPanel>
-                        <ListView Name="lvCommans">
-                        </ListView>
-                    </StackPanel>
-                </GroupBox>
-            </StackPanel>
-           
-           
+            <Grid Grid.Column="6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Floor tiles count: " HorizontalAlignment="Right"/>
+                        <TextBox Name="tbFloorTileCount" Text="Nothing" Grid.Column="1" IsReadOnly="True"/>
+                    </Grid>
+                    <GroupBox Header="List of floor tiles">
+                        <StackPanel>
+                            <ListView Name="lvFloorTiles">
+                            </ListView>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+                <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" ResizeBehavior="PreviousAndNext" Height="5"/>
+                <StackPanel Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Commands count: " HorizontalAlignment="Right"/>
+                        <TextBox Name="tbCommandsCount" Text="Nothing" Grid.Column="1" IsReadOnly="True"/>
+                        <TextBlock Text="Commands index: " Grid.Row="1" HorizontalAlignment="Right"/>
+                        <TextBox Name="tbCommandsIndex" Text="-1" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
+                    </Grid>
+                    <GroupBox Header="List of commands">
+                        <StackPanel>
+                            <ListView Name="lvCommans">
+                            </ListView>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </Grid>
+
+
         </Grid>
         <StatusBar Grid.Row="3">
             <StatusBar.ItemsPanel>
