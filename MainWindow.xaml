@@ -225,6 +225,12 @@
             <StatusBarItem>
                 <TextBlock Text="Current Tile"/>
             </StatusBarItem>
+            <StatusBarItem Grid.Column="3">
+                <TextBlock Text="Project Path"/>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="4">
+                <TextBox Name="sbiProjectPath" VerticalAlignment="Center" IsReadOnly="True"/>
+            </StatusBarItem>
         </StatusBar>
     </Grid>
 </Window>

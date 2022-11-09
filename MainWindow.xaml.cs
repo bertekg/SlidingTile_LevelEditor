@@ -1,9 +1,11 @@
-﻿using SlidingTile_LevelEditor.Class;
+﻿using Microsoft.Win32;
+using SlidingTile_LevelEditor.Class;
 using SlidingTile_LevelEditor.Commands;
 using SlidingTile_LevelEditor.Windows;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -17,6 +19,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace SlidingTile_LevelEditor
 {
@@ -28,11 +32,13 @@ namespace SlidingTile_LevelEditor
         private List<FloorTile> _floorTiles = new List<FloorTile>();
         private List<Command> _commands = new List<Command>();
         private int _indexCommand = -1;
+        private string _projectName, _projectPath;
         public MainWindow()
         {
             SetCultureInfo("en-EN");
             InitializeComponent();
             lvCommans.ItemsSource = _commands;
+            _floorTiles.Add(new FloorTile() { PosX = 0, PosY = 0, Number = 1, Type = FloorTileType.Normal });
             lvFloorTiles.ItemsSource = _floorTiles;
         }
         private static void SetCultureInfo(string cultureInfoToSet)
@@ -159,17 +165,99 @@ namespace SlidingTile_LevelEditor
 
         private void commandBinding_Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Save function", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (_projectName == null || _projectName == "" || _projectPath == null || _projectPath == "")
+            {
+                SaveAs();
+            }
+            else
+            {
+                bool bRetAfterSave = SaveProject(_floorTiles, _projectName, _projectPath);
+                if (bRetAfterSave == true)
+                {
+                    this.Title = GetProjectNameInLang() + " [" + _projectName + "]";
+                    sbiProjectPath.Text = _projectPath;
+                    MessageBox.Show("InfoSaveLevelMessage", "InfoSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                }
+                else
+                {
+                    MessageBox.Show("ErrorSaveLevelMessage", "ErrorSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void commandBinding_SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            SaveAs();
         }
 
         private void commandBinding_SaveAs_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
-
-        private void commandBinding_SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
+        private string GetProjectNameInLang()
         {
-            MessageBox.Show("Save as function", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            return "Sliding Tile - PC Level Editor";
+        }
+        private void SaveAs()
+        {
+            SaveFileDialog textDialogSave = new SaveFileDialog();
+            textDialogSave.Filter = "Game level | *.xml";
+            bool? result = textDialogSave.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                bool bRetAfterSave = SaveProject(_floorTiles, System.IO.Path.GetFileNameWithoutExtension(textDialogSave.FileName), System.IO.Path.GetDirectoryName(textDialogSave.FileName));
+                if (bRetAfterSave == true)
+                {
+                    this.Title = GetProjectNameInLang() + " [" + _projectName + "]";
+                    sbiProjectPath.Text = _projectPath;
+                    MessageBox.Show("InfoSaveLevelMessage", "InfoSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                }
+                else
+                {
+                    MessageBox.Show("ErrorSaveLevelMessage", "ErrorSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+        private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
+        {
+            bool correctSave = false;
+            if (pName == "")
+            {
+                MessageBox.Show("ErrorIncorrectNameMessage", "ErrorIncorrectNameTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (pPath == "")
+            {
+                MessageBox.Show("ErrorIncorrectPathMessage", "ErrorIncorrectPathTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!Directory.Exists(pPath))
+            {
+                MessageBox.Show("ErrorPathNoExistMessage", "ErrorPathNoExistTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                try
+                {
+                    XmlDocument xmlDocument = new XmlDocument();
+                    XmlSerializer serializer = new XmlSerializer(saveObject.GetType());
+                    string fileLoc = System.IO.Path.Combine(pPath, pName + ".xml");
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        serializer.Serialize(stream, saveObject);
+                        stream.Position = 0;
+                        xmlDocument.Load(stream);
+                        xmlDocument.Save(fileLoc);
+                        stream.Close();
+                    }
+                    _projectName = pName;
+                    _projectPath = pPath;
+                    correctSave = true;
+                }
+                catch
+                {
+                    return correctSave;
+                }
+            }
+            return correctSave;
         }
     }
     public static class CustomCommands
