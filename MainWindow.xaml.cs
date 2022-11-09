@@ -127,6 +127,36 @@ namespace SlidingTile_LevelEditor
             _indexCommand++;
             PostUndoRedoCommandsList();
         }
+
+        private void commandBinding_Open_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void commandBinding_Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Open function", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void commandBinding_Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void commandBinding_Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Save function", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void commandBinding_SaveAs_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void commandBinding_SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Save as function", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
     public static class CustomCommands
     {

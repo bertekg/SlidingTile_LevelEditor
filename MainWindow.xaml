@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SlidingTile_LevelEditor"
         xmlns:icons="clr-namespace:SlidingTile_LevelEditor.IconXMAL"
-        xmlns:model="clr-namespace:SlidingTile_LevelEditor.Models"
         mc:Ignorable="d"
         Title="Sliding Tile - PC Level Editor" Height="720" Width="1280">
     <Window.CommandBindings>
         <CommandBinding x:Name="commandBinding_New" Command="New" CanExecute="commandBinding_New_CanExecute" Executed="commandBinding_New_Executed"/>
+        <CommandBinding x:Name="commandBinding_Open" Command="Open" CanExecute="commandBinding_Open_CanExecute" Executed="commandBinding_Open_Executed"/>
+        <CommandBinding x:Name="commandBinding_Save" Command="Save" CanExecute="commandBinding_Save_CanExecute" Executed="commandBinding_Save_Executed"/>
+        <CommandBinding x:Name="commandBinding_SaveAs" Command="SaveAs" CanExecute="commandBinding_SaveAs_CanExecute" Executed="commandBinding_SaveAs_Executed"/>
         <CommandBinding x:Name="commandBinding_Undo" Command="Undo" CanExecute="commandBinding_Undo_CanExecute" Executed="commandBinding_Undo_Executed"/>
         <CommandBinding x:Name="commandBinding_Redo" Command="Redo" CanExecute="commandBinding_Redo_CanExecute" Executed="commandBinding_Redo_Executed"/>
         <CommandBinding x:Name="commandBinding_Exit" Command="local:CustomCommands.Exit" CanExecute="commandBinding_Exit_CanExecute" Executed="commandBinding_Exit_Executed"/>
@@ -24,54 +26,83 @@
         </Grid.RowDefinitions>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
+                <Menu.Resources>
+                    <Style TargetType="Viewbox">
+                        <Setter Property="Width" Value="16"/>
+                        <Setter Property="Height" Value="16"/>
+                        <Setter Property="Stretch" Value="Uniform"/>
+                    </Style>
+                </Menu.Resources>
                 <MenuItem Header="File">
                     <MenuItem Command="New">
                         <MenuItem.Icon>
-                            <Viewbox Stretch="Uniform" Width="16" Height="16">
-                                <icons:NewIcon/>
-                            </Viewbox>
+                            <icons:NewIcon/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <Separator/>
+                    <MenuItem Command="Open">
+                        <MenuItem.Icon>
+                            <icons:OpenIcon/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Command="Save">
+                        <MenuItem.Icon>
+                            <icons:SaveIcon/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="SaveAs">
+                        <MenuItem.Icon>
+                            <icons:SaveAsIcon/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
                     <MenuItem Command="local:CustomCommands.Exit">
                         <MenuItem.Icon>
-                            <Viewbox Stretch="Uniform" Width="16" Height="16">
-                                <icons:QuitIcon/>
-                            </Viewbox>
+                            <icons:QuitIcon/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Edit">
                     <MenuItem Command="Undo">
                         <MenuItem.Icon>
-                            <Viewbox Stretch="Uniform" Width="16" Height="16">
-                                <icons:UndoIcon/>
-                            </Viewbox>
+                            <icons:UndoIcon/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Command="Redo">
                         <MenuItem.Icon>
-                            <Viewbox Stretch="Uniform" Width="16" Height="16">
-                                <icons:RedoIcon/>
-                            </Viewbox>
+                            <icons:RedoIcon/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Command="local:CustomCommands.AboutProgram">
                         <MenuItem.Icon>
-                            <Viewbox Stretch="Uniform" Width="16" Height="16">
-                                <icons:AboutProgramIcon/>
-                            </Viewbox>
+                            <icons:AboutProgramIcon/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>
         <ToolBar Grid.Row="1">
+            <ToolBar.Resources>
+                <Style TargetType="Viewbox">
+                    <Setter Property="Width" Value="24"/>
+                    <Setter Property="Height" Value="24"/>
+                    <Setter Property="Stretch" Value="Uniform"/>
+                </Style>
+            </ToolBar.Resources>
             <Button Command="New" ToolTip="New">
-                <Viewbox Width="24" Height="24" Stretch="Uniform">
-                    <icons:NewIcon/>
-                </Viewbox>
+                <icons:NewIcon/>
+            </Button>
+            <Button Command="Open" ToolTip="Open">
+                <icons:OpenIcon/>
+            </Button>
+            <Button Command="Save" ToolTip="Save...">
+                <icons:SaveIcon/>
+            </Button>
+            <Button Command="SaveAs" ToolTip="Save As...">
+                <icons:SaveAsIcon/>
             </Button>
             <Separator/>
             <Button Command="Undo" ToolTip="Undo">
@@ -82,9 +113,7 @@
             </Button>
             <Separator/>
             <Button Command="local:CustomCommands.AboutProgram" ToolTip="About program">
-                <Viewbox Width="24" Height="24" Stretch="Uniform">
-                    <icons:AboutProgramIcon/>
-                </Viewbox>
+                <icons:AboutProgramIcon/>
             </Button>
         </ToolBar>
         <Grid Name="gMainGrid"  Grid.Row="2">
