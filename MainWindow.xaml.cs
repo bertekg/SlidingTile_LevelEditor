@@ -37,9 +37,22 @@ namespace SlidingTile_LevelEditor
         {
             SetCultureInfo("en-EN");
             InitializeComponent();
-            lvCommans.ItemsSource = _commands;
-            _floorTiles.Add(new FloorTile() { PosX = 0, PosY = 0, Number = 1, Type = FloorTileType.Normal });
             lvFloorTiles.ItemsSource = _floorTiles;
+            lvCommans.ItemsSource = _commands;
+            NewLevel();
+        }
+        private void NewLevel()
+        {
+            _floorTiles.Clear();
+            _floorTiles.Add(new FloorTile() { PosX = 0, PosY = 0, Number = 1, Type = FloorTileType.Normal });
+            lvFloorTiles.Items.Refresh();
+            tbFloorTileCount.Text = _floorTiles.Count.ToString();
+            _commands.Clear();
+            lvCommans.Items.Refresh();
+            _indexCommand = _commands.Count - 1;
+            tbCommandsCount.Text = _commands.Count.ToString();
+            tbCommandsIndex.Text = _indexCommand.ToString();
+            Title = GetProjectNameInLang() + " (Empty Project)";
         }
         private static void SetCultureInfo(string cultureInfoToSet)
         {
@@ -53,7 +66,8 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_New_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("New project command", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            NewLevel();
+            MessageBox.Show("New project command created", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void commandBinding_Exit_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -208,9 +222,7 @@ namespace SlidingTile_LevelEditor
                 bool bRetAfterSave = SaveProject(_floorTiles, System.IO.Path.GetFileNameWithoutExtension(textDialogSave.FileName), System.IO.Path.GetDirectoryName(textDialogSave.FileName));
                 if (bRetAfterSave == true)
                 {
-                    this.Title = GetProjectNameInLang() + " [" + _projectName + "]";
-                    sbiProjectPath.Text = _projectPath;
-                    MessageBox.Show("InfoSaveLevelMessage", "InfoSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    AssigneProjectNameAndPath();
                 }
                 else
                 {
@@ -218,6 +230,14 @@ namespace SlidingTile_LevelEditor
                 }
             }
         }
+
+        private void AssigneProjectNameAndPath()
+        {
+            this.Title = GetProjectNameInLang() + " [" + _projectName + "]";
+            sbiProjectPath.Text = _projectPath;
+            MessageBox.Show("InfoSaveLevelMessage", "InfoSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+        }
+
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {
             bool correctSave = false;
