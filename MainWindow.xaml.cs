@@ -6,19 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Xml.Serialization;
 using System.Xml;
 
@@ -32,7 +23,7 @@ namespace SlidingTile_LevelEditor
         private List<FloorTile> _floorTiles = new List<FloorTile>();
         private List<Command> _commands = new List<Command>();
         private int _indexCommand = -1;
-        private string _projectName, _projectPath;
+        private string _projectName = string.Empty, _projectPath = string.Empty;
         public MainWindow()
         {
             SetCultureInfo("en-EN");
@@ -67,7 +58,7 @@ namespace SlidingTile_LevelEditor
         private void commandBinding_New_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             NewLevel();
-            MessageBox.Show("New project command created", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("New project created!", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void commandBinding_Exit_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -88,7 +79,7 @@ namespace SlidingTile_LevelEditor
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
+            Button? button = sender as Button;
             string cont = button.Content.ToString();
             new IncNormalCommand(_commands, _floorTiles, TEMP_DetectButtonLoc(cont), _indexCommand);
             PostAddCommandUpdate();
@@ -169,7 +160,47 @@ namespace SlidingTile_LevelEditor
 
         private void commandBinding_Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Open function", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            OpenFileDialog openDialogOpen = new OpenFileDialog();
+            openDialogOpen.Filter = "Game Level | *.xml";
+            bool? result = openDialogOpen.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                _floorTiles.Clear();
+                try
+                {
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(openDialogOpen.FileName);
+                    string xmlString = xmlDocument.OuterXml;
+                    using (StringReader read = new StringReader(xmlString))
+                    {
+                        Type outType = typeof(List<FloorTile>);
+
+                        XmlSerializer serializer = new XmlSerializer(outType);
+                        using (XmlReader reader = new XmlTextReader(read))
+                        {
+                            _floorTiles = (List<FloorTile>)serializer.Deserialize(reader);
+                            lvFloorTiles.ItemsSource = _floorTiles;
+                            reader.Close();
+                        }
+                        read.Close();
+                    }
+                    _projectName = Path.GetFileNameWithoutExtension(openDialogOpen.FileName);
+                    _projectPath = Path.GetDirectoryName(openDialogOpen.FileName);
+                    Title = GetProjectNameInLang() + " [" + _projectName + "]";
+                    lvFloorTiles.Items.Refresh();
+                    tbFloorTileCount.Text = _floorTiles.Count.ToString();
+                    _commands.Clear();
+                    lvCommans.Items.Refresh();
+                    _indexCommand = _commands.Count - 1;
+                    tbCommandsCount.Text = _commands.Count.ToString();
+                    tbCommandsIndex.Text = _indexCommand.ToString();
+                    MessageBox.Show("InfoOpenLevelConfirmationMessage", "InfoOpenLevelConfirmationTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("ErrorOpenLevelMessage", "ErrorOpenLevelTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void commandBinding_Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -219,7 +250,7 @@ namespace SlidingTile_LevelEditor
             bool? result = textDialogSave.ShowDialog();
             if (result.HasValue && result.Value)
             {
-                bool bRetAfterSave = SaveProject(_floorTiles, System.IO.Path.GetFileNameWithoutExtension(textDialogSave.FileName), System.IO.Path.GetDirectoryName(textDialogSave.FileName));
+                bool bRetAfterSave = SaveProject(_floorTiles, Path.GetFileNameWithoutExtension(textDialogSave.FileName), Path.GetDirectoryName(textDialogSave.FileName));
                 if (bRetAfterSave == true)
                 {
                     AssigneProjectNameAndPath();
@@ -259,7 +290,7 @@ namespace SlidingTile_LevelEditor
                 {
                     XmlDocument xmlDocument = new XmlDocument();
                     XmlSerializer serializer = new XmlSerializer(saveObject.GetType());
-                    string fileLoc = System.IO.Path.Combine(pPath, pName + ".xml");
+                    string fileLoc = Path.Combine(pPath, pName + ".xml");
                     using (MemoryStream stream = new MemoryStream())
                     {
                         serializer.Serialize(stream, saveObject);
