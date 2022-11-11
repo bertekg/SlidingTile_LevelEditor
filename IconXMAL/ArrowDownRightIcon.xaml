@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="SlidingTile_LevelEditor.IconXMAL.ArrowDownRightIcon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Viewbox>
+        <Canvas Width="24" Height="24">
+            <Path Fill="Black" Data="M5,6.41L6.41,5L17,15.59V9H19V19H9V17H15.59L5,6.41Z" />
+        </Canvas>
+    </Viewbox>
+</UserControl>

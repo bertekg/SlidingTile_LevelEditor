@@ -10,4 +10,4 @@ All screenshots from current and previous versions are available here: https://d
 
 ### 1. Inital program view and 'About Program' window
 
-![alt text](screenshots/1InitialViewAndAboutProgram.jpg)
+![alt text](screenshots/1InitialViewAndAboutProgram.png)

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SlidingTile_LevelEditor"
         xmlns:icons="clr-namespace:SlidingTile_LevelEditor.IconXMAL"
         mc:Ignorable="d"
@@ -126,6 +127,136 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Control Level Dimension">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <GroupBox Header="Direct On Axis">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="X Min" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMinX" Grid.Row="3" Value="-1" VerticalAlignment="Center" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <Label Content="X Max" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMaxX" Grid.Row="3" Grid.Column="2" Value="1" VerticalAlignment="Center" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <Label Content="Y Min" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMinY" Grid.Column="1" Grid.Row="5" Value="-1" VerticalAlignment="Center" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <Label Content="Y Max"  Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMaxY" Grid.Row="1" Grid.Column="1" Value="1" VerticalAlignment="Center" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Header="View Navigation" Grid.Row="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.Resources>
+                                        <Style TargetType="Viewbox">
+                                            <Setter Property="Width" Value="32"/>
+                                            <Setter Property="Height" Value="32"/>
+                                            <Setter Property="Stretch" Value="Uniform"/>
+                                        </Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Margin" Value="5"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <Button ToolTip="Move View Up Left" Grid.Column="1" Grid.Row="0">
+                                        <icons:ArrowLeftUpIcon/>
+                                    </Button>
+                                    <Button ToolTip="Move View Up" Grid.Column="2" Grid.Row="0">
+                                        <icons:ArrowUpIcon/>
+                                    </Button>
+                                    <Button ToolTip="Move View Up Right" Grid.Column="3" Grid.Row="0">
+                                        <icons:ArrowRightUpIcon/>
+                                    </Button>
+                                    <Button ToolTip="Move View Left" Grid.Column="1" Grid.Row="1">
+                                        <icons:ArrowLeftIcon/>
+                                    </Button>
+                                    <Button ToolTip="Adjust Level View" Grid.Column="2" Grid.Row="1">
+                                        <icons:AdjustViewLevelIcon/>
+                                    </Button>
+                                    <Button ToolTip="Move View Right" Grid.Column="3" Grid.Row="1">
+                                        <icons:ArrowRightIcon/>
+                                    </Button>
+                                    <Button ToolTip="Move View Down Left" Grid.Column="1" Grid.Row="2">
+                                        <icons:ArrowLeftDownIcon/>
+                                    </Button>
+                                    <Button ToolTip="Move View Down" Grid.Column="2" Grid.Row="2">
+                                        <icons:ArrowDownIcon/>
+                                    </Button>
+                                    <Button ToolTip="Move View Down Right" Grid.Column="3" Grid.Row="2">
+                                        <icons:ArrowDownRightIcon/>
+                                    </Button>                                    
+                                    <Button ToolTip="Zoom Out Level View" Grid.Column="1" Grid.Row="3">
+                                        <icons:ZoomMinusIcon/>
+                                    </Button>
+                                    <Button ToolTip="Zoom In Level View" Grid.Column="3" Grid.Row="3">
+                                        <icons:ZoomPlusIcon/>
+                                    </Button>
+                                </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="2" Header="Level Dimension Information">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="X Min" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBox Name="tbInfoMinX" IsReadOnly="True" TextAlignment="Center" Grid.Row="3" Text="0" VerticalAlignment="Center"/>
+                            <Label Content="X Max" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBox Name="tbInfoMaxX" IsReadOnly="True" TextAlignment="Center" Grid.Column="2" Grid.Row="3" Text="0" VerticalAlignment="Center"/>
+                            <Label Content="Y Min" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBox Name="tbInfoMinY" IsReadOnly="True" TextAlignment="Center" Grid.Row="5" Grid.Column="1" Text="0" VerticalAlignment="Center"/>
+                            <Label Content="Y Max" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBox Name="tbInfoMaxY" IsReadOnly="True" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Text="0" VerticalAlignment="Center"/>
+                        </Grid>
+                    </GroupBox>
+
+                </Grid>
+            </ScrollViewer>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="5"/>
             <Viewbox Name="vPlaceAllCells" Grid.Column="2" Stretch="Uniform">
                 <Grid Name="gMainPlaceGrid" ShowGridLines="True">

@@ -3,11 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Viewbox>
         <Canvas Width="44" Height="44">
-            <Path Fill="#FF000000">
-                <Path.Data>
-                    <PathGeometry Figures="M 4 1 H 28 L 40 13 V 43 H 4 Z M 8 5 V 39 H 36 V 18 H 23 V 5 Z m 19 0 v 9 h 9 z"/>
-                </Path.Data>
-            </Path>
+            <Path Fill="Black" Data="M 4 1 H 28 L 40 13 V 43 H 4 Z M 8 5 V 39 H 36 V 18 H 23 V 5 Z m 19 0 v 9 h 9 z"/>
         </Canvas>
     </Viewbox>
 </UserControl>
