@@ -79,6 +79,10 @@ namespace SlidingTile_LevelEditor
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            for (int i = _commands.Count - 1; i > _indexCommand; i--)
+            {
+                _commands.RemoveAt(i);
+            }
             Button? button = sender as Button;
             string cont = button.Content.ToString();
             new IncNormalCommand(_commands, _floorTiles, TEMP_DetectButtonLoc(cont), _indexCommand);
@@ -121,6 +125,7 @@ namespace SlidingTile_LevelEditor
 
         private void commandBinding_Undo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            _commands[_indexCommand].Undo();
             _indexCommand--;
             PostUndoRedoCommandsList();
         }
@@ -140,6 +145,7 @@ namespace SlidingTile_LevelEditor
             }
             tbCommandsIndex.Text = _indexCommand.ToString();
             lvCommans.Items.Refresh();
+            lvFloorTiles.Items.Refresh();
         }
 
         private void commandBinding_Redo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -148,8 +154,9 @@ namespace SlidingTile_LevelEditor
         }
 
         private void commandBinding_Redo_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
+        {            
             _indexCommand++;
+            _commands[_indexCommand].Redo();
             PostUndoRedoCommandsList();
         }
 
