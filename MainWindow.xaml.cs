@@ -268,19 +268,104 @@ namespace SlidingTile_LevelEditor
                 }
             }
         }
-
         private void AssigneProjectNameAndPath()
         {
             this.Title = GetProjectNameInLang() + " [" + _projectName + "]";
             sbiProjectPath.Text = _projectPath;
             MessageBox.Show("InfoSaveLevelMessage", "InfoSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
         }
-
         private void iudAreaViewDim_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
 
         }
-
+        private void commandBinding_MoveViewUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_MoveViewUp_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Move Up View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void commandBinding_MoveViewDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_MoveViewDown_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Move Down View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void commandBinding_MoveViewLeft_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_MoveViewLeft_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Move Left View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void commandBinding_MoveViewRight_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_MoveViewRight_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Move Right View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void commandBinding_MoveViewLeftUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_MoveViewLeftUp_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Move Left Up View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void commandBinding_MoveViewRightUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_MoveViewRightUp_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Move Right Up View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void commandBinding_MoveViewLeftDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_MoveViewLeftDown_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Move Left Down View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void commandBinding_MoveViewRightDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_MoveViewRightDown_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Move Right Down View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void commandBinding_AdjustViewProject_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_AdjustViewProject_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Adjust View Project", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void commandBinding_ZoomOutView_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_ZoomOutView_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Zoom Out View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void commandBinding_ZoomInView_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_ZoomInView_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("Zoom In View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {
             bool correctSave = false;
@@ -322,22 +407,5 @@ namespace SlidingTile_LevelEditor
             }
             return correctSave;
         }
-    }
-    public static class CustomCommands
-    {
-        public static readonly RoutedUICommand Exit = new RoutedUICommand
-            ("Exit", "Exit", typeof(CustomCommands),
-                new InputGestureCollection()
-                {
-                    new KeyGesture(Key.Q, ModifierKeys.Alt)
-                }
-            );
-        public static readonly RoutedUICommand AboutProgram = new RoutedUICommand
-            ("About Program", "About Program", typeof(CustomCommands),
-                new InputGestureCollection()
-                {
-                    new KeyGesture(Key.F1, ModifierKeys.Alt)
-                }
-            );
     }
 }

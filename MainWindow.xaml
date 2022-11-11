@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SlidingTile_LevelEditor"
         xmlns:icons="clr-namespace:SlidingTile_LevelEditor.IconXMAL"
         mc:Ignorable="d"
@@ -17,6 +17,17 @@
         <CommandBinding x:Name="commandBinding_Redo" Command="Redo" CanExecute="commandBinding_Redo_CanExecute" Executed="commandBinding_Redo_Executed"/>
         <CommandBinding x:Name="commandBinding_Exit" Command="local:CustomCommands.Exit" CanExecute="commandBinding_Exit_CanExecute" Executed="commandBinding_Exit_Executed"/>
         <CommandBinding x:Name="commandBinding_AboutProgram" Command="local:CustomCommands.AboutProgram" CanExecute="commandBinding_AboutProgram_CanExecute" Executed="commandBinding_AboutProgram_Executed"/>
+        <CommandBinding x:Name="commandBinding_MoveViewUp" Command="local:CustomCommands.MoveViewUp" CanExecute="commandBinding_MoveViewUp_CanExecute" Executed="commandBinding_MoveViewUp_Executed"/>
+        <CommandBinding x:Name="commandBinding_MoveViewDown" Command="local:CustomCommands.MoveViewDown" CanExecute="commandBinding_MoveViewDown_CanExecute" Executed="commandBinding_MoveViewDown_Executed"/>
+        <CommandBinding x:Name="commandBinding_MoveViewLeft" Command="local:CustomCommands.MoveViewLeft" CanExecute="commandBinding_MoveViewLeft_CanExecute" Executed="commandBinding_MoveViewLeft_Executed"/>
+        <CommandBinding x:Name="commandBinding_MoveViewRight" Command="local:CustomCommands.MoveViewRight" CanExecute="commandBinding_MoveViewRight_CanExecute" Executed="commandBinding_MoveViewRight_Executed"/>
+        <CommandBinding x:Name="commandBinding_MoveViewLeftUp" Command="local:CustomCommands.MoveViewLeftUp" CanExecute="commandBinding_MoveViewLeftUp_CanExecute" Executed="commandBinding_MoveViewLeftUp_Executed"/>
+        <CommandBinding x:Name="commandBinding_MoveViewRightUp" Command="local:CustomCommands.MoveViewRightUp" CanExecute="commandBinding_MoveViewRightUp_CanExecute" Executed="commandBinding_MoveViewRightUp_Executed"/>
+        <CommandBinding x:Name="commandBinding_MoveViewLeftDown" Command="local:CustomCommands.MoveViewLeftDown" CanExecute="commandBinding_MoveViewLeftDown_CanExecute" Executed="commandBinding_MoveViewLeftDown_Executed"/>
+        <CommandBinding x:Name="commandBinding_MoveViewRightDown" Command="local:CustomCommands.MoveViewRightDown" CanExecute="commandBinding_MoveViewRightDown_CanExecute" Executed="commandBinding_MoveViewRightDown_Executed"/>
+        <CommandBinding x:Name="commandBinding_AdjustViewProject" Command="local:CustomCommands.AdjustViewProject" CanExecute="commandBinding_AdjustViewProject_CanExecute" Executed="commandBinding_AdjustViewProject_Executed"/>
+        <CommandBinding x:Name="commandBinding_ZoomOutView" Command="local:CustomCommands.ZoomOutView" CanExecute="commandBinding_ZoomOutView_CanExecute" Executed="commandBinding_ZoomOutView_Executed"/>
+        <CommandBinding x:Name="commandBinding_ZoomInView" Command="local:CustomCommands.ZoomInView" CanExecute="commandBinding_ZoomInView_CanExecute" Executed="commandBinding_ZoomInView_Executed"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -192,37 +203,47 @@
                                             <Setter Property="HorizontalAlignment" Value="Center"/>
                                         </Style>
                                     </Grid.Resources>
-                                    <Button ToolTip="Move View Up Left" Grid.Column="1" Grid.Row="0">
+                                    <Button Command="local:CustomCommands.MoveViewLeftUp"
+                                            ToolTip="Move View Left Up" Grid.Column="1" Grid.Row="0">
                                         <icons:ArrowLeftUpIcon/>
                                     </Button>
-                                    <Button ToolTip="Move View Up" Grid.Column="2" Grid.Row="0">
+                                    <Button Command="local:CustomCommands.MoveViewUp"
+                                            ToolTip="Move View Up" Grid.Column="2" Grid.Row="0">
                                         <icons:ArrowUpIcon/>
                                     </Button>
-                                    <Button ToolTip="Move View Up Right" Grid.Column="3" Grid.Row="0">
+                                    <Button Command="local:CustomCommands.MoveViewRightUp"
+                                            ToolTip="Move View Right Up" Grid.Column="3" Grid.Row="0">
                                         <icons:ArrowRightUpIcon/>
                                     </Button>
-                                    <Button ToolTip="Move View Left" Grid.Column="1" Grid.Row="1">
+                                    <Button Command="local:CustomCommands.MoveViewLeft"
+                                            ToolTip="Move View Left" Grid.Column="1" Grid.Row="1">
                                         <icons:ArrowLeftIcon/>
                                     </Button>
-                                    <Button ToolTip="Adjust Level View" Grid.Column="2" Grid.Row="1">
+                                    <Button Command="local:CustomCommands.AdjustViewProject"
+                                            ToolTip="Adjust Level View" Grid.Column="2" Grid.Row="1">
                                         <icons:AdjustViewLevelIcon/>
                                     </Button>
-                                    <Button ToolTip="Move View Right" Grid.Column="3" Grid.Row="1">
+                                    <Button Command="local:CustomCommands.MoveViewRight"
+                                            ToolTip="Move View Right" Grid.Column="3" Grid.Row="1">
                                         <icons:ArrowRightIcon/>
                                     </Button>
-                                    <Button ToolTip="Move View Down Left" Grid.Column="1" Grid.Row="2">
+                                    <Button Command="local:CustomCommands.MoveViewLeftDown"
+                                            ToolTip="Move View Left Down" Grid.Column="1" Grid.Row="2">
                                         <icons:ArrowLeftDownIcon/>
                                     </Button>
-                                    <Button ToolTip="Move View Down" Grid.Column="2" Grid.Row="2">
+                                    <Button Command="local:CustomCommands.MoveViewDown" ToolTip="Move View Down" Grid.Column="2" Grid.Row="2">
                                         <icons:ArrowDownIcon/>
                                     </Button>
-                                    <Button ToolTip="Move View Down Right" Grid.Column="3" Grid.Row="2">
+                                    <Button Command="local:CustomCommands.MoveViewRightDown"
+                                            ToolTip="Move View Right Down" Grid.Column="3" Grid.Row="2">
                                         <icons:ArrowDownRightIcon/>
-                                    </Button>                                    
-                                    <Button ToolTip="Zoom Out Level View" Grid.Column="1" Grid.Row="3">
+                                    </Button>
+                                    <Button Command="local:CustomCommands.ZoomOutView"
+                                            ToolTip="Zoom Out Level View" Grid.Column="1" Grid.Row="3">
                                         <icons:ZoomMinusIcon/>
                                     </Button>
-                                    <Button ToolTip="Zoom In Level View" Grid.Column="3" Grid.Row="3">
+                                    <Button Command="local:CustomCommands.ZoomInView"
+                                            ToolTip="Zoom In Level View" Grid.Column="3" Grid.Row="3">
                                         <icons:ZoomPlusIcon/>
                                     </Button>
                                 </Grid>
