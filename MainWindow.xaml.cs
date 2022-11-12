@@ -26,7 +26,9 @@ namespace SlidingTile_LevelEditor
         private int _indexCommand = -1;
         private string _projectName = string.Empty, _projectPath = string.Empty;
         private bool _updateControl;
-        public static EditMode editMode = EditMode.None;
+        public static EditMode _editMode = EditMode.None;
+        LinearGradientBrush _borderSelected = new LinearGradientBrush(Colors.GreenYellow, Colors.Cyan, 45.0);
+        SolidColorBrush _borderNotSelected = new SolidColorBrush(Colors.White);
         public MainWindow()
         {
             SetCultureInfo("en-EN");
@@ -50,7 +52,42 @@ namespace SlidingTile_LevelEditor
             Title = GetProjectNameInLang() + " (Empty Project)";
             CalcLevelSize();
             UpdateMainGridView();
+            UpdateEditBorders();
             _updateControl = true;
+        }
+        private void UpdateEditBorders()
+        {
+            borderNormalInc.BorderBrush = _borderNotSelected;
+            borderNormalDec.BorderBrush = _borderNotSelected;
+            borderIceInc.BorderBrush = _borderNotSelected;
+            borderIceDec.BorderBrush = _borderNotSelected;
+            borderFinish.BorderBrush = _borderNotSelected;
+            borderDelete.BorderBrush = _borderNotSelected;
+            switch (_editMode)
+            {
+                case EditMode.None:
+                    break;
+                case EditMode.IncNormal:
+                    borderNormalInc.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.DecNormal:
+                    borderNormalDec.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.IncIce:
+                    borderIceInc.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.DecIce:
+                    borderIceDec.BorderBrush= _borderSelected;
+                    break;
+                case EditMode.PlaceFinish:
+                    borderFinish.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.DeleteTile:
+                    borderDelete.BorderBrush = _borderSelected;
+                    break;
+                default:
+                    break;
+            }
         }
         private void UpdateMainGridView()
         {
@@ -209,7 +246,7 @@ namespace SlidingTile_LevelEditor
             //new IncNormalCommand(_commands, _floorTiles, TEMP_DetectButtonLoc(cont), _indexCommand);
             if (button.ToolTip == null) return; 
             Point point = (Point)button.ToolTip;
-            switch (editMode)
+            switch (_editMode)
             {
                 case EditMode.None:
                     break;
@@ -612,22 +649,39 @@ namespace SlidingTile_LevelEditor
             else if (e.Delta < 0)
                 IncViewRange(-1, 1, -1, 1);
         }
-        private void commandBinding_EditModeNormalInc_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void commandBinding_EditModeCommon_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
         private void commandBinding_EditModeNormalInc_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            editMode = EditMode.IncNormal;
+            _editMode = EditMode.IncNormal;
+            UpdateEditBorders();
         }
-        private void commandBinding_EditModeNormalDec_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
         private void commandBinding_EditModeNormalDec_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            editMode = EditMode.DecNormal;
+            _editMode = EditMode.DecNormal;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModeIceInc_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.IncIce;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModeIceDec_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.DecIce;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModeFinish_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.PlaceFinish;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModeDeleteTile_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.DeleteTile;
+            UpdateEditBorders();
         }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {
@@ -671,5 +725,5 @@ namespace SlidingTile_LevelEditor
             return correctSave;
         }
     }
-    public enum EditMode {None, IncNormal, DecNormal, PlaceFinish}
+    public enum EditMode {None, IncNormal, DecNormal, IncIce, DecIce, PlaceFinish, DeleteTile}
 }
