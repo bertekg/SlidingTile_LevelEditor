@@ -12,18 +12,19 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Linq;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace SlidingTile_LevelEditor
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private List<FloorTile> _floorTiles = new List<FloorTile>();
         private List<Command> _commands = new List<Command>();
         private int _indexCommand = -1;
         private string _projectName = string.Empty, _projectPath = string.Empty;
+        private bool _updateControl;
         public MainWindow()
         {
             SetCultureInfo("en-EN");
@@ -34,6 +35,7 @@ namespace SlidingTile_LevelEditor
         }
         private void NewLevel()
         {
+            _updateControl = false;
             _floorTiles.Clear();
             _floorTiles.Add(new FloorTile() { PosX = 0, PosY = 0, Number = 1, Type = FloorTileType.Normal });
             lvFloorTiles.Items.Refresh();
@@ -44,6 +46,121 @@ namespace SlidingTile_LevelEditor
             tbCommandsCount.Text = _commands.Count.ToString();
             tbCommandsIndex.Text = _indexCommand.ToString();
             Title = GetProjectNameInLang() + " (Empty Project)";
+            CalcLevelSize();
+            UpdateMainGridView();
+            _updateControl = true;
+        }
+        private void UpdateMainGridView()
+        {
+            gMainPlaceGrid.Children.Clear();
+            gMainPlaceGrid.RowDefinitions.Clear();
+            gMainPlaceGrid.ColumnDefinitions.Clear();
+
+            int viewMinX = iudAreaViewDimMinX.Value.Value;
+            int viewMaxX = iudAreaViewDimMaxX.Value.Value;
+            int viewMinY = iudAreaViewDimMinY.Value.Value;
+            int viewMaxY = iudAreaViewDimMaxY.Value.Value;
+            int iColNo = 1 + viewMaxX - viewMinX;
+            int iRowNo = 1 + viewMaxY - viewMinY;
+
+            for (int i = 0; i < iColNo; i++)
+            {
+                gMainPlaceGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+            for (int i = 0; i < iRowNo; i++)
+            {
+                gMainPlaceGrid.RowDefinitions.Add(new RowDefinition());
+            }
+
+            for (int i = 0; i < iColNo; i++)
+            {
+                for (int j = 0; j < iRowNo; j++)
+                {
+                    Button button = new Button();
+                    Point newPoint = new Point(viewMinX + i, viewMinY + j);
+                    button.Width = 60; button.Height = 60; button.ToolTip = newPoint;
+                    Grid.SetColumn(button, i);
+                    Grid.SetRow(button, iRowNo - j - 1);
+                    button.Click += Button_Click;
+                    FloorTile? cResult = _floorTiles.Find(x => x.PosX == newPoint.X && x.PosY == newPoint.Y);
+                    if (cResult != null)
+                    {
+                        if (cResult.Type == FloorTileType.Normal)
+                        {
+                            Grid gr = new Grid();
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Normal.png", UriKind.Relative));
+                            TextBlock label = new TextBlock();
+                            label.HorizontalAlignment = HorizontalAlignment.Center;
+                            label.VerticalAlignment = VerticalAlignment.Center;
+                            label.TextAlignment = TextAlignment.Center;
+                            if (newPoint == new Point(0, 0))
+                            {
+                                label.Text = "Start\n" + cResult.Number.ToString();
+                                label.FontSize = 18;
+                                label.Foreground = new SolidColorBrush(Colors.Green);
+                            }
+                            else
+                            {
+                                label.Text = cResult.Number.ToString();
+                                label.FontSize = 30;
+                            }
+                            gr.Children.Add(img);
+                            gr.Children.Add(label);
+                            button.Content = gr;
+                        }
+                        else if (cResult.Type == FloorTileType.Ice)
+                        {
+                            Grid gr = new Grid();
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Ice.png", UriKind.Relative));
+                            TextBlock lab = new TextBlock();
+                            lab.HorizontalAlignment = HorizontalAlignment.Center;
+                            lab.VerticalAlignment = VerticalAlignment.Center;
+                            lab.TextAlignment = TextAlignment.Center;
+                            if (newPoint == new Point(0, 0))
+                            {
+                                lab.Text = "Start\n" + cResult.Number.ToString();
+                                lab.FontSize = 18;
+                                lab.Foreground = new SolidColorBrush(Colors.Green);
+                            }
+                            else
+                            {
+                                lab.Text = cResult.Number.ToString();
+                                lab.FontSize = 30;
+                            }
+                            gr.Children.Add(img);
+                            gr.Children.Add(lab);
+                            button.Content = gr;
+                        }
+                        else
+                        {
+                            Grid gr = new Grid();
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Normal.png", UriKind.Relative));
+                            TextBlock lab = new TextBlock();
+                            lab.HorizontalAlignment = HorizontalAlignment.Center;
+                            lab.VerticalAlignment = VerticalAlignment.Center;
+                            lab.TextAlignment = TextAlignment.Center;
+                            lab.Text = "FIN";
+                            lab.FontSize = 18;
+                            lab.Foreground = new SolidColorBrush(Colors.Red);
+                            gr.Children.Add(img);
+                            gr.Children.Add(lab);
+                            button.Content = gr;
+                        }
+                    }
+                    //bTemp.MouseEnter += Button_MouseEnter;
+                    gMainPlaceGrid.Children.Add(button);
+                }
+            }
+        }
+        private void CalcLevelSize()
+        {
+            tbInfoMinX.Text = _floorTiles.Min(c => c.PosX).ToString();
+            tbInfoMaxX.Text = _floorTiles.Max(c => c.PosX).ToString();
+            tbInfoMinY.Text = _floorTiles.Min(c => c.PosY).ToString();
+            tbInfoMaxY.Text = _floorTiles.Max(c => c.PosY).ToString();
         }
         private static void SetCultureInfo(string cultureInfoToSet)
         {
@@ -201,6 +318,8 @@ namespace SlidingTile_LevelEditor
                     _indexCommand = _commands.Count - 1;
                     tbCommandsCount.Text = _commands.Count.ToString();
                     tbCommandsIndex.Text = _indexCommand.ToString();
+                    CalcLevelSize();
+                    UpdateMainGridView();
                     MessageBox.Show("InfoOpenLevelConfirmationMessage", "InfoOpenLevelConfirmationTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 catch (Exception)
@@ -276,7 +395,18 @@ namespace SlidingTile_LevelEditor
         }
         private void iudAreaViewDim_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-
+            if (_updateControl)
+                UpdateMainGridView();
+        }
+        private void IncViewRange(int minX, int maxX, int minY, int maxY)
+        {
+            _updateControl = false;
+            iudAreaViewDimMinX.Value += minX;
+            iudAreaViewDimMaxX.Value += maxX;
+            iudAreaViewDimMinY.Value += minY;
+            iudAreaViewDimMaxY.Value += maxY;
+            _updateControl = true;
+            UpdateMainGridView();
         }
         private void commandBinding_MoveViewUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -284,7 +414,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_MoveViewUp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Move Up View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            IncViewRange(0, 0, -1, -1);
         }
         private void commandBinding_MoveViewDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -292,7 +422,8 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_MoveViewDown_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Move Down View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            IncViewRange(0, 0, 1, 1);
+
         }
         private void commandBinding_MoveViewLeft_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -300,7 +431,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_MoveViewLeft_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Move Left View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            IncViewRange(1, 1, 0, 0);
         }
         private void commandBinding_MoveViewRight_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -308,7 +439,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_MoveViewRight_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Move Right View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            IncViewRange(-1, -1, 0, 0);
         }
         private void commandBinding_MoveViewLeftUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -316,7 +447,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_MoveViewLeftUp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Move Left Up View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            IncViewRange(1, 1, -1, -1);
         }
         private void commandBinding_MoveViewRightUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -324,7 +455,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_MoveViewRightUp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Move Right Up View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            IncViewRange(-1, -1, -1, -1);
         }
         private void commandBinding_MoveViewLeftDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -332,7 +463,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_MoveViewLeftDown_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Move Left Down View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            IncViewRange(1, 1, 1, 1);
         }
         private void commandBinding_MoveViewRightDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -340,7 +471,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_MoveViewRightDown_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Move Right Down View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            IncViewRange(-1, -1, 1, 1);
         }
         private void commandBinding_AdjustViewProject_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -348,7 +479,13 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_AdjustViewProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Adjust View Project", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            _updateControl = false;
+            iudAreaViewDimMinX.Value = _floorTiles.Min(item => item.PosX);
+            iudAreaViewDimMaxX.Value = _floorTiles.Max(item => item.PosX);
+            iudAreaViewDimMinY.Value = _floorTiles.Min(item => item.PosY);
+            iudAreaViewDimMaxY.Value = _floorTiles.Max(item => item.PosY);
+            _updateControl = true;
+            UpdateMainGridView();
         }
         private void commandBinding_ZoomOutView_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -356,7 +493,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_ZoomOutView_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Zoom Out View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            IncViewRange(-1, 1, -1, 1);
         }
         private void commandBinding_ZoomInView_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -364,7 +501,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_ZoomInView_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Zoom In View", "TODO", MessageBoxButton.OK, MessageBoxImage.Information);
+            IncViewRange(1, -1, 1, -1);
         }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {
