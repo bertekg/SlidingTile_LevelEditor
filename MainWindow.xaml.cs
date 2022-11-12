@@ -26,6 +26,7 @@ namespace SlidingTile_LevelEditor
         private int _indexCommand = -1;
         private string _projectName = string.Empty, _projectPath = string.Empty;
         private bool _updateControl;
+        public static EditMode editMode = EditMode.None;
         public MainWindow()
         {
             SetCultureInfo("en-EN");
@@ -208,11 +209,46 @@ namespace SlidingTile_LevelEditor
             //new IncNormalCommand(_commands, _floorTiles, TEMP_DetectButtonLoc(cont), _indexCommand);
             if (button.ToolTip == null) return; 
             Point point = (Point)button.ToolTip;
-            new IncNormalCommand(_commands, _floorTiles, point, _indexCommand + 1);
-            PostAddCommandUpdate();
+            switch (editMode)
+            {
+                case EditMode.None:
+                    break;
+                case EditMode.IncNormal:
+                    new IncNormalCommand(_commands, _floorTiles, point, _indexCommand + 1);
+                    PostCommandUpdate();
+                    break;
+                case EditMode.DecNormal:
+                    int floorTileIndex = FindFloor(point);
+                    if (floorTileIndex >= 0)
+                    {
+                        FloorTile floorTile = _floorTiles[floorTileIndex];
+                        if (floorTile.Type == FloorTileType.Finish)
+                        {
+                            MessageBox.Show("Cannot decrees Finish floor Tile", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else if (point == new Point(0,0) && floorTile.Number < 2)
+                        {
+                            MessageBox.Show("Cannot decrees Start floor Tile below number 1", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            new DecNormalCommand(_commands, _floorTiles, point, _indexCommand + 1);
+                            PostCommandUpdate();
+                        }
+                    }
+                    break;
+                case EditMode.PlaceFinish:
+                    break;
+                default:
+                    break;
+            }
+            
             UpdateMainGridView();
         }
-
+        private int FindFloor(Point point)
+        {
+            return _floorTiles.FindIndex(item => item.PosX == point.X && item.PosY == point.Y);
+        }
         private void UpdateButton(Button button, Point point)
         {
             FloorTile floorTile = _floorTiles.Find(tile => tile.PosX == point.X && tile.PosY == point.Y);
@@ -301,7 +337,7 @@ namespace SlidingTile_LevelEditor
             }
             return point;
         }
-        private void PostAddCommandUpdate()
+        private void PostCommandUpdate()
         {
             _indexCommand = _commands.Count - 1;
             lvCommans.Items.Refresh();
@@ -576,6 +612,23 @@ namespace SlidingTile_LevelEditor
             else if (e.Delta < 0)
                 IncViewRange(-1, 1, -1, 1);
         }
+        private void commandBinding_EditModeNormalInc_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_EditModeNormalInc_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            editMode = EditMode.IncNormal;
+        }
+        private void commandBinding_EditModeNormalDec_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void commandBinding_EditModeNormalDec_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            editMode = EditMode.DecNormal;
+        }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {
             bool correctSave = false;
@@ -618,4 +671,5 @@ namespace SlidingTile_LevelEditor
             return correctSave;
         }
     }
+    public enum EditMode {None, IncNormal, DecNormal, PlaceFinish}
 }

@@ -28,6 +28,8 @@
         <CommandBinding x:Name="commandBinding_AdjustViewProject" Command="local:CustomCommands.AdjustViewProject" CanExecute="commandBinding_AdjustViewProject_CanExecute" Executed="commandBinding_AdjustViewProject_Executed"/>
         <CommandBinding x:Name="commandBinding_ZoomOutView" Command="local:CustomCommands.ZoomOutView" CanExecute="commandBinding_ZoomOutView_CanExecute" Executed="commandBinding_ZoomOutView_Executed"/>
         <CommandBinding x:Name="commandBinding_ZoomInView" Command="local:CustomCommands.ZoomInView" CanExecute="commandBinding_ZoomInView_CanExecute" Executed="commandBinding_ZoomInView_Executed"/>
+        <CommandBinding x:Name="commandBinding_EditModeNormalInc" Command="local:CustomCommands.EditModeNormalInc" CanExecute="commandBinding_EditModeNormalInc_CanExecute" Executed="commandBinding_EditModeNormalInc_Executed"/>
+        <CommandBinding x:Name="commandBinding_EditModeNormalDec" Command="local:CustomCommands.EditModeNormalDec" CanExecute="commandBinding_EditModeNormalDec_CanExecute" Executed="commandBinding_EditModeNormalDec_Executed"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -310,7 +312,12 @@
                 </Grid>
             </Viewbox>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="3" ResizeBehavior="PreviousAndNext" Width="5"/>
-            <GroupBox Header="Floor type" Grid.Column="4"/>
+            <GroupBox Header="Floor type" Grid.Column="4">
+                <StackPanel>
+                    <Button Content="Normal INC" Command="local:CustomCommands.EditModeNormalInc"/>
+                    <Button Content="Normal DEC" Command="local:CustomCommands.EditModeNormalDec"/>
+                </StackPanel>
+            </GroupBox>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="5" ResizeBehavior="PreviousAndNext" Width="5"/>
             <Grid Grid.Column="6">
                 <Grid.RowDefinitions>

@@ -94,5 +94,17 @@ namespace SlidingTile_LevelEditor
           {
                 new KeyGesture(Key.Add)
           });
+        public static readonly RoutedUICommand EditModeNormalInc = new RoutedUICommand
+            ("Edit Mode Normal Inc", "EditModeNormalInc", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.D1, ModifierKeys.Alt)
+            });
+        public static readonly RoutedUICommand EditModeNormalDec = new RoutedUICommand
+            ("Edit Mode Normal Dec", "EditModeNormalDec", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.D2, ModifierKeys.Alt)
+            });
     }
 }
