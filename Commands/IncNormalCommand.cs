@@ -1,13 +1,7 @@
 ﻿using SlidingTile_LevelEditor.Class;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Input;
 
 namespace SlidingTile_LevelEditor.Commands
 {
@@ -16,7 +10,6 @@ namespace SlidingTile_LevelEditor.Commands
         private List<Command> _commands;
         private Point _point;
         private int _commandIndex;
-        public bool _isCurrentCommand;
         private List<FloorTile> _floorTiles;
         private FloorTile _beforChange;
         private FloorTile _afterChange;
@@ -26,7 +19,6 @@ namespace SlidingTile_LevelEditor.Commands
             _commands = commands;
             _point = point;
             _commandIndex = commandIndex;
-            _isCurrentCommand = true;
             _beforChange = new FloorTile();
             _afterChange = new FloorTile();
             _floorTiles = floorTiles;
@@ -74,8 +66,8 @@ namespace SlidingTile_LevelEditor.Commands
                     PosY = floorTile.PosY,
                     Number = floorTile.Number
                 };
+                _floorTileIndex = _floorTiles.Count - 1;
             }
-            _floorTileIndex = _floorTiles.Count - 1;
         }
         private int FindFloor()
         {
@@ -119,7 +111,18 @@ namespace SlidingTile_LevelEditor.Commands
 
         public override string ToString()
         {
-            return _isCurrentCommand.ToString() + ">" + _commandIndex.ToString() + ":"  + _point.X.ToString() + "," + _point.Y.ToString();
+            string returnText = string.Empty;
+            if (_beforChange != null)
+            {
+                returnText = _commandIndex.ToString() + "; INC Normal [" + _point.X.ToString() + "," + _point.Y.ToString() +
+                    "] Number: " + _beforChange.Number.ToString() + " -> " + _afterChange.Number.ToString();
+            }
+            else 
+            {
+                returnText = _commandIndex.ToString() + "; INC Normal [" + _point.X.ToString() + "," + _point.Y.ToString() +
+                    "] Number: null -> " + _afterChange.Number.ToString();
+            }
+            return returnText;
         }
     }
 }

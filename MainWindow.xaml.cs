@@ -22,6 +22,7 @@ namespace SlidingTile_LevelEditor
     {
         private List<FloorTile> _floorTiles = new List<FloorTile>();
         private List<Command> _commands = new List<Command>();
+        private List<Button> _viewButtons;
         private int _indexCommand = -1;
         private string _projectName = string.Empty, _projectPath = string.Empty;
         private bool _updateControl;
@@ -76,6 +77,7 @@ namespace SlidingTile_LevelEditor
             {
                 for (int j = 0; j < iRowNo; j++)
                 {
+                    _viewButtons = new List<Button>();
                     Button button = new Button();
                     Point newPoint = new Point(viewMinX + i, viewMinY + j);
                     button.Width = 60; button.Height = 60; button.ToolTip = newPoint;
@@ -152,6 +154,7 @@ namespace SlidingTile_LevelEditor
                     }
                     //bTemp.MouseEnter += Button_MouseEnter;
                     gMainPlaceGrid.Children.Add(button);
+                    _viewButtons.Add(button);
                 }
             }
         }
@@ -201,10 +204,87 @@ namespace SlidingTile_LevelEditor
                 _commands.RemoveAt(i);
             }
             Button? button = sender as Button;
-            string cont = button.Content.ToString();
-            new IncNormalCommand(_commands, _floorTiles, TEMP_DetectButtonLoc(cont), _indexCommand);
+            //string cont = button.Content.ToString();
+            //new IncNormalCommand(_commands, _floorTiles, TEMP_DetectButtonLoc(cont), _indexCommand);
+            if (button.ToolTip == null) return; 
+            Point point = (Point)button.ToolTip;
+            new IncNormalCommand(_commands, _floorTiles, point, _indexCommand + 1);
             PostAddCommandUpdate();
+            UpdateMainGridView();
         }
+
+        private void UpdateButton(Button button, Point point)
+        {
+            FloorTile floorTile = _floorTiles.Find(tile => tile.PosX == point.X && tile.PosY == point.Y);
+            if (floorTile != null)
+            {
+                if (floorTile.Type == FloorTileType.Normal)
+                {
+                    Grid gr = new Grid();
+                    Image img = new Image();
+                    img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Normal.png", UriKind.Relative));
+                    TextBlock label = new TextBlock();
+                    label.HorizontalAlignment = HorizontalAlignment.Center;
+                    label.VerticalAlignment = VerticalAlignment.Center;
+                    label.TextAlignment = TextAlignment.Center;
+                    if (point == new Point(0, 0))
+                    {
+                        label.Text = "Start\n" + floorTile.Number.ToString();
+                        label.FontSize = 18;
+                        label.Foreground = new SolidColorBrush(Colors.Green);
+                    }
+                    else
+                    {
+                        label.Text = floorTile.Number.ToString();
+                        label.FontSize = 30;
+                    }
+                    gr.Children.Add(img);
+                    gr.Children.Add(label);
+                    button.Content = gr;
+                }
+                else if (floorTile.Type == FloorTileType.Ice)
+                {
+                    Grid gr = new Grid();
+                    Image img = new Image();
+                    img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Ice.png", UriKind.Relative));
+                    TextBlock lab = new TextBlock();
+                    lab.HorizontalAlignment = HorizontalAlignment.Center;
+                    lab.VerticalAlignment = VerticalAlignment.Center;
+                    lab.TextAlignment = TextAlignment.Center;
+                    if (point == new Point(0, 0))
+                    {
+                        lab.Text = "Start\n" + floorTile.Number.ToString();
+                        lab.FontSize = 18;
+                        lab.Foreground = new SolidColorBrush(Colors.Green);
+                    }
+                    else
+                    {
+                        lab.Text = floorTile.Number.ToString();
+                        lab.FontSize = 30;
+                    }
+                    gr.Children.Add(img);
+                    gr.Children.Add(lab);
+                    button.Content = gr;
+                }
+                else
+                {
+                    Grid gr = new Grid();
+                    Image img = new Image();
+                    img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Normal.png", UriKind.Relative));
+                    TextBlock lab = new TextBlock();
+                    lab.HorizontalAlignment = HorizontalAlignment.Center;
+                    lab.VerticalAlignment = VerticalAlignment.Center;
+                    lab.TextAlignment = TextAlignment.Center;
+                    lab.Text = "FIN";
+                    lab.FontSize = 18;
+                    lab.Foreground = new SolidColorBrush(Colors.Red);
+                    gr.Children.Add(img);
+                    gr.Children.Add(lab);
+                    button.Content = gr;
+                }
+            }
+        }
+
         private Point TEMP_DetectButtonLoc(string content)
         {
             Point point = new Point(0, 0);
@@ -224,11 +304,6 @@ namespace SlidingTile_LevelEditor
         private void PostAddCommandUpdate()
         {
             _indexCommand = _commands.Count - 1;
-            foreach (IncNormalCommand item in _commands)
-            {
-                item._isCurrentCommand = false;
-            }
-            ((IncNormalCommand)_commands[^1])._isCurrentCommand = true;
             lvCommans.Items.Refresh();
             tbCommandsCount.Text = _commands.Count.ToString();
             tbCommandsIndex.Text = _indexCommand.ToString();
@@ -245,21 +320,11 @@ namespace SlidingTile_LevelEditor
             _commands[_indexCommand].Undo();
             _indexCommand--;
             PostUndoRedoCommandsList();
+            UpdateMainGridView();
         }
 
         private void PostUndoRedoCommandsList()
         {
-            for (int i = 0; i < _commands.Count; i++)
-            {
-                if (_indexCommand != i)
-                {
-                    ((IncNormalCommand)_commands[i])._isCurrentCommand = false;
-                }
-                else
-                {
-                    ((IncNormalCommand)_commands[i])._isCurrentCommand = true;
-                }
-            }
             tbCommandsIndex.Text = _indexCommand.ToString();
             lvCommans.Items.Refresh();
             lvFloorTiles.Items.Refresh();
@@ -275,6 +340,7 @@ namespace SlidingTile_LevelEditor
             _indexCommand++;
             _commands[_indexCommand].Redo();
             PostUndoRedoCommandsList();
+            UpdateMainGridView();
         }
 
         private void commandBinding_Open_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -502,6 +568,13 @@ namespace SlidingTile_LevelEditor
         private void commandBinding_ZoomInView_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(1, -1, 1, -1);
+        }
+        private void vPlaceAllCells_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0)
+                IncViewRange(1, -1, 1, -1);
+            else if (e.Delta < 0)
+                IncViewRange(-1, 1, -1, 1);
         }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {

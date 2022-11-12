@@ -136,7 +136,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="260"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <Grid>
@@ -279,7 +279,7 @@
                 </Grid>
             </ScrollViewer>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="5"/>
-            <Viewbox Name="vPlaceAllCells" Grid.Column="2" Stretch="Uniform">
+            <Viewbox Name="vPlaceAllCells" Grid.Column="2" Stretch="Uniform" MouseWheel="vPlaceAllCells_MouseWheel">
                 <Grid Name="gMainPlaceGrid" ShowGridLines="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -310,6 +310,7 @@
                 </Grid>
             </Viewbox>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="3" ResizeBehavior="PreviousAndNext" Width="5"/>
+            <GroupBox Header="Floor type" Grid.Column="4"/>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="5" ResizeBehavior="PreviousAndNext" Width="5"/>
             <Grid Grid.Column="6">
                 <Grid.RowDefinitions>
