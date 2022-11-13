@@ -37,7 +37,7 @@
                     <TextBlock Grid.Row="1" Text="Sliding Tile" VerticalAlignment="Center" FontSize="20"/>
                     <TextBlock Grid.Row="2" Text="Level Editor" VerticalAlignment="Center" FontSize="16"/>
                     <TextBlock Grid.Row="4" Name="tbVersionNo" Text="Version number XXX" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="5" Name="tbReleaseDate" Text="Release Date YYY" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="5" Name="tbReleaseDate" Text="Release date YYY" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="6" Name="tbCopyright" Text="© 2022-ZZZZ Bartłomiej Grywalski" VerticalAlignment="Center"/>
                 </Grid>
             </Grid>

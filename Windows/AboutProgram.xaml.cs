@@ -19,7 +19,7 @@ namespace SlidingTile_LevelEditor.Windows
             System.IO.FileInfo fileInfo = new System.IO.FileInfo(assembly.Location);
             DateTime lastModified = fileInfo.LastWriteTime;
             tbVersionNo.Text = $"Version number: {Assembly.GetExecutingAssembly().GetName().Version}";
-            tbReleaseDate.Text = $"Release Date: {lastModified.Date:yyyy.MM.dd}";
+            tbReleaseDate.Text = $"Release date: {lastModified.Date:yyyy.MM.dd}";
             tbCopyright.Text = fvi.LegalCopyright;
         }
         private void bClose_Click(object sender, RoutedEventArgs e)

@@ -14,7 +14,7 @@ namespace SlidingTile_LevelEditor.Commands
         private FloorTile _beforChange;
         private FloorTile _afterChange;
         private int _floorTileIndex;
-        public NormalIncCommand(List<Command> commands, List<FloorTile> floorTiles, Point point, int commandIndex)
+        public NormalIncCommand(List<Command> commands, List<FloorTile> floorTiles, Point point, int commandIndex, int floorTileIndex)
         {
             _commands = commands;
             _point = point;
@@ -22,12 +22,12 @@ namespace SlidingTile_LevelEditor.Commands
             _beforChange = new FloorTile();
             _afterChange = new FloorTile();
             _floorTiles = floorTiles;
+            _floorTileIndex = floorTileIndex;
             Execute();
         }
         public override void Execute()
         {
             _commands.Add(this);
-            _floorTileIndex = FindFloor();
             if (_floorTileIndex >= 0)
             {
                 _beforChange = new FloorTile
@@ -67,10 +67,6 @@ namespace SlidingTile_LevelEditor.Commands
                 };
                 _floorTileIndex = _floorTiles.Count - 1;
             }
-        }
-        private int FindFloor()
-        {
-            return _floorTiles.FindIndex(item => item.PosX == _point.X&& item.PosY == _point.Y);
         }
         public override void Undo()
         {
