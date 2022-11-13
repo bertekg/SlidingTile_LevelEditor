@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Image Margin="10" Width="128" Height="128"/>
+                <Image Source="/Graphics/ProgramIcon2_128.png" Margin="10" Width="128" Height="128" />
                 <Grid Margin="10"  Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>

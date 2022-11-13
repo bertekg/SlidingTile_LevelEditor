@@ -51,7 +51,7 @@ namespace SlidingTile_LevelEditor
             tbCommandsIndex.Text = _indexCommand.ToString();
             Title = GetProjectNameInLang() + " (Empty Project)";
             CalcLevelSize();
-            UpdateMainGridView();
+            UpdateMainGridViewFull();
             UpdateEditBorders();
             _updateControl = true;
         }
@@ -89,9 +89,8 @@ namespace SlidingTile_LevelEditor
                     break;
             }
         }
-        private void UpdateMainGridView()
+        private void UpdateMainGridViewFull()
         {
-            gMainPlaceGrid.Children.Clear();
             gMainPlaceGrid.RowDefinitions.Clear();
             gMainPlaceGrid.ColumnDefinitions.Clear();
 
@@ -110,7 +109,22 @@ namespace SlidingTile_LevelEditor
             {
                 gMainPlaceGrid.RowDefinitions.Add(new RowDefinition());
             }
+            UpdateMainGridViewOnlyButtons(viewMinX, viewMinY, iColNo, iRowNo);
+        }
+        private void UpdateMainGridViewOnlyButtons()
+        {
+            int viewMinX = iudAreaViewDimMinX.Value.Value;
+            int viewMaxX = iudAreaViewDimMaxX.Value.Value;
+            int viewMinY = iudAreaViewDimMinY.Value.Value;
+            int viewMaxY = iudAreaViewDimMaxY.Value.Value;
+            int iColNo = 1 + viewMaxX - viewMinX;
+            int iRowNo = 1 + viewMaxY - viewMinY;
 
+            UpdateMainGridViewOnlyButtons(viewMinX, viewMinY, iColNo, iRowNo);
+        }
+        private void UpdateMainGridViewOnlyButtons(int viewMinX, int viewMinY, int iColNo, int iRowNo)
+        {
+            gMainPlaceGrid.Children.Clear();
             for (int i = 0; i < iColNo; i++)
             {
                 for (int j = 0; j < iRowNo; j++)
@@ -196,6 +210,7 @@ namespace SlidingTile_LevelEditor
                 }
             }
         }
+
         private void CalcLevelSize()
         {
             tbInfoMinX.Text = _floorTiles.Min(c => c.PosX).ToString();
@@ -346,7 +361,7 @@ namespace SlidingTile_LevelEditor
                     break;
             }
 
-            UpdateMainGridView();
+            UpdateMainGridViewOnlyButtons();
         }
         private int FindFloor(Point point)
         {
@@ -448,6 +463,7 @@ namespace SlidingTile_LevelEditor
             tbCommandsIndex.Text = _indexCommand.ToString();
             lvFloorTiles.Items.Refresh();
             tbFloorTileCount.Text = _floorTiles.Count.ToString();
+            CalcLevelSize();
         }
         private void commandBinding_Undo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -459,7 +475,7 @@ namespace SlidingTile_LevelEditor
             _commands[_indexCommand].Undo();
             _indexCommand--;
             PostUndoRedoCommandsList();
-            UpdateMainGridView();
+            UpdateMainGridViewOnlyButtons();
         }
 
         private void PostUndoRedoCommandsList()
@@ -468,6 +484,7 @@ namespace SlidingTile_LevelEditor
             lvCommans.Items.Refresh();
             lvFloorTiles.Items.Refresh();
             tbFloorTileCount.Text = _floorTiles.Count.ToString();
+            CalcLevelSize();
         }
 
         private void commandBinding_Redo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -480,7 +497,7 @@ namespace SlidingTile_LevelEditor
             _indexCommand++;
             _commands[_indexCommand].Redo();
             PostUndoRedoCommandsList();
-            UpdateMainGridView();
+            UpdateMainGridViewOnlyButtons();
         }
 
         private void commandBinding_Open_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -525,7 +542,7 @@ namespace SlidingTile_LevelEditor
                     tbCommandsCount.Text = _commands.Count.ToString();
                     tbCommandsIndex.Text = _indexCommand.ToString();
                     CalcLevelSize();
-                    UpdateMainGridView();
+                    UpdateMainGridViewFull();
                     MessageBox.Show("InfoOpenLevelConfirmationMessage", "InfoOpenLevelConfirmationTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 catch (Exception)
@@ -602,7 +619,7 @@ namespace SlidingTile_LevelEditor
         private void iudAreaViewDim_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (_updateControl)
-                UpdateMainGridView();
+                UpdateMainGridViewFull();
         }
         private void IncViewRange(int minX, int maxX, int minY, int maxY)
         {
@@ -612,7 +629,7 @@ namespace SlidingTile_LevelEditor
             iudAreaViewDimMinY.Value += minY;
             iudAreaViewDimMaxY.Value += maxY;
             _updateControl = true;
-            UpdateMainGridView();
+            UpdateMainGridViewFull();
         }
         private void commandBinding_MoveViewUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -691,7 +708,7 @@ namespace SlidingTile_LevelEditor
             iudAreaViewDimMinY.Value = _floorTiles.Min(item => item.PosY);
             iudAreaViewDimMaxY.Value = _floorTiles.Max(item => item.PosY);
             _updateControl = true;
-            UpdateMainGridView();
+            UpdateMainGridViewFull();
         }
         private void commandBinding_ZoomOutView_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
