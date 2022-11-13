@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SlidingTile_LevelEditor.Commands
 {
-    class DecNormalCommand : Command
+    class IceDecCommand : Command
     {
         private List<Command> _commands;
         private Point _point;
@@ -15,7 +17,7 @@ namespace SlidingTile_LevelEditor.Commands
         private FloorTile _beforChange;
         private FloorTile _afterChange;
         private int _floorTileIndex;
-        public DecNormalCommand(List<Command> commands, List<FloorTile> floorTiles, Point point, int commandIndex)
+        public IceDecCommand(List<Command> commands, List<FloorTile> floorTiles, Point point, int commandIndex) 
         {
             _commands = commands;
             _point = point;
@@ -38,7 +40,7 @@ namespace SlidingTile_LevelEditor.Commands
             };
             if (_floorTiles[_floorTileIndex].Number > 1)
             {
-                _floorTiles[_floorTileIndex].Type = FloorTileType.Normal;
+                _floorTiles[_floorTileIndex].Type = FloorTileType.Ice;
                 _floorTiles[_floorTileIndex].Number--;
                 _afterChange = new FloorTile
                 {
@@ -52,7 +54,7 @@ namespace SlidingTile_LevelEditor.Commands
             {
                 _floorTiles.RemoveAt(_floorTileIndex);
                 _afterChange = null;
-            }           
+            }
         }
         private int FindFloor()
         {
@@ -99,12 +101,12 @@ namespace SlidingTile_LevelEditor.Commands
             string returnText;
             if (_afterChange != null)
             {
-                returnText = _commandIndex.ToString() + "; DEC Normal [" + _point.X.ToString() + "," + _point.Y.ToString() +
+                returnText = _commandIndex.ToString() + "; Ice DEC [" + _point.X.ToString() + "," + _point.Y.ToString() +
                     "] Number: " + _beforChange.Number.ToString() + " -> " + _afterChange.Number.ToString();
             }
             else
             {
-                returnText = _commandIndex.ToString() + "; DEC Normal [" + _point.X.ToString() + "," + _point.Y.ToString() +
+                returnText = _commandIndex.ToString() + "; Ice DEC [" + _point.X.ToString() + "," + _point.Y.ToString() +
                     "] Number: " + _beforChange.Number.ToString() + " -> null";
             }
             return returnText;

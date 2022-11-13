@@ -1,11 +1,12 @@
 ﻿using SlidingTile_LevelEditor.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
 namespace SlidingTile_LevelEditor.Commands
 {
-    class IncNormalCommand : Command
+    class NormalDecCommand : Command
     {
         private List<Command> _commands;
         private Point _point;
@@ -14,7 +15,7 @@ namespace SlidingTile_LevelEditor.Commands
         private FloorTile _beforChange;
         private FloorTile _afterChange;
         private int _floorTileIndex;
-        public IncNormalCommand(List<Command> commands, List<FloorTile> floorTiles, Point point, int commandIndex)
+        public NormalDecCommand(List<Command> commands, List<FloorTile> floorTiles, Point point, int commandIndex)
         {
             _commands = commands;
             _point = point;
@@ -28,17 +29,17 @@ namespace SlidingTile_LevelEditor.Commands
         {
             _commands.Add(this);
             _floorTileIndex = FindFloor();
-            if (_floorTileIndex >= 0)
+            _beforChange = new FloorTile
             {
-                _beforChange = new FloorTile
-                {
-                    Type = _floorTiles[_floorTileIndex].Type,
-                    PosX = _floorTiles[_floorTileIndex].PosX,
-                    PosY = _floorTiles[_floorTileIndex].PosY,
-                    Number = _floorTiles[_floorTileIndex].Number
-                };
+                Type = _floorTiles[_floorTileIndex].Type,
+                PosX = _floorTiles[_floorTileIndex].PosX,
+                PosY = _floorTiles[_floorTileIndex].PosY,
+                Number = _floorTiles[_floorTileIndex].Number
+            };
+            if (_floorTiles[_floorTileIndex].Number > 1)
+            {
                 _floorTiles[_floorTileIndex].Type = FloorTileType.Normal;
-                _floorTiles[_floorTileIndex].Number++;
+                _floorTiles[_floorTileIndex].Number--;
                 _afterChange = new FloorTile
                 {
                     Type = _floorTiles[_floorTileIndex].Type,
@@ -47,46 +48,38 @@ namespace SlidingTile_LevelEditor.Commands
                     Number = _floorTiles[_floorTileIndex].Number
                 };
             }
-            else 
+            else
             {
-                _beforChange = null;
-                FloorTile floorTile = new FloorTile()
-                {
-                    PosX = (int)_point.X,
-                    PosY = (int)_point.Y,
-                    Type = FloorTileType.Normal,
-                    Number = 1
-                };
-                _floorTiles.Add(floorTile);
-                _afterChange = new FloorTile()
-                {
-                    Type = floorTile.Type,
-                    PosX = floorTile.PosX,
-                    PosY = floorTile.PosY,
-                    Number = floorTile.Number
-                };
-                _floorTileIndex = _floorTiles.Count - 1;
-            }
+                _floorTiles.RemoveAt(_floorTileIndex);
+                _afterChange = null;
+            }           
         }
         private int FindFloor()
         {
-            return _floorTiles.FindIndex(item => item.PosX == _point.X&& item.PosY == _point.Y);
+            return _floorTiles.FindIndex(item => item.PosX == _point.X && item.PosY == _point.Y);
         }
         public override void Undo()
         {
-            if (_beforChange != null)
+            if (_afterChange != null)
             {
                 _floorTiles[_floorTileIndex].Type = _beforChange.Type;
                 _floorTiles[_floorTileIndex].Number = _beforChange.Number;
             }
             else
             {
-                _floorTiles.RemoveAt(_floorTileIndex);
+                FloorTile floorTileToInser = new FloorTile()
+                {
+                    Type = _beforChange.Type,
+                    PosX = _beforChange.PosX,
+                    PosY = _beforChange.PosY,
+                    Number = _beforChange.Number
+                };
+                _floorTiles.Insert(_floorTileIndex, floorTileToInser);
             }
         }
         public override void Redo()
         {
-            if (_floorTiles.ElementAtOrDefault(_floorTileIndex) != null)
+            if (_afterChange != null)
             {
                 _floorTiles[_floorTileIndex] = new FloorTile()
                 {
@@ -98,28 +91,21 @@ namespace SlidingTile_LevelEditor.Commands
             }
             else
             {
-                FloorTile floorTileToInser = new FloorTile()
-                {
-                    Type = _afterChange.Type,
-                    PosX = _afterChange.PosX,
-                    PosY = _afterChange.PosY,
-                    Number = _afterChange.Number
-                };
-                _floorTiles.Insert(_floorTileIndex, floorTileToInser);
+                _floorTiles.RemoveAt(_floorTileIndex);
             }
         }
         public override string ToString()
         {
             string returnText;
-            if (_beforChange != null)
+            if (_afterChange != null)
             {
-                returnText = _commandIndex.ToString() + "; INC Normal [" + _point.X.ToString() + "," + _point.Y.ToString() +
+                returnText = _commandIndex.ToString() + "; Normal DEC [" + _point.X.ToString() + "," + _point.Y.ToString() +
                     "] Number: " + _beforChange.Number.ToString() + " -> " + _afterChange.Number.ToString();
             }
-            else 
+            else
             {
-                returnText = _commandIndex.ToString() + "; INC Normal [" + _point.X.ToString() + "," + _point.Y.ToString() +
-                    "] Number: null -> " + _afterChange.Number.ToString();
+                returnText = _commandIndex.ToString() + "; Normal DEC [" + _point.X.ToString() + "," + _point.Y.ToString() +
+                    "] Number: " + _beforChange.Number.ToString() + " -> null";
             }
             return returnText;
         }

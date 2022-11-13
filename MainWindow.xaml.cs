@@ -67,19 +67,19 @@ namespace SlidingTile_LevelEditor
             {
                 case EditMode.None:
                     break;
-                case EditMode.IncNormal:
+                case EditMode.NormalInc:
                     borderNormalInc.BorderBrush = _borderSelected;
                     break;
-                case EditMode.DecNormal:
+                case EditMode.NormalDec:
                     borderNormalDec.BorderBrush = _borderSelected;
                     break;
-                case EditMode.IncIce:
+                case EditMode.IceInc:
                     borderIceInc.BorderBrush = _borderSelected;
                     break;
-                case EditMode.DecIce:
+                case EditMode.IceDec:
                     borderIceDec.BorderBrush= _borderSelected;
                     break;
-                case EditMode.PlaceFinish:
+                case EditMode.FinishTile:
                     borderFinish.BorderBrush = _borderSelected;
                     break;
                 case EditMode.DeleteTile:
@@ -138,7 +138,7 @@ namespace SlidingTile_LevelEditor
                             {
                                 label.Text = "Start\n" + cResult.Number.ToString();
                                 label.FontSize = 18;
-                                label.Foreground = new SolidColorBrush(Colors.Green);
+                                label.Foreground = new SolidColorBrush(Colors.Black);
                             }
                             else
                             {
@@ -162,7 +162,7 @@ namespace SlidingTile_LevelEditor
                             {
                                 lab.Text = "Start\n" + cResult.Number.ToString();
                                 lab.FontSize = 18;
-                                lab.Foreground = new SolidColorBrush(Colors.Green);
+                                lab.Foreground = new SolidColorBrush(Colors.Black);
                             }
                             else
                             {
@@ -242,20 +242,27 @@ namespace SlidingTile_LevelEditor
                 _commands.RemoveAt(i);
             }
             Button? button = sender as Button;
-            //string cont = button.Content.ToString();
-            //new IncNormalCommand(_commands, _floorTiles, TEMP_DetectButtonLoc(cont), _indexCommand);
             if (button.ToolTip == null) return; 
             Point point = (Point)button.ToolTip;
+            int floorTileIndex;
+            if (_editMode == EditMode.None)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Please select edit mode.\nDo you want change to \"Normal Inc\" edit mode?",
+                        "Missing selection of Edit Mode", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    _editMode = EditMode.NormalInc;
+                    UpdateEditBorders();
+                }
+            }
             switch (_editMode)
             {
-                case EditMode.None:
-                    break;
-                case EditMode.IncNormal:
-                    new IncNormalCommand(_commands, _floorTiles, point, _indexCommand + 1);
+                case EditMode.NormalInc:
+                    new NormalIncCommand(_commands, _floorTiles, point, _indexCommand + 1);
                     PostCommandUpdate();
                     break;
-                case EditMode.DecNormal:
-                    int floorTileIndex = FindFloor(point);
+                case EditMode.NormalDec:
+                    floorTileIndex = FindFloor(point);
                     if (floorTileIndex >= 0)
                     {
                         FloorTile floorTile = _floorTiles[floorTileIndex];
@@ -263,23 +270,48 @@ namespace SlidingTile_LevelEditor
                         {
                             MessageBox.Show("Cannot decrees Finish floor Tile", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        else if (point == new Point(0,0) && floorTile.Number < 2)
+                        else if (point == new Point(0, 0) && floorTile.Number < 2)
                         {
                             MessageBox.Show("Cannot decrees Start floor Tile below number 1", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else
                         {
-                            new DecNormalCommand(_commands, _floorTiles, point, _indexCommand + 1);
+                            new NormalDecCommand(_commands, _floorTiles, point, _indexCommand + 1);
                             PostCommandUpdate();
                         }
                     }
                     break;
-                case EditMode.PlaceFinish:
+                case EditMode.IceInc:
+                    new IceIncCommand(_commands, _floorTiles, point, _indexCommand + 1);
+                    PostCommandUpdate();
                     break;
-                default:
+                case EditMode.IceDec:
+                    floorTileIndex = FindFloor(point);
+                    if (floorTileIndex >= 0)
+                    {
+                        FloorTile floorTile = _floorTiles[floorTileIndex];
+                        if (floorTile.Type == FloorTileType.Finish)
+                        {
+                            MessageBox.Show("Cannot decrees Finish floor Tile", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else if (point == new Point(0, 0) && floorTile.Number < 2)
+                        {
+                            MessageBox.Show("Cannot decrees Start floor Tile below number 1", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            new IceDecCommand(_commands, _floorTiles, point, _indexCommand + 1);
+                            PostCommandUpdate();
+                        }
+                    }
+                    break;
+                case EditMode.FinishTile:
+
+                    break;
+                case EditMode.DeleteTile:
                     break;
             }
-            
+
             UpdateMainGridView();
         }
         private int FindFloor(Point point)
@@ -655,27 +687,27 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_EditModeNormalInc_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            _editMode = EditMode.IncNormal;
+            _editMode = EditMode.NormalInc;
             UpdateEditBorders();
         }
         private void commandBinding_EditModeNormalDec_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            _editMode = EditMode.DecNormal;
+            _editMode = EditMode.NormalDec;
             UpdateEditBorders();
         }
         private void commandBinding_EditModeIceInc_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            _editMode = EditMode.IncIce;
+            _editMode = EditMode.IceInc;
             UpdateEditBorders();
         }
         private void commandBinding_EditModeIceDec_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            _editMode = EditMode.DecIce;
+            _editMode = EditMode.IceDec;
             UpdateEditBorders();
         }
         private void commandBinding_EditModeFinish_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            _editMode = EditMode.PlaceFinish;
+            _editMode = EditMode.FinishTile;
             UpdateEditBorders();
         }
         private void commandBinding_EditModeDeleteTile_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -725,5 +757,5 @@ namespace SlidingTile_LevelEditor
             return correctSave;
         }
     }
-    public enum EditMode {None, IncNormal, DecNormal, IncIce, DecIce, PlaceFinish, DeleteTile}
+    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, FinishTile, DeleteTile}
 }
