@@ -204,7 +204,7 @@ namespace SlidingTile_LevelEditor
                             button.Content = gr;
                         }
                     }
-                    //bTemp.MouseEnter += Button_MouseEnter;
+                    button.MouseEnter += Button_MouseEnter;
                     gMainPlaceGrid.Children.Add(button);
                     _viewButtons.Add(button);
                 }
@@ -766,6 +766,11 @@ namespace SlidingTile_LevelEditor
         {
             _editMode = EditMode.DeleteTile;
             UpdateEditBorders();
+        }
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button bTemo = (Button)sender;
+            tbCurrentGrid.Text = bTemo.ToolTip.ToString();
         }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {

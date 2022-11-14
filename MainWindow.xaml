@@ -297,11 +297,11 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Height="100" Width="100" Content="Button [-1,1]" Grid.Column="0" Grid.Row="0" Click="Button_Click"/>
-                    <Button Height="100" Width="100" Content="Button [-1,0]" Grid.Column="0" Grid.Row="1" Click="Button_Click"/>
-                    <Button Height="100" Width="100" Content="Button [-1,-1]" Grid.Column="0" Grid.Row="2" Click="Button_Click"/>
-                    <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="1" Grid.Row="0" Click="Button_Click"/>
-                    <Button Height="100" Width="100" Grid.Column="1" Grid.Row="1" Click="Button_Click">
+                    <Button Height="100" Width="100" Content="Button [-1,1]" Grid.Column="0" Grid.Row="0" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                    <Button Height="100" Width="100" Content="Button [-1,0]" Grid.Column="0" Grid.Row="1" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                    <Button Height="100" Width="100" Content="Button [-1,-1]" Grid.Column="0" Grid.Row="2" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                    <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="1" Grid.Row="0" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                    <Button Height="100" Width="100" Grid.Column="1" Grid.Row="1" Click="Button_Click" MouseEnter="Button_MouseEnter">
                         <Grid>
                             <Image Source="Graphics/Tiles/Normal.png" />
                             <Viewbox>
@@ -309,10 +309,10 @@
                             </Viewbox>
                         </Grid>
                     </Button>
-                    <Button Height="100" Width="100" Content="Button [0,-1]" Grid.Column="1" Grid.Row="2" Click="Button_Click"/>
-                    <Button Height="100" Width="100" Content="Button [1,1]" Grid.Column="2" Grid.Row="0" Click="Button_Click"/>
-                    <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="2" Grid.Row="1" Click="Button_Click"/>
-                    <Button Height="100" Width="100" Content="Button [1,-1]" Grid.Column="2" Grid.Row="2" Click="Button_Click"/>
+                    <Button Height="100" Width="100" Content="Button [0,-1]" Grid.Column="1" Grid.Row="2" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                    <Button Height="100" Width="100" Content="Button [1,1]" Grid.Column="2" Grid.Row="0" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                    <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="2" Grid.Row="1" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                    <Button Height="100" Width="100" Content="Button [1,-1]" Grid.Column="2" Grid.Row="2" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
                 </Grid>
             </Viewbox>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="3" ResizeBehavior="PreviousAndNext" Width="5"/>
@@ -456,7 +456,10 @@
                 </ItemsPanelTemplate>
             </StatusBar.ItemsPanel>
             <StatusBarItem>
-                <TextBlock Text="Current Tile"/>
+                <TextBlock Text="Current Floor Tile"/>
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="1">
+                <TextBox x:Name="tbCurrentGrid" Text="0,0" VerticalAlignment="Center" IsReadOnly="True"/>
             </StatusBarItem>
             <StatusBarItem Grid.Column="3">
                 <TextBlock Text="Project Path"/>
