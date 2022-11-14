@@ -141,8 +141,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="260"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="250"/>
             </Grid.ColumnDefinitions>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <Grid>
@@ -285,137 +283,163 @@
                 </Grid>
             </ScrollViewer>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="5"/>
-            <Viewbox Name="vPlaceAllCells" Grid.Column="2" Stretch="Uniform" MouseWheel="vPlaceAllCells_MouseWheel">
-                <Grid Name="gMainPlaceGrid" ShowGridLines="True">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Height="100" Width="100" Content="Button [-1,1]" Grid.Column="0" Grid.Row="0" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
-                    <Button Height="100" Width="100" Content="Button [-1,0]" Grid.Column="0" Grid.Row="1" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
-                    <Button Height="100" Width="100" Content="Button [-1,-1]" Grid.Column="0" Grid.Row="2" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
-                    <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="1" Grid.Row="0" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
-                    <Button Height="100" Width="100" Grid.Column="1" Grid.Row="1" Click="Button_Click" MouseEnter="Button_MouseEnter">
-                        <Grid>
-                            <Image Source="Graphics/Tiles/Normal.png" />
-                            <Viewbox>
-                                <TextBlock TextWrapping="Wrap" Text="Start" Padding="5,0,5,0" Foreground="Red" FontWeight="Bold"/>
-                            </Viewbox>
-                        </Grid>
-                    </Button>
-                    <Button Height="100" Width="100" Content="Button [0,-1]" Grid.Column="1" Grid.Row="2" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
-                    <Button Height="100" Width="100" Content="Button [1,1]" Grid.Column="2" Grid.Row="0" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
-                    <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="2" Grid.Row="1" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
-                    <Button Height="100" Width="100" Content="Button [1,-1]" Grid.Column="2" Grid.Row="2" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
-                </Grid>
-            </Viewbox>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <GroupBox Header="Edit mode of floor tile">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="BorderThickness" Value="5"/>
+                                </Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Width" Value="64"/>
+                                    <Setter Property="Height" Value="64"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="FontSize" Value="50"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <StackPanel>
+                                <Border Name="borderNormalInc">
+                                    <Button ToolTip="Normal INC" Command="local:CustomCommands.EditModeNormalInc">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Normal.png"/>
+                                            <TextBlock Text="+" Foreground="Black" Padding="0,0,0,14"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                                <Border Name="borderNormalDec">
+                                    <Button ToolTip="Normal DEC" Command="local:CustomCommands.EditModeNormalDec">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Normal.png"/>
+                                            <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel>
+                                <Border Name="borderIceInc">
+                                    <Button ToolTip="Ice INC" Command="local:CustomCommands.EditModeIceInc">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Ice.png"/>
+                                            <TextBlock Text="+" Foreground="Black" Padding="0,0,0,14"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                                <Border Name="borderIceDec">
+                                    <Button ToolTip="Ice DEC" Command="local:CustomCommands.EditModeIceDec">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Ice.png"/>
+                                            <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel>
+                                <Border Name="borderFinish">
+                                    <Button ToolTip="Finish" Command="local:CustomCommands.EditModeFinish">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Finish.png"/>
+                                            <TextBlock Text="F" Foreground="Red" Padding="0,0,0,5"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                                <Border Name="borderDelete">
+                                    <Button ToolTip="Delete Floor Tile" Command="local:CustomCommands.EditModeDeleteTile">
+                                        <Viewbox Width="50" Height="50" Stretch="Uniform">
+                                            <icons:RemoveIcon/>
+                                        </Viewbox>
+                                    </Button>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </GroupBox>
+                <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" ResizeBehavior="PreviousAndNext" Height="5"/>
+                <Viewbox Name="vPlaceAllCells" Grid.Row="2" Stretch="Uniform" MouseWheel="vPlaceAllCells_MouseWheel">
+                    <Grid Name="gMainPlaceGrid" ShowGridLines="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Height="100" Width="100" Content="Button [-1,1]" Grid.Column="0" Grid.Row="0" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                        <Button Height="100" Width="100" Content="Button [-1,0]" Grid.Column="0" Grid.Row="1" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                        <Button Height="100" Width="100" Content="Button [-1,-1]" Grid.Column="0" Grid.Row="2" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                        <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="1" Grid.Row="0" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                        <Button Height="100" Width="100" Grid.Column="1" Grid.Row="1" Click="Button_Click" MouseEnter="Button_MouseEnter">
+                            <Grid>
+                                <Image Source="Graphics/Tiles/Normal.png" />
+                                <Viewbox>
+                                    <TextBlock TextWrapping="Wrap" Text="Start" Padding="5,0,5,0" Foreground="Red" FontWeight="Bold"/>
+                                </Viewbox>
+                            </Grid>
+                        </Button>
+                        <Button Height="100" Width="100" Content="Button [0,-1]" Grid.Column="1" Grid.Row="2" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                        <Button Height="100" Width="100" Content="Button [1,1]" Grid.Column="2" Grid.Row="0" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                        <Button Height="100" Width="100" Content="Button [0,1]" Grid.Column="2" Grid.Row="1" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                        <Button Height="100" Width="100" Content="Button [1,-1]" Grid.Column="2" Grid.Row="2" Click="Button_Click" MouseEnter="Button_MouseEnter"/>
+                    </Grid>
+                </Viewbox>
+            </Grid>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="3" ResizeBehavior="PreviousAndNext" Width="5"/>
-            <GroupBox Header="Edit mode of floor tile" Grid.Column="4">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <StackPanel.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="BorderThickness" Value="5"/>
-                            </Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Width" Value="64"/>
-                                <Setter Property="Height" Value="64"/>
-                                <Setter Property="HorizontalAlignment" Value="Center"/>
-                            </Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="HorizontalAlignment" Value="Center"/>
-                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                <Setter Property="FontSize" Value="50"/>
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Style>
-                        </StackPanel.Resources>
-                        <StackPanel Orientation="Horizontal">
-                            <Border Name="borderNormalInc">
-                                <Button ToolTip="Normal INC" Command="local:CustomCommands.EditModeNormalInc">
-                                    <Grid>
-                                        <Image Source="Graphics\Tiles\Normal.png"/>
-                                        <TextBlock Text="+" Foreground="Black" Padding="0,0,0,14"/>
-                                    </Grid>
-                                </Button>
-                            </Border>
-                            <Border Name="borderNormalDec">
-                                <Button ToolTip="Normal DEC" Command="local:CustomCommands.EditModeNormalDec">
-                                    <Grid>
-                                        <Image Source="Graphics\Tiles\Normal.png"/>
-                                        <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>
-                                    </Grid>
-                                </Button>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Border Name="borderIceInc">
-                                <Button ToolTip="Ice INC" Command="local:CustomCommands.EditModeIceInc">
-                                    <Grid>
-                                        <Image Source="Graphics\Tiles\Ice.png"/>
-                                        <TextBlock Text="+" Foreground="Black" Padding="0,0,0,14"/>
-                                    </Grid>
-                                </Button>
-                            </Border>
-                            <Border Name="borderIceDec">
-                                <Button ToolTip="Ice DEC" Command="local:CustomCommands.EditModeIceDec">
-                                    <Grid>
-                                        <Image Source="Graphics\Tiles\Ice.png"/>
-                                        <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>
-                                    </Grid>
-                                </Button>
-                            </Border>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Border Name="borderFinish">
-                                <Button ToolTip="Finish" Command="local:CustomCommands.EditModeFinish">
-                                    <Grid>
-                                        <Image Source="Graphics\Tiles\Finish.png"/>
-                                        <TextBlock Text="F" Foreground="Red" Padding="0,0,0,5"/>
-                                    </Grid>
-                                </Button>
-                            </Border>
-                            <Border Name="borderDelete">
-                                <Button ToolTip="Delete Floor Tile" Command="local:CustomCommands.EditModeDeleteTile">
-                                    <Viewbox Width="50" Height="50" Stretch="Uniform">
-                                        <icons:RemoveIcon/>
-                                    </Viewbox>
-                                </Button>
-                            </Border>
-                        </StackPanel>
-                    </StackPanel>
-                </ScrollViewer>
-            </GroupBox>
-            <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="5" ResizeBehavior="PreviousAndNext" Width="5"/>
-            <Grid Grid.Column="6">
+            <Grid Grid.Column="4">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="IsReadOnly" Value="True"/>
+                        <Setter Property="Margin" Value="0,5,5,5"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style>
+                </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Floor tiles count: " HorizontalAlignment="Right"/>
-                        <TextBox Name="tbFloorTileCount" Text="Nothing" Grid.Column="1" IsReadOnly="True"/>
+                        <TextBlock Text="Floor tiles count:"/>
+                        <TextBox Name="tbFloorTileCount" Text="Nothing" Grid.Column="1"/>
                     </Grid>
-                    <GroupBox Header="List of floor tiles">
-                        <StackPanel>
-                            <ListView Name="lvFloorTiles">
-                            </ListView>
-                        </StackPanel>
+                    <GroupBox Header="List of floor tiles" Grid.Row="1">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ListView Name="lvFloorTiles"/>
+                        </ScrollViewer>
                     </GroupBox>
-                </StackPanel>
+                </Grid>
                 <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" ResizeBehavior="PreviousAndNext" Height="5"/>
-                <StackPanel Grid.Row="2">
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -425,21 +449,18 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Commands count: " HorizontalAlignment="Right"/>
-                        <TextBox Name="tbCommandsCount" Text="Nothing" Grid.Column="1" IsReadOnly="True"/>
-                        <TextBlock Text="Commands index: " Grid.Row="1" HorizontalAlignment="Right"/>
-                        <TextBox Name="tbCommandsIndex" Text="-1" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
+                        <TextBlock Text="Commands count: "/>
+                        <TextBox Name="tbCommandsCount" Text="Nothing" Grid.Column="1"/>
+                        <TextBlock Text="Commands index: " Grid.Row="1"/>
+                        <TextBox Name="tbCommandsIndex" Text="-1" Grid.Row="1" Grid.Column="1"/>
                     </Grid>
-                    <GroupBox Header="List of commands">
-                        <StackPanel>
-                            <ListView Name="lvCommans">
-                            </ListView>
-                        </StackPanel>
+                    <GroupBox Header="List of commands" Grid.Row="1">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ListView Name="lvCommans"/>
+                        </ScrollViewer>
                     </GroupBox>
-                </StackPanel>
+                </Grid>
             </Grid>
-
-
         </Grid>
         <StatusBar Grid.Row="3">
             <StatusBar.ItemsPanel>
