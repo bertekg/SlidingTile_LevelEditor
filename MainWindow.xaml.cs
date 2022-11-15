@@ -788,6 +788,14 @@ namespace SlidingTile_LevelEditor
             PostCommandUpdate();
             UpdateMainGridViewOnlyButtons();
         }
+        private void commandBinding_Check_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_Check_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("TODO: Show results window with checked data.", "Check results");
+        }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {
             bool correctSave = false;

@@ -10,6 +10,18 @@ namespace SlidingTile_LevelEditor
             {
                 new KeyGesture(Key.Q, ModifierKeys.Alt)
             });
+        public static readonly RoutedUICommand DeleteAllTiles = new RoutedUICommand
+           ("Delete All Tiles", "DeleteAllTiles", typeof(CustomCommands),
+           new InputGestureCollection()
+           {
+                new KeyGesture(Key.Delete, ModifierKeys.Alt)
+           });
+        public static readonly RoutedUICommand Check = new RoutedUICommand
+           ("Check", "Check", typeof(CustomCommands),
+           new InputGestureCollection()
+           {
+                new KeyGesture(Key.T, ModifierKeys.Alt)
+           });
         public static readonly RoutedUICommand AboutProgram = new RoutedUICommand
             ("About Program", "AboutProgram", typeof(CustomCommands),
             new InputGestureCollection()
@@ -82,12 +94,6 @@ namespace SlidingTile_LevelEditor
           {
                 new KeyGesture(Key.Add)
           });
-        public static readonly RoutedUICommand DeleteAllTiles = new RoutedUICommand
-            ("Delete All Tiles", "DeleteAllTiles", typeof(CustomCommands),
-            new InputGestureCollection()
-            {
-                new KeyGesture(Key.Delete, ModifierKeys.Alt)
-            });
         public static readonly RoutedUICommand EditModeNormalInc = new RoutedUICommand
             ("Edit Mode Normal Inc", "EditModeNormalInc", typeof(CustomCommands),
             new InputGestureCollection()

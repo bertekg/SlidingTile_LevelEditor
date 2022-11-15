@@ -16,6 +16,8 @@
         <CommandBinding Command="Undo" CanExecute="commandBinding_Undo_CanExecute" Executed="commandBinding_Undo_Executed"/>
         <CommandBinding Command="Redo" CanExecute="commandBinding_Redo_CanExecute" Executed="commandBinding_Redo_Executed"/>
         <CommandBinding Command="local:CustomCommands.Exit" CanExecute="commandBinding_Exit_CanExecute" Executed="commandBinding_Exit_Executed"/>
+        <CommandBinding Command="local:CustomCommands.DeleteAllTiles" CanExecute="commandBinding_DeleteAllTiles_CanExecute" Executed="commandBinding_DeleteAllTiles_Executed"/>
+        <CommandBinding Command="local:CustomCommands.Check" CanExecute="commandBinding_Check_CanExecute" Executed="commandBinding_Check_Executed"/>
         <CommandBinding Command="local:CustomCommands.AboutProgram" CanExecute="commandBinding_AboutProgram_CanExecute" Executed="commandBinding_AboutProgram_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewUp" CanExecute="commandBinding_MoveViewUp_CanExecute" Executed="commandBinding_MoveViewUp_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewDown" CanExecute="commandBinding_MoveViewDown_CanExecute" Executed="commandBinding_MoveViewDown_Executed"/>
@@ -28,7 +30,6 @@
         <CommandBinding Command="local:CustomCommands.AdjustViewProject" CanExecute="commandBinding_AdjustViewProject_CanExecute" Executed="commandBinding_AdjustViewProject_Executed"/>
         <CommandBinding Command="local:CustomCommands.ZoomOutView" CanExecute="commandBinding_ZoomOutView_CanExecute" Executed="commandBinding_ZoomOutView_Executed"/>
         <CommandBinding Command="local:CustomCommands.ZoomInView" CanExecute="commandBinding_ZoomInView_CanExecute" Executed="commandBinding_ZoomInView_Executed"/>
-        <CommandBinding Command="local:CustomCommands.DeleteAllTiles" CanExecute="commandBinding_DeleteAllTiles_CanExecute" Executed="commandBinding_DeleteAllTiles_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeNormalInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalInc_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeNormalDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalDec_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeIceInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeIceInc_Executed"/>
@@ -100,6 +101,12 @@
                             <icons:DeleteAllTiles/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <Separator/>
+                    <MenuItem Command="local:CustomCommands.Check">
+                        <MenuItem.Icon>
+                            <icons:CheckIcon/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Command="local:CustomCommands.AboutProgram">
@@ -140,6 +147,9 @@
             <Separator/>
             <Button Command="local:CustomCommands.DeleteAllTiles" ToolTip="Clear all tiles">
                 <icons:DeleteAllTiles/>
+            </Button>
+            <Button Command="local:CustomCommands.Check" ToolTip="Check">
+                <icons:CheckIcon/>
             </Button>
             <Separator/>
             <Button Command="local:CustomCommands.AboutProgram" ToolTip="About program">
