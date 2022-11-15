@@ -772,6 +772,22 @@ namespace SlidingTile_LevelEditor
             Button bTemo = (Button)sender;
             tbCurrentGrid.Text = bTemo.ToolTip.ToString();
         }
+        private void commandBinding_DeleteAllTiles_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (_floorTiles != null)
+            {
+                if (_floorTiles.Count > 1)
+                {
+                    e.CanExecute = true;
+                } 
+            }
+        }
+        private void commandBinding_DeleteAllTiles_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            new ClearAllCommand(_commands, _floorTiles, _indexCommand);
+            PostCommandUpdate();
+            UpdateMainGridViewOnlyButtons();
+        }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {
             bool correctSave = false;

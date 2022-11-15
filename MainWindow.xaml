@@ -28,6 +28,7 @@
         <CommandBinding Command="local:CustomCommands.AdjustViewProject" CanExecute="commandBinding_AdjustViewProject_CanExecute" Executed="commandBinding_AdjustViewProject_Executed"/>
         <CommandBinding Command="local:CustomCommands.ZoomOutView" CanExecute="commandBinding_ZoomOutView_CanExecute" Executed="commandBinding_ZoomOutView_Executed"/>
         <CommandBinding Command="local:CustomCommands.ZoomInView" CanExecute="commandBinding_ZoomInView_CanExecute" Executed="commandBinding_ZoomInView_Executed"/>
+        <CommandBinding Command="local:CustomCommands.DeleteAllTiles" CanExecute="commandBinding_DeleteAllTiles_CanExecute" Executed="commandBinding_DeleteAllTiles_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeNormalInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalInc_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeNormalDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalDec_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeIceInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeIceInc_Executed"/>
@@ -93,6 +94,13 @@
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
+                <MenuItem Header="Tool">
+                    <MenuItem Command="local:CustomCommands.DeleteAllTiles">
+                        <MenuItem.Icon>
+                            <icons:DeleteAllTiles/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Command="local:CustomCommands.AboutProgram">
                         <MenuItem.Icon>
@@ -128,6 +136,10 @@
             </Button>
             <Button Command="Redo" ToolTip="Redo">
                 <icons:RedoIcon/>
+            </Button>
+            <Separator/>
+            <Button Command="local:CustomCommands.DeleteAllTiles" ToolTip="Clear all tiles">
+                <icons:DeleteAllTiles/>
             </Button>
             <Separator/>
             <Button Command="local:CustomCommands.AboutProgram" ToolTip="About program">
@@ -297,8 +309,8 @@
                                     <Setter Property="BorderThickness" Value="5"/>
                                 </Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Width" Value="64"/>
-                                    <Setter Property="Height" Value="64"/>
+                                    <Setter Property="Width" Value="48"/>
+                                    <Setter Property="Height" Value="48"/>
                                     <Setter Property="HorizontalAlignment" Value="Center"/>
                                 </Style>
                                 <Style TargetType="TextBlock">
