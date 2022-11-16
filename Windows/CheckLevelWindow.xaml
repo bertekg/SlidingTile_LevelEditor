@@ -1,0 +1,70 @@
+﻿<Window x:Class="SlidingTile_LevelEditor.Windows.CheckLevelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SlidingTile_LevelEditor.Windows"
+        mc:Ignorable="d"
+        Title="CheckLevelWindow" Height="450" Width="800" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Total number of tests:" Margin="5" VerticalAlignment="Center"/>
+                <TextBox Name="textBox_totalNumberTests" Text="None" Margin="5" VerticalAlignment="Center" IsReadOnly="True"/>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Tests fails:" Margin="5" VerticalAlignment="Center"/>
+                        <TextBox Name="textBox_failNumberTests" Text="None" Margin="5" VerticalAlignment="Center" IsReadOnly="True"/>
+                    </StackPanel>
+                    <GroupBox Header="List of tests failed" Grid.Row="1">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ListView Name="listView_failedTest"/>
+                        </ScrollViewer>
+                    </GroupBox>
+                </Grid>
+                <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="5"/>
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Tests pass:" Margin="5" VerticalAlignment="Center"/>
+                        <TextBox Name="textBox_passNumberTests" Text="None" Margin="5" VerticalAlignment="Center" IsReadOnly="True"/>
+                    </StackPanel>
+                    <GroupBox Header="List of tests pass" Grid.Row="1">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <ListView Name="listView_passedTest"/>
+                        </ScrollViewer>
+                    </GroupBox>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="bClose" Grid.Column="2" Content="Close"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Margin="10" Padding="5" Click="bClose_Click"/>
+        </Grid>
+    </Grid>
+</Window>

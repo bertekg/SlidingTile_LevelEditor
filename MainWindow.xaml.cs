@@ -187,17 +187,17 @@ namespace SlidingTile_LevelEditor
                             gr.Children.Add(lab);
                             button.Content = gr;
                         }
-                        else
+                        else if (cResult.Type == FloorTileType.Finish)
                         {
                             Grid gr = new Grid();
                             Image img = new Image();
-                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Normal.png", UriKind.Relative));
+                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Finish.png", UriKind.Relative));
                             TextBlock lab = new TextBlock();
                             lab.HorizontalAlignment = HorizontalAlignment.Center;
                             lab.VerticalAlignment = VerticalAlignment.Center;
                             lab.TextAlignment = TextAlignment.Center;
-                            lab.Text = "FIN";
-                            lab.FontSize = 18;
+                            lab.Text = "F";
+                            lab.FontSize = 30;
                             lab.Foreground = new SolidColorBrush(Colors.Red);
                             gr.Children.Add(img);
                             gr.Children.Add(lab);
@@ -794,7 +794,8 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_Check_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("TODO: Show results window with checked data.", "Check results");
+            CheckLevelWindow checkLevelWindow = new CheckLevelWindow(_floorTiles);
+            checkLevelWindow.ShowDialog();
         }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {

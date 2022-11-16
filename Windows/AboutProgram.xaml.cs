@@ -24,7 +24,7 @@ namespace SlidingTile_LevelEditor.Windows
         }
         private void bClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {

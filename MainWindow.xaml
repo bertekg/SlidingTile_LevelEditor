@@ -7,9 +7,9 @@
         xmlns:local="clr-namespace:SlidingTile_LevelEditor"
         xmlns:icons="clr-namespace:SlidingTile_LevelEditor.IconXMAL"
         mc:Ignorable="d"
-        Title="Sliding Tile - PC Level Editor" Height="720" Width="1280">
+        Title="Sliding Tile - PC Level Editor" Height="720" Width="1280" WindowState="Maximized">
     <Window.CommandBindings>
-        <CommandBinding Command="New" CanExecute="commandBinding_New_CanExecute" Executed="commandBinding_New_Executed"/>
+        <CommandBinding Command="New" CanExecute=" commandBinding_New_CanExecute" Executed="commandBinding_New_Executed"/>
         <CommandBinding Command="Open" CanExecute="commandBinding_Open_CanExecute" Executed="commandBinding_Open_Executed"/>
         <CommandBinding Command="Save" CanExecute="commandBinding_Save_CanExecute" Executed="commandBinding_Save_Executed"/>
         <CommandBinding Command="SaveAs" CanExecute="commandBinding_SaveAs_CanExecute" Executed="commandBinding_SaveAs_Executed"/>
@@ -301,7 +301,6 @@
                             <TextBox Name="tbInfoMaxY" IsReadOnly="True" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Text="0" VerticalAlignment="Center"/>
                         </Grid>
                     </GroupBox>
-
                 </Grid>
             </ScrollViewer>
             <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="5"/>
@@ -371,7 +370,7 @@
                                     <Button ToolTip="Finish" Command="local:CustomCommands.EditModeFinish">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Finish.png"/>
-                                            <TextBlock Text="F" Foreground="Red" Padding="0,0,0,5"/>
+                                            <TextBlock Text="F" Foreground="Red" Padding="0,0,0,5" FontSize="36"/>
                                         </Grid>
                                     </Button>
                                 </Border>
