@@ -543,11 +543,11 @@ namespace SlidingTile_LevelEditor
                     tbCommandsIndex.Text = _indexCommand.ToString();
                     CalcLevelSize();
                     UpdateMainGridViewFull();
-                    MessageBox.Show("InfoOpenLevelConfirmationMessage", "InfoOpenLevelConfirmationTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    MessageBox.Show("Game level was opened correct!", "New level confirmation", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("ErrorOpenLevelMessage", "ErrorOpenLevelTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Game level cannot be opened!\nFile is corrupted.", "Open level error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -559,6 +559,8 @@ namespace SlidingTile_LevelEditor
 
         private void commandBinding_Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            if (!ShouldPerformSaveAfterCheck()) return;
+            
             if (_projectName == null || _projectName == "" || _projectPath == null || _projectPath == "")
             {
                 SaveAs();
@@ -570,17 +572,19 @@ namespace SlidingTile_LevelEditor
                 {
                     this.Title = GetProjectNameInLang() + " [" + _projectName + "]";
                     sbiProjectPath.Text = _projectPath;
-                    MessageBox.Show("InfoSaveLevelMessage", "InfoSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    MessageBox.Show("Game level was saved correct!", "Save level confirmation", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 else
                 {
-                    MessageBox.Show("ErrorSaveLevelMessage", "ErrorSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Game level was not saved correct!\nSome unexpected error occur.", "Error during save level", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
         private void commandBinding_SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            if (!ShouldPerformSaveAfterCheck()) return;
+
             SaveAs();
         }
 
@@ -606,7 +610,7 @@ namespace SlidingTile_LevelEditor
                 }
                 else
                 {
-                    MessageBox.Show("ErrorSaveLevelMessage", "ErrorSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Game level was not saved correct!\nSome unexpected error occur.", "Error during save level", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -614,7 +618,7 @@ namespace SlidingTile_LevelEditor
         {
             this.Title = GetProjectNameInLang() + " [" + _projectName + "]";
             sbiProjectPath.Text = _projectPath;
-            MessageBox.Show("InfoSaveLevelMessage", "InfoSaveLevelTittle", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            MessageBox.Show("Game level was saved correct!", "Save level confirmation", MessageBoxButton.OK, MessageBoxImage.Asterisk);
         }
         private void iudAreaViewDim_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -797,20 +801,50 @@ namespace SlidingTile_LevelEditor
             CheckLevelWindow checkLevelWindow = new CheckLevelWindow(_floorTiles);
             checkLevelWindow.ShowDialog();
         }
+        private bool ShouldPerformSaveAfterCheck()
+        {
+            bool retrunVal;
+            CheckLevelWindow checkLevelWindow = new CheckLevelWindow(_floorTiles);
+            int failsNumber = checkLevelWindow.GetNumberFailedTests();
+            if (failsNumber > 0)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("In current project detected some problems.\nNumber of problem: " + failsNumber.ToString() + "\nDo you want save anymore?",
+                    "Project contain error", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    retrunVal = true;
+                }
+                else if (messageBoxResult == MessageBoxResult.No)
+                {
+                    retrunVal = false;
+                    checkLevelWindow.ShowDialog();
+                }
+                else
+                {
+                    retrunVal = false;
+                }
+            }
+            else
+            {
+                retrunVal = true;
+            }
+            checkLevelWindow.Close();
+            return retrunVal;
+        }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {
             bool correctSave = false;
             if (pName == "")
             {
-                MessageBox.Show("ErrorIncorrectNameMessage", "ErrorIncorrectNameTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select a correct level name.", "Incorrect level name", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (pPath == "")
             {
-                MessageBox.Show("ErrorIncorrectPathMessage", "ErrorIncorrectPathTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select a correct level path.", "Incorrect level path", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (!Directory.Exists(pPath))
             {
-                MessageBox.Show("ErrorPathNoExistMessage", "ErrorPathNoExistTittle", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("The level path does not exist.", "No exist level path", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {

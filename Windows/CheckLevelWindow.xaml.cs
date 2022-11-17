@@ -26,7 +26,10 @@ namespace SlidingTile_LevelEditor.Windows
             textBox_passNumberTests.Text = _passedTests.Count.ToString();
             listView_failedTest.ItemsSource = _failedTests;
         }
-
+        public int GetNumberFailedTests()
+        {
+            return _failedTests.Count;
+        }
         private void CheckMinimumNumberTiles()
         {
             const string testStartPart = "MINIMUM NUMBER TILES: ";
