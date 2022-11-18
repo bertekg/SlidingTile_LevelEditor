@@ -1,6 +1,6 @@
 ﻿namespace SlidingTile_LevelEditor.Class
 {
-    public enum FloorTileType { None, Finish, Normal, Ice, Solid };
+    public enum FloorTileType { None, Finish, Normal, Ice, Static };
     public class FloorTile
     {
         public int PosX { get; set; }

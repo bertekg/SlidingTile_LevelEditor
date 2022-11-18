@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace SlidingTile_LevelEditor.Commands
 {
-    class SolidCommand : Command
+    class StaticCommand : Command
     {
         private List<Command> _commands;
         private Point _point;
@@ -14,7 +14,7 @@ namespace SlidingTile_LevelEditor.Commands
         private FloorTile _beforChange;
         private FloorTile _afterChange;
         private int _floorTileIndex;
-        public SolidCommand(List<Command> commands, List<FloorTile> floorTiles, Point point, int commandIndex, int floorTileIndex)
+        public StaticCommand(List<Command> commands, List<FloorTile> floorTiles, Point point, int commandIndex, int floorTileIndex)
         {
             _commands = commands;
             _point = point;
@@ -38,7 +38,7 @@ namespace SlidingTile_LevelEditor.Commands
                     PosY = _floorTiles[_floorTileIndex].PosY,
                     Number = _floorTiles[_floorTileIndex].Number
                 };
-                _floorTiles[_floorTileIndex].Type = FloorTileType.Solid;
+                _floorTiles[_floorTileIndex].Type = FloorTileType.Static;
                 _floorTiles[_floorTileIndex].Number = 0;
                 _afterChange = new FloorTile
                 {
@@ -55,7 +55,7 @@ namespace SlidingTile_LevelEditor.Commands
                 {
                     PosX = (int)_point.X,
                     PosY = (int)_point.Y,
-                    Type = FloorTileType.Solid,
+                    Type = FloorTileType.Static,
                     Number = 0
                 };
                 _floorTiles.Add(floorTile);

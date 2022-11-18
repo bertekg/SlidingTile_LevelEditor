@@ -108,7 +108,7 @@ namespace SlidingTile_LevelEditor.Windows
 
                 if (resultFloorTiles[0].Type == FloorTileType.Normal || 
                     resultFloorTiles[0].Type == FloorTileType.Ice ||
-                    resultFloorTiles[0].Type == FloorTileType.Solid)
+                    resultFloorTiles[0].Type == FloorTileType.Static)
                 {
                     _passedTests.Add(testStartPart + "Correct type.");
                 }
@@ -123,7 +123,7 @@ namespace SlidingTile_LevelEditor.Windows
                 {
                     _passedTests.Add(testStartPart + "Number value is over 0 for current type: " + resultFloorTiles[0].Type.ToString() + ".");
                 }
-                else if (resultFloorTiles[0].Type == FloorTileType.Solid)
+                else if (resultFloorTiles[0].Type == FloorTileType.Static)
                 {
                     _passedTests.Add(testStartPart + "Number value can be 0 for Solid.");
                 }

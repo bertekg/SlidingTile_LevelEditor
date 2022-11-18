@@ -80,7 +80,7 @@ namespace SlidingTile_LevelEditor
                 case EditMode.IceDec:
                     borderIceDec.BorderBrush = _borderSelected;
                     break;
-                case EditMode.Solid:
+                case EditMode.Static:
                     borderSolid.BorderBrush = _borderSelected;
                     break;
                 case EditMode.FinishTile:
@@ -191,7 +191,7 @@ namespace SlidingTile_LevelEditor
                             gr.Children.Add(lab);
                             button.Content = gr;
                         }
-                        else if (cResult.Type == FloorTileType.Solid)
+                        else if (cResult.Type == FloorTileType.Static)
                         {
                             Grid gr = new Grid();
                             Image img = new Image();
@@ -331,19 +331,19 @@ namespace SlidingTile_LevelEditor
                         }
                     }
                     break;
-                case EditMode.Solid:
+                case EditMode.Static:
                     floorTileIndex = FindFloor(point);
                     if (floorTileIndex < 0)
                     {
-                        new SolidCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                        new StaticCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
                         PostCommandUpdate();
                     }
                     else
                     {
                         FloorTile floorTile = _floorTiles[floorTileIndex];
-                        if (floorTile.Type != FloorTileType.Solid)
+                        if (floorTile.Type != FloorTileType.Static)
                         {
-                            new SolidCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                            new StaticCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
                             PostCommandUpdate();
                         }
                     }
@@ -775,7 +775,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_EditModeStatic_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            _editMode = EditMode.Solid;
+            _editMode = EditMode.Static;
             UpdateEditBorders();
         }
         private void commandBinding_EditModeFinish_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -890,5 +890,5 @@ namespace SlidingTile_LevelEditor
             return correctSave;
         }
     }
-    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, Solid, FinishTile, DeleteTile}
+    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, Static, FinishTile, DeleteTile}
 }
