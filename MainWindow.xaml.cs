@@ -61,6 +61,7 @@ namespace SlidingTile_LevelEditor
             borderNormalDec.BorderBrush = _borderNotSelected;
             borderIceInc.BorderBrush = _borderNotSelected;
             borderIceDec.BorderBrush = _borderNotSelected;
+            borderSolid.BorderBrush = _borderNotSelected;
             borderFinish.BorderBrush = _borderNotSelected;
             borderDelete.BorderBrush = _borderNotSelected;
             switch (_editMode)
@@ -77,7 +78,10 @@ namespace SlidingTile_LevelEditor
                     borderIceInc.BorderBrush = _borderSelected;
                     break;
                 case EditMode.IceDec:
-                    borderIceDec.BorderBrush= _borderSelected;
+                    borderIceDec.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.Solid:
+                    borderSolid.BorderBrush = _borderSelected;
                     break;
                 case EditMode.FinishTile:
                     borderFinish.BorderBrush = _borderSelected;
@@ -185,6 +189,14 @@ namespace SlidingTile_LevelEditor
                             }
                             gr.Children.Add(img);
                             gr.Children.Add(lab);
+                            button.Content = gr;
+                        }
+                        else if (cResult.Type == FloorTileType.Solid)
+                        {
+                            Grid gr = new Grid();
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Normal.png", UriKind.Relative));
+                            gr.Children.Add(img);
                             button.Content = gr;
                         }
                         else if (cResult.Type == FloorTileType.Finish)
@@ -319,6 +331,23 @@ namespace SlidingTile_LevelEditor
                         }
                     }
                     break;
+                case EditMode.Solid:
+                    floorTileIndex = FindFloor(point);
+                    if (floorTileIndex < 0)
+                    {
+                        new SolidCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                        PostCommandUpdate();
+                    }
+                    else
+                    {
+                        FloorTile floorTile = _floorTiles[floorTileIndex];
+                        if (floorTile.Type != FloorTileType.Solid)
+                        {
+                            new SolidCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                            PostCommandUpdate();
+                        }
+                    }
+                    break;
                 case EditMode.FinishTile:
                     if (point == new Point(0, 0))
                     {
@@ -437,23 +466,6 @@ namespace SlidingTile_LevelEditor
                     button.Content = gr;
                 }
             }
-        }
-
-        private Point TEMP_DetectButtonLoc(string content)
-        {
-            Point point = new Point(0, 0);
-            if (content.Contains("Button"))
-            {
-                int openBrackIndex = content.IndexOf('[');
-                int comaIndex = content.IndexOf(',');
-                int closeBrackIndex = content.IndexOf(']');
-                string strPosX = content.Substring(openBrackIndex + 1, comaIndex - openBrackIndex);
-                string strPosY = content.Substring(comaIndex + 1, closeBrackIndex - comaIndex - 1);
-                double posX = Convert.ToDouble(strPosX);
-                double posY = Convert.ToDouble(strPosY);
-                point = new Point(posX, posY);
-            }
-            return point;
         }
         private void PostCommandUpdate()
         {
@@ -761,6 +773,11 @@ namespace SlidingTile_LevelEditor
             _editMode = EditMode.IceDec;
             UpdateEditBorders();
         }
+        private void commandBinding_EditModeStatic_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.Solid;
+            UpdateEditBorders();
+        }
         private void commandBinding_EditModeFinish_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             _editMode = EditMode.FinishTile;
@@ -873,5 +890,5 @@ namespace SlidingTile_LevelEditor
             return correctSave;
         }
     }
-    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, FinishTile, DeleteTile}
+    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, Solid, FinishTile, DeleteTile}
 }

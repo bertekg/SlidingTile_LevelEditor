@@ -118,6 +118,12 @@ namespace SlidingTile_LevelEditor
             {
                 new KeyGesture(Key.D4, ModifierKeys.Alt)
             });
+        public static readonly RoutedUICommand EditModeStatic = new RoutedUICommand
+            ("Edit Mode Static", "EditModeStatic", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.D5, ModifierKeys.Alt)
+            });
         public static readonly RoutedUICommand EditModeFinish = new RoutedUICommand
             ("Edit Mode Finish", "EditModeFinish", typeof(CustomCommands),
             new InputGestureCollection()

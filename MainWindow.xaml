@@ -34,6 +34,7 @@
         <CommandBinding Command="local:CustomCommands.EditModeNormalDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalDec_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeIceInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeIceInc_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeIceDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeIceDec_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeStatic" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeStatic_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeFinish" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeFinish_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeDeleteTile" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeDeleteTile_Executed"/>
     </Window.CommandBindings>
@@ -365,6 +366,13 @@
                                     </Button>
                                 </Border>
                             </StackPanel>
+                            <Border Name="borderSolid" VerticalAlignment="Center">
+                                <Button ToolTip="Static" Command="local:CustomCommands.EditModeStatic">
+                                    <Grid>
+                                        <Image Source="Graphics\Tiles\Normal.png"/>
+                                    </Grid>
+                                </Button>
+                            </Border>
                             <StackPanel>
                                 <Border Name="borderFinish">
                                     <Button ToolTip="Finish" Command="local:CustomCommands.EditModeFinish">

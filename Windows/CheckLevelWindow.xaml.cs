@@ -107,18 +107,25 @@ namespace SlidingTile_LevelEditor.Windows
                 _passedTests.Add(testStartPart + "Tile exist on the list.");
 
                 if (resultFloorTiles[0].Type == FloorTileType.Normal || 
-                    resultFloorTiles[0].Type == FloorTileType.Ice)
+                    resultFloorTiles[0].Type == FloorTileType.Ice ||
+                    resultFloorTiles[0].Type == FloorTileType.Solid)
                 {
                     _passedTests.Add(testStartPart + "Correct type.");
                 }
                 else
                 {
-                    _failedTests.Add(testStartPart + "Wrong type, must be Normal or Ice.");
+                    _failedTests.Add(testStartPart + "Wrong type, must be Normal, Ice, Solid.");
                 }
 
-                if (resultFloorTiles[0].Number > 0)
+                if (resultFloorTiles[0].Number > 0 && 
+                    (resultFloorTiles[0].Type == FloorTileType.Normal ||
+                    resultFloorTiles[0].Type == FloorTileType.Ice))
                 {
-                    _passedTests.Add(testStartPart + "Number value is over 0.");
+                    _passedTests.Add(testStartPart + "Number value is over 0 for current type: " + resultFloorTiles[0].Type.ToString() + ".");
+                }
+                else if (resultFloorTiles[0].Type == FloorTileType.Solid)
+                {
+                    _passedTests.Add(testStartPart + "Number value can be 0 for Solid.");
                 }
                 else
                 {
