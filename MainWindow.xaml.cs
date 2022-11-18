@@ -62,6 +62,8 @@ namespace SlidingTile_LevelEditor
             borderIceInc.BorderBrush = _borderNotSelected;
             borderIceDec.BorderBrush = _borderNotSelected;
             borderSolid.BorderBrush = _borderNotSelected;
+            borderPortalInc.BorderBrush = _borderNotSelected;
+            borderPortalDec.BorderBrush = _borderNotSelected;
             borderFinish.BorderBrush = _borderNotSelected;
             borderDelete.BorderBrush = _borderNotSelected;
             switch (_editMode)
@@ -82,6 +84,12 @@ namespace SlidingTile_LevelEditor
                     break;
                 case EditMode.Static:
                     borderSolid.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.PostalInc:
+                    borderPortalInc.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.PortalDec:
+                    borderPortalDec.BorderBrush = _borderSelected;
                     break;
                 case EditMode.FinishTile:
                     borderFinish.BorderBrush = _borderSelected;
@@ -195,7 +203,7 @@ namespace SlidingTile_LevelEditor
                         {
                             Grid gr = new Grid();
                             Image img = new Image();
-                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Normal.png", UriKind.Relative));
+                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Static.png", UriKind.Relative));
                             gr.Children.Add(img);
                             button.Content = gr;
                         }
@@ -778,6 +786,16 @@ namespace SlidingTile_LevelEditor
             _editMode = EditMode.Static;
             UpdateEditBorders();
         }
+        private void commandBinding_EditModePortalInc_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.PostalInc;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModePortalDec_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.PortalDec;
+            UpdateEditBorders();
+        }
         private void commandBinding_EditModeFinish_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             _editMode = EditMode.FinishTile;
@@ -890,5 +908,5 @@ namespace SlidingTile_LevelEditor
             return correctSave;
         }
     }
-    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, Static, FinishTile, DeleteTile}
+    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, Static, PostalInc, PortalDec, FinishTile, DeleteTile}
 }
