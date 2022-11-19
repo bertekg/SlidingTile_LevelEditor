@@ -85,7 +85,7 @@ namespace SlidingTile_LevelEditor
                 case EditMode.Static:
                     borderSolid.BorderBrush = _borderSelected;
                     break;
-                case EditMode.PostalInc:
+                case EditMode.PortalInc:
                     borderPortalInc.BorderBrush = _borderSelected;
                     break;
                 case EditMode.PortalDec:
@@ -207,6 +207,21 @@ namespace SlidingTile_LevelEditor
                             gr.Children.Add(img);
                             button.Content = gr;
                         }
+                        else if (cResult.Type == FloorTileType.Portal)
+                        {
+                            Grid gr = new Grid();
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Portal.png", UriKind.Relative));
+                            TextBlock label = new TextBlock();
+                            label.HorizontalAlignment = HorizontalAlignment.Center;
+                            label.VerticalAlignment = VerticalAlignment.Center;
+                            label.TextAlignment = TextAlignment.Center;
+                            label.Text = cResult.Portal.ToString();
+                            label.FontSize = 30;
+                            gr.Children.Add(img);
+                            gr.Children.Add(label);
+                            button.Content = gr;
+                        }
                         else if (cResult.Type == FloorTileType.Finish)
                         {
                             Grid gr = new Grid();
@@ -302,11 +317,11 @@ namespace SlidingTile_LevelEditor
                         FloorTile floorTile = _floorTiles[floorTileIndex];
                         if (floorTile.Type == FloorTileType.Finish)
                         {
-                            MessageBox.Show("Cannot decrees Finish floor Tile", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Cannot decrees Finish floor Tile.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else if (point == new Point(0, 0) && floorTile.Number < 2)
                         {
-                            MessageBox.Show("Cannot decrees Start floor Tile below number 1", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Cannot decrees Start floor Tile below number 1.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else
                         {
@@ -326,11 +341,11 @@ namespace SlidingTile_LevelEditor
                         FloorTile floorTile = _floorTiles[floorTileIndex];
                         if (floorTile.Type == FloorTileType.Finish)
                         {
-                            MessageBox.Show("Cannot decrees Finish floor Tile", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Cannot decrees Finish floor Tile.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else if (point == new Point(0, 0) && floorTile.Number < 2)
                         {
-                            MessageBox.Show("Cannot decrees Start floor Tile below number 1", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Cannot decrees Start floor Tile below number 1.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else
                         {
@@ -356,10 +371,44 @@ namespace SlidingTile_LevelEditor
                         }
                     }
                     break;
+                case EditMode.PortalInc:
+                    if (point == new Point(0, 0))
+                    {
+                        MessageBox.Show("Cannot change Start floor tile to Portal.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        new PortalIncCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                        PostCommandUpdate();
+                    }
+                    break;
+                case EditMode.PortalDec:
+                    if (point == new Point(0, 0))
+                    {
+                        MessageBox.Show("Cannot change Start floor tile to Portal.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        floorTileIndex = FindFloor(point);
+                        if (floorTileIndex >= 0)
+                        {
+                            FloorTile floorTile = _floorTiles[floorTileIndex];
+                            if (floorTile.Type == FloorTileType.Finish)
+                            {
+                                MessageBox.Show("Cannot decrees Finish floor Tile.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            else
+                            {
+                                new PortalDecCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                                PostCommandUpdate();
+                            }
+                        }
+                    }
+                    break;
                 case EditMode.FinishTile:
                     if (point == new Point(0, 0))
                     {
-                        MessageBox.Show("Cannot change Start floor tile to Finish", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Cannot change Start floor tile to Finish.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
@@ -387,7 +436,7 @@ namespace SlidingTile_LevelEditor
                     {
                         if (point == new Point(0, 0))
                         {
-                            MessageBox.Show("Cannot remove Start floor tile", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Cannot remove Start floor tile.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         else
                         {
@@ -788,7 +837,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_EditModePortalInc_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            _editMode = EditMode.PostalInc;
+            _editMode = EditMode.PortalInc;
             UpdateEditBorders();
         }
         private void commandBinding_EditModePortalDec_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -908,5 +957,5 @@ namespace SlidingTile_LevelEditor
             return correctSave;
         }
     }
-    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, Static, PostalInc, PortalDec, FinishTile, DeleteTile}
+    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, Static, PortalInc, PortalDec, FinishTile, DeleteTile}
 }

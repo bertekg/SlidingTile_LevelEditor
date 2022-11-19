@@ -248,10 +248,6 @@
                                             ToolTip="Move View Left" Grid.Column="1" Grid.Row="1">
                                         <icons:ArrowLeftIcon/>
                                     </Button>
-                                    <Button Command="local:CustomCommands.AdjustViewProject"
-                                            ToolTip="Adjust Level View" Grid.Column="2" Grid.Row="1">
-                                        <icons:AdjustViewLevelIcon/>
-                                    </Button>
                                     <Button Command="local:CustomCommands.MoveViewRight"
                                             ToolTip="Move View Right" Grid.Column="3" Grid.Row="1">
                                         <icons:ArrowRightIcon/>
@@ -270,6 +266,10 @@
                                     <Button Command="local:CustomCommands.ZoomOutView"
                                             ToolTip="Zoom Out Level View" Grid.Column="1" Grid.Row="3">
                                         <icons:ZoomMinusIcon/>
+                                    </Button>
+                                    <Button Command="local:CustomCommands.AdjustViewProject"
+                                            ToolTip="Adjust Level View" Grid.Column="2" Grid.Row="3">
+                                        <icons:AdjustViewLevelIcon/>
                                     </Button>
                                     <Button Command="local:CustomCommands.ZoomInView"
                                             ToolTip="Zoom In Level View" Grid.Column="3" Grid.Row="3">
