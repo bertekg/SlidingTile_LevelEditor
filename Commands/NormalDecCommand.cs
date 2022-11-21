@@ -34,18 +34,21 @@ namespace SlidingTile_LevelEditor.Commands
                 Type = _floorTiles[_floorTileIndex].Type,
                 PosX = _floorTiles[_floorTileIndex].PosX,
                 PosY = _floorTiles[_floorTileIndex].PosY,
-                Number = _floorTiles[_floorTileIndex].Number
+                Number = _floorTiles[_floorTileIndex].Number,
+                Portal = _floorTiles[_floorTileIndex].Portal
             };
             if (_floorTiles[_floorTileIndex].Number > 1)
             {
                 _floorTiles[_floorTileIndex].Type = FloorTileType.Normal;
                 _floorTiles[_floorTileIndex].Number--;
+                _floorTiles[_floorTileIndex].Portal = 0;
                 _afterChange = new FloorTile
                 {
                     Type = _floorTiles[_floorTileIndex].Type,
                     PosX = _floorTiles[_floorTileIndex].PosX,
                     PosY = _floorTiles[_floorTileIndex].PosY,
-                    Number = _floorTiles[_floorTileIndex].Number
+                    Number = _floorTiles[_floorTileIndex].Number,
+                    Portal = _floorTiles[_floorTileIndex].Portal
                 };
             }
             else
@@ -60,6 +63,7 @@ namespace SlidingTile_LevelEditor.Commands
             {
                 _floorTiles[_floorTileIndex].Type = _beforChange.Type;
                 _floorTiles[_floorTileIndex].Number = _beforChange.Number;
+                _floorTiles[_floorTileIndex].Portal = _beforChange.Portal;
             }
             else
             {
@@ -68,7 +72,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = _beforChange.Type,
                     PosX = _beforChange.PosX,
                     PosY = _beforChange.PosY,
-                    Number = _beforChange.Number
+                    Number = _beforChange.Number,
+                    Portal = _beforChange.Portal
                 };
                 _floorTiles.Insert(_floorTileIndex, floorTileToInser);
             }
@@ -82,7 +87,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = _afterChange.Type,
                     PosX = _afterChange.PosX,
                     PosY = _afterChange.PosY,
-                    Number = _afterChange.Number
+                    Number = _afterChange.Number,
+                    Portal = _afterChange.Portal
                 };
             }
             else
@@ -96,12 +102,13 @@ namespace SlidingTile_LevelEditor.Commands
             if (_afterChange != null)
             {
                 returnText = _commandIndex.ToString() + "; Normal DEC [" + _point.X.ToString() + "," + _point.Y.ToString() +
-                    "] Number: " + _beforChange.Number.ToString() + " -> " + _afterChange.Number.ToString();
+                    "] Number: " + _beforChange.Number.ToString() + " -> " + _afterChange.Number.ToString() +
+                    ", Portal: " + _beforChange.Portal.ToString() + " -> " + _afterChange.Portal.ToString();
             }
             else
             {
                 returnText = _commandIndex.ToString() + "; Normal DEC [" + _point.X.ToString() + "," + _point.Y.ToString() +
-                    "] Number: " + _beforChange.Number.ToString() + " -> null";
+                    "] Number: " + _beforChange.Number.ToString() + " -> null, Portal: " + _beforChange.Portal.ToString() + " -> null";
             }
             return returnText;
         }

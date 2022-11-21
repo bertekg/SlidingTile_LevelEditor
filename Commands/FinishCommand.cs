@@ -38,16 +38,19 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = _floorTiles[_floorTileIndex].Type,
                     PosX = _floorTiles[_floorTileIndex].PosX,
                     PosY = _floorTiles[_floorTileIndex].PosY,
-                    Number = _floorTiles[_floorTileIndex].Number
+                    Number = _floorTiles[_floorTileIndex].Number,
+                    Portal = _floorTiles[_floorTileIndex].Portal
                 };
                 _floorTiles[_floorTileIndex].Type = FloorTileType.Finish;
                 _floorTiles[_floorTileIndex].Number = 0;
+                _floorTiles[_floorTileIndex].Portal = 0;
                 _afterChange = new FloorTile
                 {
                     Type = _floorTiles[_floorTileIndex].Type,
                     PosX = _floorTiles[_floorTileIndex].PosX,
                     PosY = _floorTiles[_floorTileIndex].PosY,
-                    Number = _floorTiles[_floorTileIndex].Number
+                    Number = _floorTiles[_floorTileIndex].Number,
+                    Portal = _floorTiles[_floorTileIndex].Portal
                 };
             }
             else
@@ -58,7 +61,8 @@ namespace SlidingTile_LevelEditor.Commands
                     PosX = (int)_point.X,
                     PosY = (int)_point.Y,
                     Type = FloorTileType.Finish,
-                    Number = 0
+                    Number = 0,
+                    Portal = 0
                 };
                 _floorTiles.Add(floorTile);
                 _afterChange = new FloorTile()
@@ -66,7 +70,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = floorTile.Type,
                     PosX = floorTile.PosX,
                     PosY = floorTile.PosY,
-                    Number = floorTile.Number
+                    Number = floorTile.Number,
+                    Portal = floorTile.Portal
                 };
                 _floorTileIndex = _floorTiles.Count - 1;
             }
@@ -77,6 +82,7 @@ namespace SlidingTile_LevelEditor.Commands
             {
                 _floorTiles[_floorTileIndex].Type = _beforChange.Type;
                 _floorTiles[_floorTileIndex].Number = _beforChange.Number;
+                _floorTiles[_floorTileIndex].Portal = _beforChange.Portal;
             }
             else
             {
@@ -92,7 +98,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = _afterChange.Type,
                     PosX = _afterChange.PosX,
                     PosY = _afterChange.PosY,
-                    Number = _afterChange.Number
+                    Number = _afterChange.Number,
+                    Portal = _afterChange.Portal
                 };
             }
             else
@@ -102,7 +109,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = _afterChange.Type,
                     PosX = _afterChange.PosX,
                     PosY = _afterChange.PosY,
-                    Number = _afterChange.Number
+                    Number = _afterChange.Number,
+                    Portal = _afterChange.Portal
                 };
                 _floorTiles.Insert(_floorTileIndex, floorTileToInser);
             }
@@ -113,12 +121,13 @@ namespace SlidingTile_LevelEditor.Commands
             if (_beforChange != null)
             {
                 returnText = _commandIndex.ToString() + "; Finish [" + _point.X.ToString() + "," + _point.Y.ToString() +
-                    "] Number: " + _beforChange.Number.ToString() + " -> " + _afterChange.Number.ToString();
+                    "] Number: " + _beforChange.Number.ToString() + " -> " + _afterChange.Number.ToString() +
+                    ", Portal: " + _beforChange.Portal.ToString() + " -> " + _afterChange.Portal.ToString();
             }
             else
             {
                 returnText = _commandIndex.ToString() + "; Finish [" + _point.X.ToString() + "," + _point.Y.ToString() +
-                    "] Number: null -> " + _afterChange.Number.ToString();
+                    "] Number: null -> " + _afterChange.Number.ToString() + ", Portal: null -> " + _afterChange.Portal.ToString();
             }
             return returnText;
         }

@@ -30,7 +30,8 @@ namespace SlidingTile_LevelEditor.Commands
                 Type = _floorTiles[_floorTileIndex].Type,
                 PosX = _floorTiles[_floorTileIndex].PosX,
                 PosY = _floorTiles[_floorTileIndex].PosY,
-                Number = _floorTiles[_floorTileIndex].Number
+                Number = _floorTiles[_floorTileIndex].Number,
+                Portal = _floorTiles[_floorTileIndex].Portal
             };
             _floorTiles.RemoveAt(_floorTileIndex);
         }
@@ -41,7 +42,8 @@ namespace SlidingTile_LevelEditor.Commands
                 Type = _beforChange.Type,
                 PosX = _beforChange.PosX,
                 PosY = _beforChange.PosY,
-                Number = _beforChange.Number
+                Number = _beforChange.Number,
+                Portal = _beforChange.Portal
             };
             _floorTiles.Insert(_floorTileIndex, floorTileToInser);
         }
@@ -52,7 +54,8 @@ namespace SlidingTile_LevelEditor.Commands
         public override string ToString()
         {
             return _commandIndex.ToString() + "; Remove [" + _point.X.ToString() + "," + _point.Y.ToString() +
-                    "] Number: " + _beforChange.Number.ToString() + " -> null";
+                    "] Number: " + _beforChange.Number.ToString() + " -> null" +
+                    ", Portal: " + _beforChange.Portal.ToString() + " -> null";
         }
     }
 }
