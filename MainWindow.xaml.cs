@@ -802,7 +802,14 @@ namespace SlidingTile_LevelEditor
         private void vPlaceAllCells_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta > 0)
-                IncViewRange(1, -1, 1, -1);
+            {
+                int xDelta = iudAreaViewDimMaxX.Value.Value - iudAreaViewDimMinX.Value.Value;
+                int yDelta = iudAreaViewDimMaxY.Value.Value - iudAreaViewDimMinY.Value.Value;
+                if (xDelta >= 2 && yDelta >= 2)
+                {
+                    IncViewRange(1, -1, 1, -1);
+                }
+            }   
             else if (e.Delta < 0)
                 IncViewRange(-1, 1, -1, 1);
         }
