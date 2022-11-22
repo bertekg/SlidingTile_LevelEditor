@@ -106,10 +106,10 @@ namespace SlidingTile_LevelEditor
             gMainPlaceGrid.RowDefinitions.Clear();
             gMainPlaceGrid.ColumnDefinitions.Clear();
 
-            int viewMinX = iudAreaViewDimMinX.Value.Value;
-            int viewMaxX = iudAreaViewDimMaxX.Value.Value;
-            int viewMinY = iudAreaViewDimMinY.Value.Value;
-            int viewMaxY = iudAreaViewDimMaxY.Value.Value;
+            int viewMinX = iudAreaViewDimMinX.Value ?? default;
+            int viewMaxX = iudAreaViewDimMaxX.Value ?? default;
+            int viewMinY = iudAreaViewDimMinY.Value ?? default;
+            int viewMaxY = iudAreaViewDimMaxY.Value ?? default;
             int iColNo = 1 + viewMaxX - viewMinX;
             int iRowNo = 1 + viewMaxY - viewMinY;
 
@@ -125,10 +125,10 @@ namespace SlidingTile_LevelEditor
         }
         private void UpdateMainGridViewOnlyButtons()
         {
-            int viewMinX = iudAreaViewDimMinX.Value.Value;
-            int viewMaxX = iudAreaViewDimMaxX.Value.Value;
-            int viewMinY = iudAreaViewDimMinY.Value.Value;
-            int viewMaxY = iudAreaViewDimMaxY.Value.Value;
+            int viewMinX = iudAreaViewDimMinX.Value ?? default;
+            int viewMaxX = iudAreaViewDimMaxX.Value ?? default;
+            int viewMinY = iudAreaViewDimMinY.Value ?? default;
+            int viewMaxY = iudAreaViewDimMaxY.Value ?? default;
             int iColNo = 1 + viewMaxX - viewMinX;
             int iRowNo = 1 + viewMaxY - viewMinY;
 
