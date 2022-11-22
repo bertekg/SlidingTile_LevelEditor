@@ -51,6 +51,12 @@ namespace SlidingTile_LevelEditor
             tbCommandsIndex.Text = _indexCommand.ToString();
             Title = GetProjectNameInLang() + " (Empty Project)";
             CalcLevelSize();
+            _updateControl = false;
+            iudAreaViewDimMinX.Value = -1;
+            iudAreaViewDimMaxX.Value = 1;
+            iudAreaViewDimMinY.Value = -1;
+            iudAreaViewDimMaxY.Value = 1;
+            _updateControl = true;
             UpdateMainGridViewFull();
             UpdateEditBorders();
             _updateControl = true;
@@ -611,7 +617,7 @@ namespace SlidingTile_LevelEditor
                     tbCommandsCount.Text = _commands.Count.ToString();
                     tbCommandsIndex.Text = _indexCommand.ToString();
                     CalcLevelSize();
-                    UpdateMainGridViewFull();
+                    AdjustViewProject();
                     MessageBox.Show("Game level was opened correct!", "New level confirmation", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 catch (Exception)
@@ -774,6 +780,10 @@ namespace SlidingTile_LevelEditor
             e.CanExecute = true;
         }
         private void commandBinding_AdjustViewProject_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            AdjustViewProject();
+        }
+        private void AdjustViewProject()
         {
             _updateControl = false;
             iudAreaViewDimMinX.Value = _floorTiles.Min(item => item.PosX);
