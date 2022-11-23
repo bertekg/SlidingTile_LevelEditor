@@ -20,11 +20,47 @@ namespace SlidingTile_LevelEditor.Windows
             CheckFinishFloorTile();
             CheckMinimumNumberTiles();
             CheckFloorTileRepeted();
+            CheckPortalTile();
             textBox_totalNumberTests.Text = (_failedTests.Count + _passedTests.Count).ToString();
             textBox_failNumberTests.Text = _failedTests.Count.ToString();
             listView_passedTest.ItemsSource = _passedTests;
             textBox_passNumberTests.Text = _passedTests.Count.ToString();
             listView_failedTest.ItemsSource = _failedTests;
+        }
+        private void CheckPortalTile()
+        {
+            const string testStartPart = "PORTAL TILE: ";
+            for (int i = 0; i < _floorTiles.Count; i++)
+            {
+                if (_floorTiles[i].Type != FloorTileType.Portal) continue;
+
+                if (_floorTiles[i].PosX != 0 || _floorTiles[i].PosY != 0)
+                    _passedTests.Add($"{testStartPart}Index [{i}] is not on start position.");
+                else
+                    _failedTests.Add($"{testStartPart}Index [{i}] cannot be on start position.");
+
+                if (_floorTiles[i].Number != 0)
+                    _failedTests.Add($"{testStartPart}Number in index [{i}] is not 0. Value inside [{_floorTiles[i].Number}.");
+                else
+                    _passedTests.Add($"{testStartPart}Number in index [{i}] is 0.");
+            }
+            List<FloorTile> onlyPortals = _floorTiles.FindAll(tile => tile.Type == FloorTileType.Portal);
+            List<int> portalNumberProcessed = new List<int>();
+            foreach (FloorTile tile in onlyPortals)
+            {
+                if (portalNumberProcessed.Contains(tile.Portal)) continue;
+                List<FloorTile> uniqPortalNumber = onlyPortals.FindAll(item => item.Portal == tile.Portal);
+                if (uniqPortalNumber.Count != 2 )
+                {
+                    _failedTests.Add($"{testStartPart}Number Portal [{tile.Portal}] not occurs 2 times in level. Number funded tiles [{uniqPortalNumber.Count}].");
+                    portalNumberProcessed.Add(tile.Portal);
+                }
+                else
+                {
+                    _passedTests.Add($"{testStartPart}Number Portal [{tile.Portal}] occurs only 2 times in level.");
+                    portalNumberProcessed.Add(tile.Portal);
+                }
+            }
         }
         public int GetNumberFailedTests()
         {
@@ -42,7 +78,6 @@ namespace SlidingTile_LevelEditor.Windows
                 _failedTests.Add(testStartPart + "Number of tiles less then 2, must be Start and minimum 1 Finish tile!");
             }
         }
-
         private void CheckFloorTileRepeted()
         {
             const string testStartPart = "FLOOR TILE REPETED: ";
