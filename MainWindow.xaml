@@ -18,18 +18,30 @@
         <CommandBinding Command="local:CustomCommands.Exit" CanExecute="commandBinding_Exit_CanExecute" Executed="commandBinding_Exit_Executed"/>
         <CommandBinding Command="local:CustomCommands.DeleteAllTiles" CanExecute="commandBinding_DeleteAllTiles_CanExecute" Executed="commandBinding_DeleteAllTiles_Executed"/>
         <CommandBinding Command="local:CustomCommands.Check" CanExecute="commandBinding_Check_CanExecute" Executed="commandBinding_Check_Executed"/>
+        <CommandBinding Command="local:CustomCommands.Option" CanExecute="commandBinding_Option_CanExecute" Executed="commandBinding_Option_Executed"/>
         <CommandBinding Command="local:CustomCommands.AboutProgram" CanExecute="commandBinding_AboutProgram_CanExecute" Executed="commandBinding_AboutProgram_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewUp" CanExecute="commandBinding_MoveViewUp_CanExecute" Executed="commandBinding_MoveViewUp_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewDown" CanExecute="commandBinding_MoveViewDown_CanExecute" Executed="commandBinding_MoveViewDown_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewLeft" CanExecute="commandBinding_MoveViewLeft_CanExecute" Executed="commandBinding_MoveViewLeft_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewRight" CanExecute="commandBinding_MoveViewRight_CanExecute" Executed="commandBinding_MoveViewRight_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewLeftUp" CanExecute="commandBinding_MoveViewLeftUp_CanExecute" Executed="commandBinding_MoveViewLeftUp_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewRightUp" CanExecute="commandBinding_MoveViewRightUp_CanExecute" Executed="commandBinding_MoveViewRightUp_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewLeftDown" CanExecute="commandBinding_MoveViewLeftDown_CanExecute" Executed="commandBinding_MoveViewLeftDown_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewRightDown" CanExecute="commandBinding_MoveViewRightDown_CanExecute" Executed="commandBinding_MoveViewRightDown_Executed"/>
-        <CommandBinding Command="local:CustomCommands.AdjustViewProject" CanExecute="commandBinding_AdjustViewProject_CanExecute" Executed="commandBinding_AdjustViewProject_Executed"/>
-        <CommandBinding Command="local:CustomCommands.ZoomOutView" CanExecute="commandBinding_ZoomOutView_CanExecute" Executed="commandBinding_ZoomOutView_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewUp" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewUp_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewUpNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewUp_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewDown" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewDown_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewDownNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewDown_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewLeft" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewLeft_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewLeftNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewLeft_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewRight" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewRight_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewRightNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewRight_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewLeftUp" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewLeftUp_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewLeftUpNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewLeftUp_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewRightUp" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewRightUp_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewRightUpNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewRightUp_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewLeftDown" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewLeftDown_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewLeftDownNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewLeftDown_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewRightDown" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewRightDown_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewRightDownNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewRightDown_Executed"/>
+        <CommandBinding Command="local:CustomCommands.AdjustViewProject" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_AdjustViewProject_Executed"/>
+        <CommandBinding Command="local:CustomCommands.AdjustViewProjectNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_AdjustViewProject_Executed"/>
+        <CommandBinding Command="local:CustomCommands.ZoomOutView" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_ZoomOutView_Executed"/>
+        <CommandBinding Command="local:CustomCommands.ZoomOutViewNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_ZoomOutView_Executed"/>
         <CommandBinding Command="local:CustomCommands.ZoomInView" CanExecute="commandBinding_ZoomInView_CanExecute" Executed="commandBinding_ZoomInView_Executed"/>
+        <CommandBinding Command="local:CustomCommands.ZoomInViewNumPad" CanExecute="commandBinding_ZoomInViewNumPad_CanExecute" Executed="commandBinding_ZoomInView_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeNormalInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalInc_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeNormalDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalDec_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeIceInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeIceInc_Executed"/>
@@ -110,6 +122,12 @@
                             <icons:CheckIcon/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <Separator/>
+                    <MenuItem Command="local:CustomCommands.Option">
+                        <MenuItem.Icon>
+                            <icons:OptionIcon/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Command="local:CustomCommands.AboutProgram">
@@ -153,6 +171,9 @@
             </Button>
             <Button Command="local:CustomCommands.Check" ToolTip="Check">
                 <icons:CheckIcon/>
+            </Button>
+            <Button Command="local:CustomCommands.Option" ToolTip="Option">
+                <icons:OptionIcon/>
             </Button>
             <Separator/>
             <Button Command="local:CustomCommands.AboutProgram" ToolTip="About program">

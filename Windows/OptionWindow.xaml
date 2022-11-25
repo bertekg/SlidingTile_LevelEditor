@@ -1,0 +1,22 @@
+﻿<Window x:Class="SlidingTile_LevelEditor.Windows.OptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Option" Height="450" Width="800" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <CheckBox Name="checkBox_UseNumpad" Content="Use NumPad for view navigation" Margin="5" Checked="checkBox_UseNumpad_Common" Unchecked="checkBox_UseNumpad_Common"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="bClose" Grid.Column="2" Content="Close"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Margin="10" Padding="5" Click="bClose_Click"/>
+        </Grid>
+    </Grid>
+</Window>

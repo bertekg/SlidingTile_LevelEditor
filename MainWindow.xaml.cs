@@ -15,6 +15,7 @@ using System.Xml;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using SlidingTile_LevelEditor.Properties;
 
 namespace SlidingTile_LevelEditor
 {
@@ -251,7 +252,6 @@ namespace SlidingTile_LevelEditor
                 }
             }
         }
-
         private void CalcLevelSize()
         {
             tbInfoMinX.Text = _floorTiles.Min(c => c.PosX).ToString();
@@ -288,7 +288,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_AboutProgram_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            AboutProgram apWindow = new AboutProgram();
+            AboutProgramWindow apWindow = new AboutProgramWindow();
             apWindow.ShowDialog();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -710,74 +710,48 @@ namespace SlidingTile_LevelEditor
             _updateControl = true;
             UpdateMainGridViewFull();
         }
-        private void commandBinding_MoveViewUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void commandBinding_MoveViewCommon_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
+        }
+        private void commandBinding_MoveViewNumPadCommon_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (Settings.Default.navigationNumPad)
+            {
+                e.CanExecute = true;
+            }
         }
         private void commandBinding_MoveViewUp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(0, 0, -1, -1);
         }
-        private void commandBinding_MoveViewDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
         private void commandBinding_MoveViewDown_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(0, 0, 1, 1);
-
-        }
-        private void commandBinding_MoveViewLeft_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
         }
         private void commandBinding_MoveViewLeft_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(1, 1, 0, 0);
         }
-        private void commandBinding_MoveViewRight_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
         private void commandBinding_MoveViewRight_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(-1, -1, 0, 0);
-        }
-        private void commandBinding_MoveViewLeftUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
         }
         private void commandBinding_MoveViewLeftUp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(1, 1, -1, -1);
         }
-        private void commandBinding_MoveViewRightUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
         private void commandBinding_MoveViewRightUp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(-1, -1, -1, -1);
-        }
-        private void commandBinding_MoveViewLeftDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
         }
         private void commandBinding_MoveViewLeftDown_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(1, 1, 1, 1);
         }
-        private void commandBinding_MoveViewRightDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
         private void commandBinding_MoveViewRightDown_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(-1, -1, 1, 1);
-        }
-        private void commandBinding_AdjustViewProject_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
         }
         private void commandBinding_AdjustViewProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -793,17 +767,13 @@ namespace SlidingTile_LevelEditor
             _updateControl = true;
             UpdateMainGridViewFull();
         }
-        private void commandBinding_ZoomOutView_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
         private void commandBinding_ZoomOutView_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(-1, 1, -1, 1);
         }
         private void commandBinding_ZoomInView_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            e.CanExecute = CheckPossibleZoomIn();
         }
         private void commandBinding_ZoomInView_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -813,15 +783,35 @@ namespace SlidingTile_LevelEditor
         {
             if (e.Delta > 0)
             {
-                int xDelta = iudAreaViewDimMaxX.Value.Value - iudAreaViewDimMinX.Value.Value;
-                int yDelta = iudAreaViewDimMaxY.Value.Value - iudAreaViewDimMinY.Value.Value;
-                if (xDelta >= 2 && yDelta >= 2)
-                {
-                    IncViewRange(1, -1, 1, -1);
-                }
-            }   
+                ZoomIn();
+            }
             else if (e.Delta < 0)
                 IncViewRange(-1, 1, -1, 1);
+        }
+        private void ZoomIn()
+        {
+            if (CheckPossibleZoomIn())
+            {
+                IncViewRange(1, -1, 1, -1);
+            }
+        }
+        private bool CheckPossibleZoomIn()
+        {
+            bool isPossible = false;
+            int xDelta = (iudAreaViewDimMaxX.Value ?? default) - (iudAreaViewDimMinX.Value ?? default);
+            int yDelta = (iudAreaViewDimMaxY.Value ?? default) - (iudAreaViewDimMinY.Value ?? default);
+            if (xDelta >= 2 && yDelta >= 2)
+            {
+                isPossible = true;
+            }
+            return isPossible;
+        }
+        private void commandBinding_ZoomInViewNumPad_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (Settings.Default.navigationNumPad)
+            {
+                e.CanExecute = CheckPossibleZoomIn();
+            }
         }
         private void commandBinding_EditModeCommon_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -931,6 +921,15 @@ namespace SlidingTile_LevelEditor
             }
             checkLevelWindow.Close();
             return retrunVal;
+        }
+        private void commandBinding_Option_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void commandBinding_Option_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            OptionWindow optionWindow = new OptionWindow();
+            optionWindow.ShowDialog();
         }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {

@@ -3,9 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SlidingTile_LevelEditor.Windows"
         mc:Ignorable="d"
-        Title="CheckLevelWindow" Height="450" Width="800" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen">
+        Title="Check Level" Height="450" Width="800" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

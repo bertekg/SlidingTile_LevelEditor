@@ -9,9 +9,9 @@ namespace SlidingTile_LevelEditor.Windows
     /// <summary>
     /// Interaction logic for AboutProgram.xaml
     /// </summary>
-    public partial class AboutProgram : Window
+    public partial class AboutProgramWindow : Window
     {
-        public AboutProgram()
+        public AboutProgramWindow()
         {
             InitializeComponent();
             Assembly assembly = Assembly.GetExecutingAssembly();
