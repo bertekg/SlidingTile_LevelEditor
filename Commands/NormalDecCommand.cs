@@ -1,7 +1,5 @@
 ﻿using SlidingTile_LevelEditor.Class;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 
 namespace SlidingTile_LevelEditor.Commands

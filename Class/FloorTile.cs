@@ -1,6 +1,6 @@
 ﻿namespace SlidingTile_LevelEditor.Class
 {
-    public enum FloorTileType { None, Finish, Normal, Ice, Static, Portal };
+    public enum FloorTileType { None, Finish, Normal, Ice, Static, Portal, Spring };
     public enum SpringDirection { Up, Left, Down, Right }
     public class FloorTile
     {

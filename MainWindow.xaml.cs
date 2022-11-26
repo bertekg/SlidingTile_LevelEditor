@@ -427,6 +427,40 @@ namespace SlidingTile_LevelEditor
                         }
                     }
                     break;
+                case EditMode.SpringInc:
+                    if (point == new Point(0, 0))
+                    {
+                        MessageBox.Show("Cannot change Start floor tile to Spring.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        new SpringIncCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                        PostCommandUpdate();
+                    }
+                    break;
+                case EditMode.SpringDec:
+                    if (point == new Point(0, 0))
+                    {
+                        MessageBox.Show("Cannot change Start floor tile to Spring.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        floorTileIndex = FindFloor(point);
+                        if (floorTileIndex >= 0)
+                        {
+                            FloorTile floorTile = _floorTiles[floorTileIndex];
+                            if (floorTile.Type == FloorTileType.Finish)
+                            {
+                                MessageBox.Show("Cannot decrees Finish floor Tile.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            else
+                            {
+                                new SpringDecCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                                PostCommandUpdate();
+                            }
+                        }
+                    }
+                    break;
                 case EditMode.FinishTile:
                     if (point == new Point(0, 0))
                     {
