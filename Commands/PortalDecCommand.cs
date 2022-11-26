@@ -38,7 +38,7 @@ namespace SlidingTile_LevelEditor.Commands
             if (_floorTiles[_floorTileIndex].Portal > 1)
             {
                 _floorTiles[_floorTileIndex].Type = FloorTileType.Portal;
-                _floorTiles[_floorTileIndex].Number = 0;
+                _floorTiles[_floorTileIndex].Number = 1;
                 _floorTiles[_floorTileIndex].Portal--;
                 _afterChange = new FloorTile
                 {

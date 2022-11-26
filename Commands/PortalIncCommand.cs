@@ -39,7 +39,7 @@ namespace SlidingTile_LevelEditor.Commands
                     Portal = _floorTiles[_floorTileIndex].Portal
                 };
                 _floorTiles[_floorTileIndex].Type = FloorTileType.Portal;
-                _floorTiles[_floorTileIndex].Number = 0;
+                _floorTiles[_floorTileIndex].Number = 1;
                 _floorTiles[_floorTileIndex].Portal++;
                 _afterChange = new FloorTile
                 {
@@ -58,7 +58,7 @@ namespace SlidingTile_LevelEditor.Commands
                     PosX = (int)_point.X,
                     PosY = (int)_point.Y,
                     Type = FloorTileType.Portal,
-                    Number = 0,
+                    Number = 1,
                     Portal = 1
                 };
                 _floorTiles.Add(floorTile);

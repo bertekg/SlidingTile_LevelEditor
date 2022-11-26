@@ -39,10 +39,10 @@ namespace SlidingTile_LevelEditor.Windows
                 else
                     _failedTests.Add($"{testStartPart}Index [{i}] cannot be on start position.");
 
-                if (_floorTiles[i].Number != 0)
-                    _failedTests.Add($"{testStartPart}Number in index [{i}] is not 0. Value inside [{_floorTiles[i].Number}.");
+                if (_floorTiles[i].Number != 1)
+                    _failedTests.Add($"{testStartPart}Number in index [{i}] is not 1. Value inside [{_floorTiles[i].Number}].");
                 else
-                    _passedTests.Add($"{testStartPart}Number in index [{i}] is 0.");
+                    _passedTests.Add($"{testStartPart}Number in index [{i}] is 1.");
             }
             List<FloorTile> onlyPortals = _floorTiles.FindAll(tile => tile.Type == FloorTileType.Portal);
             List<int> portalNumberProcessed = new List<int>();
