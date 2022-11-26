@@ -142,6 +142,30 @@ namespace SlidingTile_LevelEditor
             {
                 new KeyGesture(Key.D7, ModifierKeys.Control)
             });
+        public static readonly RoutedUICommand EditModeSpringInc = new RoutedUICommand
+           ("Edit Mode Spring Inc", "EditModeSpringInc", typeof(CustomCommands),
+           new InputGestureCollection()
+           {
+                new KeyGesture(Key.D1, ModifierKeys.Alt)
+           });
+        public static readonly RoutedUICommand EditModeSpringDec = new RoutedUICommand
+           ("Edit Mode Spring Dec", "EditModeSpringDec", typeof(CustomCommands),
+           new InputGestureCollection()
+           {
+                new KeyGesture(Key.D2, ModifierKeys.Alt)
+           });
+        public static readonly RoutedUICommand EditModeSpringLeft = new RoutedUICommand
+           ("Edit Mode Spring Left", "EditModeSpringLeft", typeof(CustomCommands),
+           new InputGestureCollection()
+           {
+                new KeyGesture(Key.D3, ModifierKeys.Alt)
+           });
+        public static readonly RoutedUICommand EditModeSpringRight = new RoutedUICommand
+           ("Edit Mode Spring Right", "EditModeSpringRight", typeof(CustomCommands),
+           new InputGestureCollection()
+           {
+                new KeyGesture(Key.D4, ModifierKeys.Alt)
+           });
         public static readonly RoutedUICommand EditModeFinish = new RoutedUICommand
             ("Edit Mode Finish", "EditModeFinish", typeof(CustomCommands),
             new InputGestureCollection()

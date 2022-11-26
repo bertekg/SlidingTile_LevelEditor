@@ -71,6 +71,10 @@ namespace SlidingTile_LevelEditor
             borderSolid.BorderBrush = _borderNotSelected;
             borderPortalInc.BorderBrush = _borderNotSelected;
             borderPortalDec.BorderBrush = _borderNotSelected;
+            borderSpringInc.BorderBrush = _borderNotSelected;
+            borderSpringDec.BorderBrush = _borderNotSelected;
+            borderSpringLeft.BorderBrush = _borderNotSelected;
+            borderSpringRight.BorderBrush = _borderNotSelected;
             borderFinish.BorderBrush = _borderNotSelected;
             borderDelete.BorderBrush = _borderNotSelected;
             switch (_editMode)
@@ -97,6 +101,18 @@ namespace SlidingTile_LevelEditor
                     break;
                 case EditMode.PortalDec:
                     borderPortalDec.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.SpringInc:
+                    borderSpringInc.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.SpringDec:
+                    borderSpringDec.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.SpringLeft:
+                    borderSpringLeft.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.SpringRight:
+                    borderSpringRight.BorderBrush = _borderSelected;
                     break;
                 case EditMode.FinishTile:
                     borderFinish.BorderBrush = _borderSelected;
@@ -838,6 +854,26 @@ namespace SlidingTile_LevelEditor
             _editMode = EditMode.PortalDec;
             UpdateEditBorders();
         }
+        private void commandBinding_EditModeSpringInc_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.SpringInc;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModeSpringDec_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.SpringDec;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModeSpringLeft_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.SpringLeft;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModeSpringRight_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.SpringRight;
+            UpdateEditBorders();
+        }
         private void commandBinding_EditModeFinish_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             _editMode = EditMode.FinishTile;
@@ -959,5 +995,6 @@ namespace SlidingTile_LevelEditor
             return correctSave;
         }
     }
-    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, Static, PortalInc, PortalDec, FinishTile, DeleteTile}
+    public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, Static, PortalInc, PortalDec,
+        SpringInc, SpringDec, SpringLeft, SpringRight, FinishTile, DeleteTile}
 }

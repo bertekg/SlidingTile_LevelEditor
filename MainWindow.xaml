@@ -38,6 +38,10 @@
         <CommandBinding Command="local:CustomCommands.EditModeStatic" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeStatic_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModePortalInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModePortalInc_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModePortalDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModePortalDec_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeSpringInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringInc_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeSpringDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringDec_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeSpringLeft" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringLeft_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeSpringRight" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringRight_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeFinish" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeFinish_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeDeleteTile" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeDeleteTile_Executed"/>
     </Window.CommandBindings>
@@ -171,14 +175,19 @@
         </ToolBar>
         <Grid Name="gMainGrid"  Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="180"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="320"/>
             </Grid.ColumnDefinitions>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -205,14 +214,14 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Content="X Min" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    <xctk:IntegerUpDown Name="iudAreaViewDimMinX" Grid.Row="3" Value="-1" VerticalAlignment="Center" ValueChanged="iudAreaViewDim_ValueChanged"/>
-                                    <Label Content="X Max" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    <xctk:IntegerUpDown Name="iudAreaViewDimMaxX" Grid.Row="3" Grid.Column="2" Value="1" VerticalAlignment="Center" ValueChanged="iudAreaViewDim_ValueChanged"/>
-                                    <Label Content="Y Min" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    <xctk:IntegerUpDown Name="iudAreaViewDimMinY" Grid.Column="1" Grid.Row="5" Value="-1" VerticalAlignment="Center" ValueChanged="iudAreaViewDim_ValueChanged"/>
-                                    <Label Content="Y Max"  Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    <xctk:IntegerUpDown Name="iudAreaViewDimMaxY" Grid.Row="1" Grid.Column="1" Value="1" VerticalAlignment="Center" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <TextBlock Text="X Min" Grid.Row="2" Grid.Column="0"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMinX" Grid.Row="3" Grid.Column="0" Value="-1" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <TextBlock Text="X Max" Grid.Row="2" Grid.Column="2"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMaxX" Grid.Row="3" Grid.Column="2" Value="1" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <TextBlock Text="Y Min" Grid.Row="4" Grid.Column="1"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMinY" Grid.Column="1" Grid.Row="5" Value="-1" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <TextBlock Text="Y Max" Grid.Row="0" Grid.Column="1"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMaxY" Grid.Row="1" Grid.Column="1" Value="1" ValueChanged="iudAreaViewDim_ValueChanged"/>
                                 </Grid>
                             </GroupBox>
                             <GroupBox Header="View Navigation" Grid.Row="1">
@@ -292,6 +301,13 @@
                     </GroupBox>
                     <GroupBox Grid.Row="2" Header="Level Dimension Information">
                         <Grid>
+                            <Grid.Resources>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="IsReadOnly" Value="True"/>
+                                    <Setter Property="TextAlignment" Value="Center"/>
+                                    <Setter Property="Text" Value="0"/>
+                                </Style>
+                            </Grid.Resources>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
@@ -305,14 +321,14 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="X Min" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBox Name="tbInfoMinX" IsReadOnly="True" TextAlignment="Center" Grid.Row="3" Text="0" VerticalAlignment="Center"/>
-                            <Label Content="X Max" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBox Name="tbInfoMaxX" IsReadOnly="True" TextAlignment="Center" Grid.Column="2" Grid.Row="3" Text="0" VerticalAlignment="Center"/>
-                            <Label Content="Y Min" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBox Name="tbInfoMinY" IsReadOnly="True" TextAlignment="Center" Grid.Row="5" Grid.Column="1" Text="0" VerticalAlignment="Center"/>
-                            <Label Content="Y Max" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBox Name="tbInfoMaxY" IsReadOnly="True" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Text="0" VerticalAlignment="Center"/>
+                            <TextBlock Text="X Min" Grid.Row="2" Grid.Column="0"/>
+                            <TextBox Name="tbInfoMinX" Grid.Row="3" Grid.Column="0"/>
+                            <TextBlock Text="X Max" Grid.Row="2" Grid.Column="2"/>
+                            <TextBox Name="tbInfoMaxX" Grid.Row="3" Grid.Column="2"/>
+                            <TextBlock Text="Y Min" Grid.Row="4" Grid.Column="1"/>
+                            <TextBox Name="tbInfoMinY" Grid.Row="5" Grid.Column="1"/>
+                            <TextBlock Text="Y Max" Grid.Row="0"  Grid.Column="1"/>
+                            <TextBox Name="tbInfoMaxY" Grid.Row="1" Grid.Column="1"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -401,6 +417,42 @@
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Portal.png"/>
                                             <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel>
+                                <Border Name="borderSpringInc">
+                                    <Button Command="local:CustomCommands.EditModeSpringInc" ToolTip="Sprint INC (Alt+1)">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Spring.png"/>
+                                            <TextBlock Text="+" Foreground="Black" Padding="0,0,0,14"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                                <Border Name="borderSpringDec">
+                                    <Button Command="local:CustomCommands.EditModeSpringDec" ToolTip="Sprint DEC (Alt+2)">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Spring.png"/>
+                                            <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel>
+                                <Border Name="borderSpringLeft">
+                                    <Button Command="local:CustomCommands.EditModeSpringLeft" ToolTip="Sprint Left (Alt+3)">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Spring.png"/>
+                                            <TextBlock Text="↶" Foreground="Black" Padding="0,0,0,14"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                                <Border Name="borderSpringRight">
+                                    <Button Command="local:CustomCommands.EditModeSpringRight" ToolTip="Sprint Right (Alt+4)">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Spring.png"/>
+                                            <TextBlock Text="↷" Foreground="Black" Padding="0,0,0,14"/>
                                         </Grid>
                                     </Button>
                                 </Border>

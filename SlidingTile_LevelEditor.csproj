@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-	<Version>0.1.5.0</Version>
+	<Version>0.1.6.0</Version>
 	<ApplicationIcon>ProgramIcon2_256.ico</ApplicationIcon>
   </PropertyGroup>
 
@@ -15,6 +15,7 @@
     <None Remove="Graphics\Tiles\Ice.png" />
     <None Remove="Graphics\Tiles\Normal.png" />
     <None Remove="Graphics\Tiles\Portal.png" />
+    <None Remove="Graphics\Tiles\Spring.png" />
     <None Remove="Graphics\Tiles\Static.png" />
   </ItemGroup>
 
@@ -40,6 +41,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Graphics\Tiles\Portal.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Graphics\Tiles\Spring.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Graphics\Tiles\Static.png">

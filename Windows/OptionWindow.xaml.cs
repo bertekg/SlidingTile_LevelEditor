@@ -1,5 +1,4 @@
-﻿using SlidingTile_LevelEditor.Properties;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace SlidingTile_LevelEditor.Windows
@@ -9,7 +8,6 @@ namespace SlidingTile_LevelEditor.Windows
     /// </summary>
     public partial class OptionWindow : Window
     {
-        private bool afterInitial;
         public OptionWindow()
         {
             InitializeComponent();
