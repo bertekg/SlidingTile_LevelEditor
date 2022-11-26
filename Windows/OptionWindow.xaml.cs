@@ -13,17 +13,6 @@ namespace SlidingTile_LevelEditor.Windows
         public OptionWindow()
         {
             InitializeComponent();
-            afterInitial = false;
-            checkBox_UseNumpad.IsChecked = Settings.Default.navigationNumPad;
-            afterInitial = true;
-        }
-        private void checkBox_UseNumpad_Common(object sender, RoutedEventArgs e)
-        {
-            if (afterInitial)
-            {
-                Settings.Default.navigationNumPad = checkBox_UseNumpad.IsChecked ?? default;
-                Settings.Default.Save();
-            }
         }
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {

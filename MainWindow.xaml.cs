@@ -714,13 +714,6 @@ namespace SlidingTile_LevelEditor
         {
             e.CanExecute = true;
         }
-        private void commandBinding_MoveViewNumPadCommon_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            if (Settings.Default.navigationNumPad)
-            {
-                e.CanExecute = true;
-            }
-        }
         private void commandBinding_MoveViewUp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IncViewRange(0, 0, -1, -1);
@@ -753,7 +746,7 @@ namespace SlidingTile_LevelEditor
         {
             IncViewRange(-1, -1, 1, 1);
         }
-        private void commandBinding_AdjustViewProject_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void commandBinding_FullLevelView_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             AdjustViewProject();
         }
@@ -805,13 +798,6 @@ namespace SlidingTile_LevelEditor
                 isPossible = true;
             }
             return isPossible;
-        }
-        private void commandBinding_ZoomInViewNumPad_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            if (Settings.Default.navigationNumPad)
-            {
-                e.CanExecute = CheckPossibleZoomIn();
-            }
         }
         private void commandBinding_EditModeCommon_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {

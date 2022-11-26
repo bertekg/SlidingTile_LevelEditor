@@ -8,167 +8,139 @@ namespace SlidingTile_LevelEditor
             ("Exit", "Exit", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.Q, ModifierKeys.Alt)
+                new KeyGesture(Key.Q, ModifierKeys.Control)
             });
         public static readonly RoutedUICommand DeleteAllTiles = new RoutedUICommand
            ("Delete All Tiles", "DeleteAllTiles", typeof(CustomCommands),
            new InputGestureCollection()
            {
-                new KeyGesture(Key.Delete, ModifierKeys.Alt)
+                new KeyGesture(Key.Delete, ModifierKeys.Control)
            });
         public static readonly RoutedUICommand Check = new RoutedUICommand
            ("Check", "Check", typeof(CustomCommands),
            new InputGestureCollection()
            {
-                new KeyGesture(Key.T, ModifierKeys.Alt)
+                new KeyGesture(Key.T, ModifierKeys.Control)
+           });
+        public static readonly RoutedUICommand Option = new RoutedUICommand
+           ("Option", "Option", typeof(CustomCommands),
+           new InputGestureCollection()
+           {
+                new KeyGesture(Key.O, ModifierKeys.Alt)
            });
         public static readonly RoutedUICommand AboutProgram = new RoutedUICommand
             ("About Program", "AboutProgram", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.F1, ModifierKeys.Alt)
+                new KeyGesture(Key.F1)
             });
-
         public static readonly RoutedUICommand MoveViewUp = new RoutedUICommand
-            ("Move View Up", "MoveViewUp", typeof(CustomCommands));
-        public static readonly RoutedUICommand MoveViewUpNumPad = new RoutedUICommand
-            ("Move View Up NumPad", "MoveViewUpNumPad", typeof(CustomCommands),
+            ("Move View Up", "MoveViewUp", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.NumPad8)
+                new KeyGesture(Key.NumPad8, ModifierKeys.Control)
             });
-
         public static readonly RoutedUICommand MoveViewDown = new RoutedUICommand
-            ("Move View Down", "MoveViewDown", typeof(CustomCommands));
-        public static readonly RoutedUICommand MoveViewDownNumPad = new RoutedUICommand
-           ("Move View Down NumPad", "MoveViewDownNumPad", typeof(CustomCommands),
-           new InputGestureCollection()
-           {
-                new KeyGesture(Key.NumPad2)
-           });
-
+            ("Move View Down", "MoveViewDown", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.NumPad2, ModifierKeys.Control)
+            });
         public static readonly RoutedUICommand MoveViewLeft = new RoutedUICommand
-            ("Move View Left", "MoveViewLeft", typeof(CustomCommands));
-        public static readonly RoutedUICommand MoveViewLeftNumPad = new RoutedUICommand
-           ("Move View Left NumPad", "MoveViewLeftNumPad", typeof(CustomCommands),
-           new InputGestureCollection()
-           {
-                new KeyGesture(Key.NumPad4)
-           });
-
+            ("Move View Left", "MoveViewLeft", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.NumPad4, ModifierKeys.Control)
+            });
         public static readonly RoutedUICommand MoveViewRight = new RoutedUICommand
-            ("Move View Right", "MoveViewRight", typeof(CustomCommands));
-        public static readonly RoutedUICommand MoveViewRightNumPad = new RoutedUICommand
-           ("Move View Right NumPad", "MoveViewRightNumPad", typeof(CustomCommands),
-           new InputGestureCollection()
-           {
-                new KeyGesture(Key.NumPad6)
-           });
-
+            ("Move View Right", "MoveViewRight", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.NumPad6, ModifierKeys.Control)
+            });
         public static readonly RoutedUICommand MoveViewLeftUp = new RoutedUICommand
-            ("Move View Left Up", "MoveViewLeftUp", typeof(CustomCommands));
-        public static readonly RoutedUICommand MoveViewLeftUpNumPad = new RoutedUICommand
-           ("Move View Left Up NumPad", "MoveViewLeftUpNumPad", typeof(CustomCommands),
-           new InputGestureCollection()
-           {
-                new KeyGesture(Key.NumPad7)
-           });
-
+            ("Move View Left Up", "MoveViewLeftUp", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.NumPad7, ModifierKeys.Control)
+            });
         public static readonly RoutedUICommand MoveViewRightUp = new RoutedUICommand
-            ("Move View Right Up", "MoveViewRightUp", typeof(CustomCommands));
-        public static readonly RoutedUICommand MoveViewRightUpNumPad = new RoutedUICommand
-            ("Move View Right Up NumPad", "MoveViewRightUpNumPad", typeof(CustomCommands),
+            ("Move View Right Up", "MoveViewRightUp", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.NumPad9)
+                new KeyGesture(Key.NumPad9, ModifierKeys.Control)
             });
-
         public static readonly RoutedUICommand MoveViewLeftDown = new RoutedUICommand
-            ("Move View Left Down", "MoveViewLeftDown", typeof(CustomCommands));
-        public static readonly RoutedUICommand MoveViewLeftDownNumPad = new RoutedUICommand
-            ("Move View Left Down NumPad", "MoveViewLeftDownNumPad", typeof(CustomCommands),
+            ("Move View Left Down", "MoveViewLeftDown", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.NumPad1)
+                new KeyGesture(Key.NumPad1, ModifierKeys.Control)
             });
-
         public static readonly RoutedUICommand MoveViewRightDown = new RoutedUICommand
-            ("Move View Right Down", "MoveViewRightDown", typeof(CustomCommands));
-        public static readonly RoutedUICommand MoveViewRightDownNumPad = new RoutedUICommand
-            ("Move View Right Down NumPad", "MoveViewRightDownNumPad", typeof(CustomCommands),
+            ("Move View Right Down", "MoveViewRightDown", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.NumPad3)
+                new KeyGesture(Key.NumPad3, ModifierKeys.Control)
             });
-
-        public static readonly RoutedUICommand AdjustViewProject = new RoutedUICommand
-           ("Adjust View Project", "AjustViewProject", typeof(CustomCommands));
-        public static readonly RoutedUICommand AdjustViewProjectNumPad = new RoutedUICommand
-           ("Adjust View Project NumPad", "AjustViewProjectNumPad", typeof(CustomCommands),
-           new InputGestureCollection()
-           {
-                new KeyGesture(Key.NumPad5)
-           });
-
+        public static readonly RoutedUICommand FullLevelView = new RoutedUICommand
+            ("Full Level View", "FullLevelView", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.F, ModifierKeys.Control)
+            });
         public static readonly RoutedUICommand ZoomOutView = new RoutedUICommand
-           ("Zoom Out View", "ZoomOutView", typeof(CustomCommands));
-        public static readonly RoutedUICommand ZoomOutViewNumPad = new RoutedUICommand
-          ("Zoom Out View NumPad ", "ZoomOutViewNumPad ", typeof(CustomCommands),
-          new InputGestureCollection()
-          {
-                new KeyGesture(Key.Subtract)
-          });
-
+            ("Zoom Out View", "ZoomOutView", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.Subtract, ModifierKeys.Control)
+            });
         public static readonly RoutedUICommand ZoomInView = new RoutedUICommand
-          ("Zoom In View", "ZoomInView", typeof(CustomCommands));
-        public static readonly RoutedUICommand ZoomInViewNumPad = new RoutedUICommand
-          ("Zoom In View NumPad", "ZoomInViewNumPad", typeof(CustomCommands),
-          new InputGestureCollection()
-          {
-                new KeyGesture(Key.Add)
-          });
-
+            ("Zoom In View", "ZoomInView", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.Add, ModifierKeys.Control)
+            });
         public static readonly RoutedUICommand EditModeNormalInc = new RoutedUICommand
             ("Edit Mode Normal Inc", "EditModeNormalInc", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.D1, ModifierKeys.Alt)
+                new KeyGesture(Key.D1, ModifierKeys.Control)
             });
         public static readonly RoutedUICommand EditModeNormalDec = new RoutedUICommand
             ("Edit Mode Normal Dec", "EditModeNormalDec", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.D2, ModifierKeys.Alt)
+                new KeyGesture(Key.D2, ModifierKeys.Control)
             });
         public static readonly RoutedUICommand EditModeIceInc = new RoutedUICommand
             ("Edit Mode Ice Inc", "EditModeIceInc", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.D3, ModifierKeys.Alt)
+                new KeyGesture(Key.D3, ModifierKeys.Control)
             });
         public static readonly RoutedUICommand EditModeIceDec = new RoutedUICommand
             ("Edit Mode Ice Dec", "EditModeIceDec", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.D4, ModifierKeys.Alt)
+                new KeyGesture(Key.D4, ModifierKeys.Control)
             });
         public static readonly RoutedUICommand EditModeStatic = new RoutedUICommand
             ("Edit Mode Static", "EditModeStatic", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.D5, ModifierKeys.Alt)
+                new KeyGesture(Key.D5, ModifierKeys.Control)
             });
         public static readonly RoutedUICommand EditModePortalInc = new RoutedUICommand
             ("Edit Mode Portal Inc", "EditModePortalInc", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.D6, ModifierKeys.Alt)
+                new KeyGesture(Key.D6, ModifierKeys.Control)
             });
         public static readonly RoutedUICommand EditModePortalDec = new RoutedUICommand
             ("Edit Mode Portal Dec", "EditModePortalDec", typeof(CustomCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.D7, ModifierKeys.Alt)
+                new KeyGesture(Key.D7, ModifierKeys.Control)
             });
         public static readonly RoutedUICommand EditModeFinish = new RoutedUICommand
             ("Edit Mode Finish", "EditModeFinish", typeof(CustomCommands),
@@ -182,11 +154,5 @@ namespace SlidingTile_LevelEditor
             {
                 new KeyGesture(Key.D0, ModifierKeys.Alt)
             });
-        public static readonly RoutedUICommand Option = new RoutedUICommand
-           ("Option", "Option", typeof(CustomCommands),
-           new InputGestureCollection()
-           {
-                new KeyGesture(Key.O, ModifierKeys.Alt)
-           });
     }
 }

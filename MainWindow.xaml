@@ -21,27 +21,16 @@
         <CommandBinding Command="local:CustomCommands.Option" CanExecute="commandBinding_Option_CanExecute" Executed="commandBinding_Option_Executed"/>
         <CommandBinding Command="local:CustomCommands.AboutProgram" CanExecute="commandBinding_AboutProgram_CanExecute" Executed="commandBinding_AboutProgram_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewUp" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewUp_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewUpNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewUp_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewDown" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewDown_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewDownNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewDown_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewLeft" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewLeft_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewLeftNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewLeft_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewRight" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewRight_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewRightNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewRight_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewLeftUp" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewLeftUp_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewLeftUpNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewLeftUp_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewRightUp" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewRightUp_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewRightUpNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewRightUp_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewLeftDown" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewLeftDown_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewLeftDownNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewLeftDown_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewRightDown" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewRightDown_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewRightDownNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_MoveViewRightDown_Executed"/>
-        <CommandBinding Command="local:CustomCommands.AdjustViewProject" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_AdjustViewProject_Executed"/>
-        <CommandBinding Command="local:CustomCommands.AdjustViewProjectNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_AdjustViewProject_Executed"/>
+        <CommandBinding Command="local:CustomCommands.FullLevelView" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_FullLevelView_Executed"/>
         <CommandBinding Command="local:CustomCommands.ZoomOutView" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_ZoomOutView_Executed"/>
-        <CommandBinding Command="local:CustomCommands.ZoomOutViewNumPad" CanExecute="commandBinding_MoveViewNumPadCommon_CanExecute" Executed="commandBinding_ZoomOutView_Executed"/>
         <CommandBinding Command="local:CustomCommands.ZoomInView" CanExecute="commandBinding_ZoomInView_CanExecute" Executed="commandBinding_ZoomInView_Executed"/>
-        <CommandBinding Command="local:CustomCommands.ZoomInViewNumPad" CanExecute="commandBinding_ZoomInViewNumPad_CanExecute" Executed="commandBinding_ZoomInView_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeNormalInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalInc_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeNormalDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalDec_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeIceInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeIceInc_Executed"/>
@@ -146,37 +135,37 @@
                     <Setter Property="Stretch" Value="Uniform"/>
                 </Style>
             </ToolBar.Resources>
-            <Button Command="New" ToolTip="New">
+            <Button Command="New" ToolTip="New (Ctrl+N)">
                 <icons:NewIcon/>
             </Button>
-            <Button Command="Open" ToolTip="Open">
+            <Button Command="Open" ToolTip="Open (Ctrl+O)">
                 <icons:OpenIcon/>
             </Button>
-            <Button Command="Save" ToolTip="Save...">
+            <Button Command="Save" ToolTip="Save (Ctrl+S)">
                 <icons:SaveIcon/>
             </Button>
-            <Button Command="SaveAs" ToolTip="Save As...">
+            <Button Command="SaveAs" ToolTip="Save As">
                 <icons:SaveAsIcon/>
             </Button>
             <Separator/>
-            <Button Command="Undo" ToolTip="Undo">
+            <Button Command="Undo" ToolTip="Undo (Ctrl+Z)">
                 <icons:UndoIcon/>
             </Button>
-            <Button Command="Redo" ToolTip="Redo">
+            <Button Command="Redo" ToolTip="Redo (Ctrl+Y)">
                 <icons:RedoIcon/>
             </Button>
             <Separator/>
-            <Button Command="local:CustomCommands.DeleteAllTiles" ToolTip="Clear all tiles">
+            <Button Command="local:CustomCommands.DeleteAllTiles" ToolTip="Delete All Tiles (Ctrl+Delete)">
                 <icons:DeleteAllTiles/>
             </Button>
-            <Button Command="local:CustomCommands.Check" ToolTip="Check">
+            <Button Command="local:CustomCommands.Check" ToolTip="Check (Ctrl+T)">
                 <icons:CheckIcon/>
             </Button>
-            <Button Command="local:CustomCommands.Option" ToolTip="Option">
+            <Button Command="local:CustomCommands.Option" ToolTip="Option (Alt+O)">
                 <icons:OptionIcon/>
             </Button>
             <Separator/>
-            <Button Command="local:CustomCommands.AboutProgram" ToolTip="About program">
+            <Button Command="local:CustomCommands.AboutProgram" ToolTip="About program (F1)">
                 <icons:AboutProgramIcon/>
             </Button>
         </ToolBar>
@@ -254,46 +243,47 @@
                                         </Style>
                                     </Grid.Resources>
                                     <Button Command="local:CustomCommands.MoveViewLeftUp"
-                                            ToolTip="Move View Left Up" Grid.Column="1" Grid.Row="0">
+                                            ToolTip="Move View Left Up (Ctrl+NumPad7)" Grid.Column="1" Grid.Row="0">
                                         <icons:ArrowLeftUpIcon/>
                                     </Button>
                                     <Button Command="local:CustomCommands.MoveViewUp"
-                                            ToolTip="Move View Up" Grid.Column="2" Grid.Row="0">
+                                            ToolTip="Move View Up (Ctrl+NumPad8)" Grid.Column="2" Grid.Row="0">
                                         <icons:ArrowUpIcon/>
                                     </Button>
                                     <Button Command="local:CustomCommands.MoveViewRightUp"
-                                            ToolTip="Move View Right Up" Grid.Column="3" Grid.Row="0">
+                                            ToolTip="Move View Right Up (Ctrl+NumPad9)" Grid.Column="3" Grid.Row="0">
                                         <icons:ArrowRightUpIcon/>
                                     </Button>
                                     <Button Command="local:CustomCommands.MoveViewLeft"
-                                            ToolTip="Move View Left" Grid.Column="1" Grid.Row="1">
+                                            ToolTip="Move View Left (Ctrl+NumPad4)" Grid.Column="1" Grid.Row="1">
                                         <icons:ArrowLeftIcon/>
                                     </Button>
                                     <Button Command="local:CustomCommands.MoveViewRight"
-                                            ToolTip="Move View Right" Grid.Column="3" Grid.Row="1">
+                                            ToolTip="Move View Right (Ctrl+NumPad6)" Grid.Column="3" Grid.Row="1">
                                         <icons:ArrowRightIcon/>
                                     </Button>
                                     <Button Command="local:CustomCommands.MoveViewLeftDown"
-                                            ToolTip="Move View Left Down" Grid.Column="1" Grid.Row="2">
+                                            ToolTip="Move View Left Down (Ctrl+NumPad1)" Grid.Column="1" Grid.Row="2">
                                         <icons:ArrowLeftDownIcon/>
                                     </Button>
-                                    <Button Command="local:CustomCommands.MoveViewDown" ToolTip="Move View Down" Grid.Column="2" Grid.Row="2">
+                                    <Button Command="local:CustomCommands.MoveViewDown"
+                                            ToolTip="Move View Down (Ctrl+NumPad2)" Grid.Column="2" Grid.Row="2">
                                         <icons:ArrowDownIcon/>
                                     </Button>
                                     <Button Command="local:CustomCommands.MoveViewRightDown"
-                                            ToolTip="Move View Right Down" Grid.Column="3" Grid.Row="2">
+                                            ToolTip="Move View Right Down (Ctrl+NumPad3)" Grid.Column="3" Grid.Row="2">
                                         <icons:ArrowDownRightIcon/>
                                     </Button>
                                     <Button Command="local:CustomCommands.ZoomOutView"
-                                            ToolTip="Zoom Out Level View" Grid.Column="1" Grid.Row="3">
+                                            ToolTip="Zoom Out View (Ctrl+NumPad-)" Grid.Column="1" Grid.Row="3">
                                         <icons:ZoomMinusIcon/>
                                     </Button>
-                                    <Button Command="local:CustomCommands.AdjustViewProject"
-                                            ToolTip="Adjust Level View" Grid.Column="2" Grid.Row="3">
+                                    <Button Command="local:CustomCommands.FullLevelView"
+                                            ToolTip="Full Level View (Ctrl+F)" Grid.Column="2" Grid.Row="3">
                                         <icons:AdjustViewLevelIcon/>
                                     </Button>
                                     <Button Command="local:CustomCommands.ZoomInView"
-                                            ToolTip="Zoom In Level View" Grid.Column="3" Grid.Row="3">
+                                            ToolTip="Zoom In View (Ctrl+NumPad+)" Grid.Column="3" Grid.Row="3">
                                         <icons:ZoomPlusIcon/>
                                     </Button>
                                 </Grid>
@@ -356,7 +346,7 @@
                             </StackPanel.Resources>
                             <StackPanel>
                                 <Border Name="borderNormalInc">
-                                    <Button ToolTip="Normal INC" Command="local:CustomCommands.EditModeNormalInc">
+                                    <Button Command="local:CustomCommands.EditModeNormalInc" ToolTip="Normal INC (Ctrl+1)" >
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Normal.png"/>
                                             <TextBlock Text="+" Foreground="Black" Padding="0,0,0,14"/>
@@ -364,7 +354,7 @@
                                     </Button>
                                 </Border>
                                 <Border Name="borderNormalDec">
-                                    <Button ToolTip="Normal DEC" Command="local:CustomCommands.EditModeNormalDec">
+                                    <Button Command="local:CustomCommands.EditModeNormalDec" ToolTip="Normal DEC (Ctrl+2)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Normal.png"/>
                                             <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>
@@ -374,7 +364,7 @@
                             </StackPanel>
                             <StackPanel>
                                 <Border Name="borderIceInc">
-                                    <Button ToolTip="Ice INC" Command="local:CustomCommands.EditModeIceInc">
+                                    <Button Command="local:CustomCommands.EditModeIceInc" ToolTip="Ice INC (Ctrl+3)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Ice.png"/>
                                             <TextBlock Text="+" Foreground="Black" Padding="0,0,0,14"/>
@@ -382,7 +372,7 @@
                                     </Button>
                                 </Border>
                                 <Border Name="borderIceDec">
-                                    <Button ToolTip="Ice DEC" Command="local:CustomCommands.EditModeIceDec">
+                                    <Button Command="local:CustomCommands.EditModeIceDec" ToolTip="Ice DEC (Ctrl+4)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Ice.png"/>
                                             <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>
@@ -391,7 +381,7 @@
                                 </Border>
                             </StackPanel>
                             <Border Name="borderSolid" VerticalAlignment="Center">
-                                <Button ToolTip="Static" Command="local:CustomCommands.EditModeStatic">
+                                <Button Command="local:CustomCommands.EditModeStatic" ToolTip="Static (Ctrl+5)">
                                     <Grid>
                                         <Image Source="Graphics\Tiles\Static.png"/>
                                     </Grid>
@@ -399,7 +389,7 @@
                             </Border>
                             <StackPanel>
                                 <Border Name="borderPortalInc">
-                                    <Button ToolTip="Portal INC" Command="local:CustomCommands.EditModePortalInc">
+                                    <Button Command="local:CustomCommands.EditModePortalInc" ToolTip="Portal INC (Ctrl+6)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Portal.png"/>
                                             <TextBlock Text="+" Foreground="Black" Padding="0,0,0,14"/>
@@ -407,7 +397,7 @@
                                     </Button>
                                 </Border>
                                 <Border Name="borderPortalDec">
-                                    <Button ToolTip="Portal DEC" Command="local:CustomCommands.EditModePortalDec">
+                                    <Button Command="local:CustomCommands.EditModePortalDec" ToolTip="Portal DEC (Ctrl+7)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Portal.png"/>
                                             <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>
@@ -416,7 +406,7 @@
                                 </Border>
                             </StackPanel>
                             <Border Name="borderFinish">
-                                <Button ToolTip="Finish" Command="local:CustomCommands.EditModeFinish">
+                                <Button Command="local:CustomCommands.EditModeFinish" ToolTip="Finish (Alt+9)">
                                     <Grid>
                                         <Image Source="Graphics\Tiles\Finish.png"/>
                                         <TextBlock Text="F" Foreground="Red" Padding="0,0,0,5" FontSize="36"/>
@@ -424,7 +414,7 @@
                                 </Button>
                             </Border>
                             <Border Name="borderDelete">
-                                <Button ToolTip="Delete Floor Tile" Command="local:CustomCommands.EditModeDeleteTile">
+                                <Button Command="local:CustomCommands.EditModeDeleteTile" ToolTip="Clear (Alt+0)">
                                     <Viewbox Width="50" Height="50" Stretch="Uniform">
                                         <icons:RemoveIcon/>
                                     </Viewbox>
