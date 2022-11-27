@@ -245,6 +245,38 @@ namespace SlidingTile_LevelEditor
                             gr.Children.Add(label);
                             button.Content = gr;
                         }
+                        else if (cResult.Type == FloorTileType.Spring)
+                        {
+                            Grid gr = new Grid();
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Spring.png", UriKind.Relative));
+                            TextBlock label = new TextBlock();
+                            label.HorizontalAlignment = HorizontalAlignment.Center;
+                            label.VerticalAlignment = VerticalAlignment.Center;
+                            label.TextAlignment = TextAlignment.Center;
+                            switch (cResult.Spring)
+                            {
+                                case SpringDirection.Up:
+                                    label.Text = $"⮝{cResult.Number}";
+                                    break;
+                                case SpringDirection.Left:
+                                    label.Text = $"⮜{cResult.Number}";
+                                    break;
+                                case SpringDirection.Down:
+                                    label.Text = $"⮟{cResult.Number}";
+
+                                    break;
+                                case SpringDirection.Right:
+                                    label.Text = $"⮞{cResult.Number}";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            label.FontSize = 24;
+                            gr.Children.Add(img);
+                            gr.Children.Add(label);
+                            button.Content = gr;
+                        }
                         else if (cResult.Type == FloorTileType.Finish)
                         {
                             Grid gr = new Grid();
@@ -461,6 +493,52 @@ namespace SlidingTile_LevelEditor
                         }
                     }
                     break;
+                case EditMode.SpringLeft:
+                    if (point == new Point(0, 0))
+                    {
+                        MessageBox.Show("Cannot change Start floor tile to Spring.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        floorTileIndex = FindFloor(point);
+                        if (floorTileIndex >= 0)
+                        {
+                            FloorTile floorTile = _floorTiles[floorTileIndex];
+                            if (floorTile.Type == FloorTileType.Spring)
+                            {
+                                new SpringLeftCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                                PostCommandUpdate();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Cannot change direction of this floor tile. Only existing Spring tile can be modified", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                    }
+                    break;
+                case EditMode.SpringRight:
+                    if (point == new Point(0, 0))
+                    {
+                        MessageBox.Show("Cannot change Start floor tile to Spring.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        floorTileIndex = FindFloor(point);
+                        if (floorTileIndex >= 0)
+                        {
+                            FloorTile floorTile = _floorTiles[floorTileIndex];
+                            if (floorTile.Type == FloorTileType.Spring)
+                            {
+                                new SpringRightCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                                PostCommandUpdate();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Cannot change direction of this floor tile. Only existing Spring tile can be modified", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                    }
+                    break;
                 case EditMode.FinishTile:
                     if (point == new Point(0, 0))
                     {
@@ -502,7 +580,6 @@ namespace SlidingTile_LevelEditor
                     }
                     break;
             }
-
             UpdateMainGridViewOnlyButtons();
         }
         private int FindFloor(Point point)
