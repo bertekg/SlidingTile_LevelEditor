@@ -1,9 +1,5 @@
 ﻿using SlidingTile_LevelEditor.Class;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SlidingTile_LevelEditor.Commands
@@ -33,9 +29,9 @@ namespace SlidingTile_LevelEditor.Commands
             _commands.Add(this);
             _beforChange = new FloorTile
             {
-                Type = _floorTiles[_floorTileIndex].Type,
                 PosX = _floorTiles[_floorTileIndex].PosX,
                 PosY = _floorTiles[_floorTileIndex].PosY,
+                Type = _floorTiles[_floorTileIndex].Type,
                 Number = _floorTiles[_floorTileIndex].Number,
                 Portal = _floorTiles[_floorTileIndex].Portal,
                 Spring = _floorTiles[_floorTileIndex].Spring
@@ -47,9 +43,9 @@ namespace SlidingTile_LevelEditor.Commands
             }
             _afterChange = new FloorTile
             {
-                Type = _floorTiles[_floorTileIndex].Type,
                 PosX = _floorTiles[_floorTileIndex].PosX,
                 PosY = _floorTiles[_floorTileIndex].PosY,
+                Type = _floorTiles[_floorTileIndex].Type,
                 Number = _floorTiles[_floorTileIndex].Number,
                 Portal = _floorTiles[_floorTileIndex].Portal,
                 Spring = _floorTiles[_floorTileIndex].Spring
@@ -59,9 +55,9 @@ namespace SlidingTile_LevelEditor.Commands
         {
             _floorTiles[_floorTileIndex] = new FloorTile()
             {
-                Type = _beforChange.Type,
                 PosX = _beforChange.PosX,
                 PosY = _beforChange.PosY,
+                Type = _beforChange.Type,
                 Number = _beforChange.Number,
                 Portal = _beforChange.Portal,
                 Spring = _beforChange.Spring
@@ -71,9 +67,9 @@ namespace SlidingTile_LevelEditor.Commands
         {
             _floorTiles[_floorTileIndex] = new FloorTile()
             {
-                Type = _afterChange.Type,
                 PosX = _afterChange.PosX,
                 PosY = _afterChange.PosY,
+                Type = _afterChange.Type,
                 Number = _afterChange.Number,
                 Portal = _afterChange.Portal,
                 Spring = _afterChange.Spring

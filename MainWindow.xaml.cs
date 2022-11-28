@@ -1012,7 +1012,7 @@ namespace SlidingTile_LevelEditor
         }
         private void commandBinding_DeleteAllTiles_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            new ClearAllCommand(_commands, _floorTiles, _indexCommand);
+            new ClearAllCommand(_commands, _floorTiles, _indexCommand + 1);
             PostCommandUpdate();
             UpdateMainGridViewOnlyButtons();
         }

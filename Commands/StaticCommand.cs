@@ -33,22 +33,25 @@ namespace SlidingTile_LevelEditor.Commands
             {
                 _beforChange = new FloorTile
                 {
-                    Type = _floorTiles[_floorTileIndex].Type,
                     PosX = _floorTiles[_floorTileIndex].PosX,
                     PosY = _floorTiles[_floorTileIndex].PosY,
+                    Type = _floorTiles[_floorTileIndex].Type,
                     Number = _floorTiles[_floorTileIndex].Number,
-                    Portal = _floorTiles[_floorTileIndex].Portal
+                    Portal = _floorTiles[_floorTileIndex].Portal,
+                    Spring = _floorTiles[_floorTileIndex].Spring
                 };
                 _floorTiles[_floorTileIndex].Type = FloorTileType.Static;
                 _floorTiles[_floorTileIndex].Number = 0;
                 _floorTiles[_floorTileIndex].Portal = 0;
+                _floorTiles[_floorTileIndex].Spring = SpringDirection.Up;
                 _afterChange = new FloorTile
                 {
-                    Type = _floorTiles[_floorTileIndex].Type,
                     PosX = _floorTiles[_floorTileIndex].PosX,
                     PosY = _floorTiles[_floorTileIndex].PosY,
+                    Type = _floorTiles[_floorTileIndex].Type,
                     Number = _floorTiles[_floorTileIndex].Number,
-                    Portal = _floorTiles[_floorTileIndex].Portal
+                    Portal = _floorTiles[_floorTileIndex].Portal,
+                    Spring = _floorTiles[_floorTileIndex].Spring
                 };
             }
             else
@@ -60,16 +63,18 @@ namespace SlidingTile_LevelEditor.Commands
                     PosY = (int)_point.Y,
                     Type = FloorTileType.Static,
                     Number = 0,
-                    Portal = 0
+                    Portal = 0,
+                    Spring = SpringDirection.Up
                 };
                 _floorTiles.Add(floorTile);
                 _afterChange = new FloorTile()
                 {
-                    Type = floorTile.Type,
                     PosX = floorTile.PosX,
                     PosY = floorTile.PosY,
+                    Type = floorTile.Type,
                     Number = floorTile.Number,
-                    Portal = floorTile.Portal
+                    Portal = floorTile.Portal,
+                    Spring = floorTile.Spring
                 };
                 _floorTileIndex = _floorTiles.Count - 1;
             }
@@ -81,6 +86,7 @@ namespace SlidingTile_LevelEditor.Commands
                 _floorTiles[_floorTileIndex].Type = _beforChange.Type;
                 _floorTiles[_floorTileIndex].Number = _beforChange.Number;
                 _floorTiles[_floorTileIndex].Portal = _beforChange.Portal;
+                _floorTiles[_floorTileIndex].Spring = _beforChange.Spring;
             }
             else
             {
@@ -93,22 +99,24 @@ namespace SlidingTile_LevelEditor.Commands
             {
                 _floorTiles[_floorTileIndex] = new FloorTile()
                 {
-                    Type = _afterChange.Type,
                     PosX = _afterChange.PosX,
                     PosY = _afterChange.PosY,
+                    Type = _afterChange.Type,
                     Number = _afterChange.Number,
-                    Portal = _afterChange.Portal
+                    Portal = _afterChange.Portal,
+                    Spring= _afterChange.Spring
                 };
             }
             else
             {
                 FloorTile floorTileToInser = new FloorTile()
                 {
-                    Type = _afterChange.Type,
                     PosX = _afterChange.PosX,
                     PosY = _afterChange.PosY,
+                    Type = _afterChange.Type,
                     Number = _afterChange.Number,
-                    Portal = _afterChange.Portal
+                    Portal = _afterChange.Portal,
+                    Spring= _afterChange.Spring
                 };
                 _floorTiles.Insert(_floorTileIndex, floorTileToInser);
             }
@@ -118,14 +126,13 @@ namespace SlidingTile_LevelEditor.Commands
             string returnText;
             if (_beforChange != null)
             {
-                returnText = _commandIndex.ToString() + "; Solid [" + _point.X.ToString() + "," + _point.Y.ToString() +
-                    "] Number: " + _beforChange.Number.ToString() + " -> " + _afterChange.Number.ToString() +
-                    ", Portal: " + _beforChange.Portal.ToString() + " -> " + _afterChange.Portal.ToString();
+                returnText = $"{_commandIndex}; Static [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> {_afterChange.Number}, " +
+                     $"Portal: {_beforChange.Portal} -> {_afterChange.Portal}, Spring: {_beforChange.Spring} -> {_afterChange.Spring}";
             }
             else
             {
-                returnText = _commandIndex.ToString() + "; Solid [" + _point.X.ToString() + "," + _point.Y.ToString() +
-                    "] Number: null -> " + _afterChange.Number.ToString() + ", Portal: null -> " + _afterChange.Portal.ToString();
+                returnText = $"{_commandIndex}; Static [{_point.X},{_point.Y}] Number: null -> {_afterChange.Number}" +
+                    $", Portal: null -> {_afterChange.Portal}, Spring: null -> {_afterChange.Spring}";
             }
             return returnText;
         }

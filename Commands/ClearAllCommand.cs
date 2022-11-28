@@ -29,14 +29,24 @@ namespace SlidingTile_LevelEditor.Commands
                 {
                     PosX = tile.PosX,
                     PosY = tile.PosY,
+                    Type = tile.Type,
                     Number = tile.Number,
-                    Type = tile.Type
+                    Portal = tile.Portal,
+                    Spring = tile.Spring
                 };
                 _beforChange.Add(newFloorTile);
             }
             _floorTiles.Clear();
-            _floorTiles.Add(new FloorTile() { PosX = 0, PosY = 0, Type = FloorTileType.Normal, Number = 1 });
-            _afterChange.Add(new FloorTile() { PosX = 0, PosY = 0, Type = FloorTileType.Normal, Number = 1 });
+            _floorTiles.Add(new FloorTile()
+            {
+                PosX = 0, PosY = 0, Type = FloorTileType.Normal,
+                Number = 1, Portal = 0, Spring = SpringDirection.Up
+            });
+            _afterChange.Add(new FloorTile() 
+            { 
+                PosX = 0, PosY = 0, Type = FloorTileType.Normal,
+                Number = 1, Portal = 0, Spring = SpringDirection.Up
+            });
         }
         public override void Undo()
         {
@@ -47,8 +57,10 @@ namespace SlidingTile_LevelEditor.Commands
                 {
                     PosX = tile.PosX,
                     PosY = tile.PosY,
+                    Type = tile.Type,
                     Number = tile.Number,
-                    Type = tile.Type
+                    Portal = tile.Portal,
+                    Spring = tile.Spring
                 };
                 _floorTiles.Add(newFloorTile);
             }
@@ -62,15 +74,17 @@ namespace SlidingTile_LevelEditor.Commands
                 {
                     PosX = tile.PosX,
                     PosY = tile.PosY,
+                    Type = tile.Type,
                     Number = tile.Number,
-                    Type = tile.Type
+                    Portal = tile.Portal,
+                    Spring = tile.Spring
                 };
                 _floorTiles.Add(newFloorTile);
             }
         }
         public override string ToString()
         {
-            return _commandIndex.ToString() + "; Delete all tiles, before count: " + _beforChange.Count.ToString();
+            return $"{_commandIndex}; Delete all tiles, before count: {_beforChange.Count}";
         }
     }
 }
