@@ -5,12 +5,14 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-	<Version>0.1.6.3</Version>
+	<Version>0.1.7.0</Version>
 	<ApplicationIcon>ProgramIcon2_256.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Graphics\ProgramIcon2_128.png" />
+    <None Remove="Graphics\Tiles\Bomb.png" />
+    <None Remove="Graphics\Tiles\BombMod.png" />
     <None Remove="Graphics\Tiles\Finish.png" />
     <None Remove="Graphics\Tiles\Ice.png" />
     <None Remove="Graphics\Tiles\Normal.png" />
@@ -29,6 +31,12 @@
 
   <ItemGroup>
     <Resource Include="Graphics\ProgramIcon2_128.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Graphics\Tiles\Bomb.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Graphics\Tiles\BombMod.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Graphics\Tiles\Finish.png">

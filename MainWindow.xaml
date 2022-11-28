@@ -457,6 +457,42 @@
                                     </Button>
                                 </Border>
                             </StackPanel>
+                            <StackPanel>
+                                <Border Name="borderBombInitInc">
+                                    <Button Command="local:CustomCommands.EditModeSpringLeft" ToolTip="Bomb Initial Inc (Alt+5)">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Bomb.png"/>
+                                            <TextBlock Text="I+" FontSize="32" Foreground="Black" Padding="0,0,0,4"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                                <Border Name="borderBombInitDec">
+                                    <Button Command="local:CustomCommands.EditModeSpringRight" ToolTip="Bomb Initial Dec (Alt+6)">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\Bomb.png"/>
+                                            <TextBlock Text="I−" FontSize="32" Foreground="Black" Padding="0,0,0,4"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel>
+                                <Border Name="borderBombModInc">
+                                    <Button Command="local:CustomCommands.EditModeSpringLeft" ToolTip="Bomb Modification Inc (Alt+7)">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\BombMod.png"/>
+                                            <TextBlock Text="M+" FontSize="20" Foreground="Black"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                                <Border Name="borderBombModDec">
+                                    <Button Command="local:CustomCommands.EditModeSpringRight" ToolTip="Bomb Modification Dec (Alt+8)">
+                                        <Grid>
+                                            <Image Source="Graphics\Tiles\BombMod.png"/>
+                                            <TextBlock Text="M−" FontSize="20" Foreground="Black"/>
+                                        </Grid>
+                                    </Button>
+                                </Border>
+                            </StackPanel>
                             <Border Name="borderFinish">
                                 <Button Command="local:CustomCommands.EditModeFinish" ToolTip="Finish (Alt+9)">
                                     <Grid>
