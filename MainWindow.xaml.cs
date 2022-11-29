@@ -75,6 +75,10 @@ namespace SlidingTile_LevelEditor
             borderSpringDec.BorderBrush = _borderNotSelected;
             borderSpringLeft.BorderBrush = _borderNotSelected;
             borderSpringRight.BorderBrush = _borderNotSelected;
+            borderBombInitInc.BorderBrush = _borderNotSelected;
+            borderBombInitDec.BorderBrush = _borderNotSelected;
+            borderBombModInc.BorderBrush = _borderNotSelected;
+            borderBombModDec.BorderBrush = _borderNotSelected;
             borderFinish.BorderBrush = _borderNotSelected;
             borderDelete.BorderBrush = _borderNotSelected;
             switch (_editMode)
@@ -119,6 +123,18 @@ namespace SlidingTile_LevelEditor
                     break;
                 case EditMode.DeleteTile:
                     borderDelete.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.BombInitalInc:
+                    borderBombInitInc.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.BombInitialDec:
+                    borderBombInitDec.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.BombModInc:
+                    borderBombModInc.BorderBrush = _borderSelected;
+                    break;
+                case EditMode.BombModDec:
+                    borderBombModDec.BorderBrush = _borderSelected;
                     break;
                 default:
                     break;
@@ -985,6 +1001,26 @@ namespace SlidingTile_LevelEditor
             _editMode = EditMode.SpringRight;
             UpdateEditBorders();
         }
+        private void commandBinding_EditModeBombInitialInc_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.BombInitalInc;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModeBombInitialDec_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.BombInitialDec;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModeBombModInc_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.BombModInc;
+            UpdateEditBorders();
+        }
+        private void commandBinding_EditModeBombModDec_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _editMode = EditMode.BombModDec;
+            UpdateEditBorders();
+        }
         private void commandBinding_EditModeFinish_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             _editMode = EditMode.FinishTile;
@@ -1107,5 +1143,6 @@ namespace SlidingTile_LevelEditor
         }
     }
     public enum EditMode {None, NormalInc, NormalDec, IceInc, IceDec, Static, PortalInc, PortalDec,
-        SpringInc, SpringDec, SpringLeft, SpringRight, FinishTile, DeleteTile}
+        SpringInc, SpringDec, SpringLeft, SpringRight,
+        BombInitalInc, BombInitialDec, BombModInc, BombModDec, FinishTile, DeleteTile}
 }

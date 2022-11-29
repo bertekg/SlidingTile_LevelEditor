@@ -42,6 +42,10 @@
         <CommandBinding Command="local:CustomCommands.EditModeSpringDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringDec_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeSpringLeft" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringLeft_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeSpringRight" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringRight_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeBombInitialInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeBombInitialInc_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeBombInitialDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeBombInitialDec_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeBombModInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeBombModInc_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeBombModDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeBombModDec_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeFinish" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeFinish_Executed"/>
         <CommandBinding Command="local:CustomCommands.EditModeDeleteTile" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeDeleteTile_Executed"/>
     </Window.CommandBindings>
@@ -459,7 +463,7 @@
                             </StackPanel>
                             <StackPanel>
                                 <Border Name="borderBombInitInc">
-                                    <Button Command="local:CustomCommands.EditModeSpringLeft" ToolTip="Bomb Initial Inc (Alt+5)">
+                                    <Button Command="local:CustomCommands.EditModeBombInitialInc" ToolTip="Bomb Initial Inc (Alt+5)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Bomb.png"/>
                                             <TextBlock Text="I+" FontSize="32" Foreground="Black" Padding="0,0,0,4"/>
@@ -467,7 +471,7 @@
                                     </Button>
                                 </Border>
                                 <Border Name="borderBombInitDec">
-                                    <Button Command="local:CustomCommands.EditModeSpringRight" ToolTip="Bomb Initial Dec (Alt+6)">
+                                    <Button Command="local:CustomCommands.EditModeBombInitialDec" ToolTip="Bomb Initial Dec (Alt+6)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Bomb.png"/>
                                             <TextBlock Text="I−" FontSize="32" Foreground="Black" Padding="0,0,0,4"/>
@@ -477,7 +481,7 @@
                             </StackPanel>
                             <StackPanel>
                                 <Border Name="borderBombModInc">
-                                    <Button Command="local:CustomCommands.EditModeSpringLeft" ToolTip="Bomb Modification Inc (Alt+7)">
+                                    <Button Command="local:CustomCommands.EditModeBombModInc" ToolTip="Bomb Modification Inc (Alt+7)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\BombMod.png"/>
                                             <TextBlock Text="M+" FontSize="20" Foreground="Black"/>
@@ -485,7 +489,7 @@
                                     </Button>
                                 </Border>
                                 <Border Name="borderBombModDec">
-                                    <Button Command="local:CustomCommands.EditModeSpringRight" ToolTip="Bomb Modification Dec (Alt+8)">
+                                    <Button Command="local:CustomCommands.EditModeBombModDec" ToolTip="Bomb Modification Dec (Alt+8)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\BombMod.png"/>
                                             <TextBlock Text="M−" FontSize="20" Foreground="Black"/>

@@ -166,6 +166,30 @@ namespace SlidingTile_LevelEditor
            {
                 new KeyGesture(Key.D4, ModifierKeys.Alt)
            });
+        public static readonly RoutedUICommand EditModeBombInitialInc = new RoutedUICommand
+          ("Edit Mode Bomb Initial Inc", "EditModeBombInitialInc", typeof(CustomCommands),
+          new InputGestureCollection()
+          {
+                new KeyGesture(Key.D5, ModifierKeys.Alt)
+          });
+        public static readonly RoutedUICommand EditModeBombInitialDec = new RoutedUICommand
+            ("Edit Mode Bomb Initial Dec", "EditModeBombInitialDec", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.D6, ModifierKeys.Alt)
+            });
+        public static readonly RoutedUICommand EditModeBombModInc = new RoutedUICommand
+            ("Edit Mode Bomb Mod Inc", "EditModeBombModInc", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.D7, ModifierKeys.Alt)
+            });
+        public static readonly RoutedUICommand EditModeBombModDec = new RoutedUICommand
+            ("Edit Mode Bomb Mod Dec", "EditModeBombModDec", typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.D8, ModifierKeys.Alt)
+            });
         public static readonly RoutedUICommand EditModeFinish = new RoutedUICommand
             ("Edit Mode Finish", "EditModeFinish", typeof(CustomCommands),
             new InputGestureCollection()
