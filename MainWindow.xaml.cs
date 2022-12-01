@@ -15,7 +15,6 @@ using System.Xml;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
-using SlidingTile_LevelEditor.Properties;
 
 namespace SlidingTile_LevelEditor
 {
@@ -293,6 +292,36 @@ namespace SlidingTile_LevelEditor
                             gr.Children.Add(label);
                             button.Content = gr;
                         }
+                        else if (cResult.Type == FloorTileType.BombInit)
+                        {
+                            Grid gr = new Grid();
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/Bomb.png", UriKind.Relative));
+                            TextBlock label = new TextBlock();
+                            label.HorizontalAlignment = HorizontalAlignment.Center;
+                            label.VerticalAlignment = VerticalAlignment.Center;
+                            label.TextAlignment = TextAlignment.Center;
+                            label.Text = $"Init\n{cResult.Bomb}";
+                            label.FontSize = 18;
+                            gr.Children.Add(img);
+                            gr.Children.Add(label);
+                            button.Content = gr;
+                        }
+                        else if (cResult.Type == FloorTileType.BombMod)
+                        {
+                            Grid gr = new Grid();
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri(@"/Graphics/Tiles/BombMod.png", UriKind.Relative));
+                            TextBlock label = new TextBlock();
+                            label.HorizontalAlignment = HorizontalAlignment.Center;
+                            label.VerticalAlignment = VerticalAlignment.Center;
+                            label.TextAlignment = TextAlignment.Center;
+                            label.Text = $"Mod\n{cResult.Bomb}";
+                            label.FontSize = 18;
+                            gr.Children.Add(img);
+                            gr.Children.Add(label);
+                            button.Content = gr;
+                        }
                         else if (cResult.Type == FloorTileType.Finish)
                         {
                             Grid gr = new Grid();
@@ -558,11 +587,22 @@ namespace SlidingTile_LevelEditor
                 case EditMode.BombInitalInc:
                     if (point == new Point(0, 0))
                     {
-                        MessageBox.Show("Cannot change Start floor tile to Bomb.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Cannot change Start floor tile to Bomb Init.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
                         new BombInitIncCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                        PostCommandUpdate();
+                    }
+                    break;
+                case EditMode.BombModInc:
+                    if (point == new Point(0, 0))
+                    {
+                        MessageBox.Show("Cannot change Start floor tile to Bomb Mod.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        new BombModIncCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
                         PostCommandUpdate();
                     }
                     break;
