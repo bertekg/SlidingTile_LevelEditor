@@ -4,8 +4,8 @@ using System.Linq;
 using System.Windows;
 
 namespace SlidingTile_LevelEditor.Commands
-{  
-    class BombModIncCommand : Command
+{
+    class BombInitDecCommand : Command
     {
         private List<Command> _commands;
         private Point _point;
@@ -14,7 +14,7 @@ namespace SlidingTile_LevelEditor.Commands
         private FloorTile _beforChange;
         private FloorTile _afterChange;
         private int _floorTileIndex;
-        public BombModIncCommand(List<Command> commands, List<FloorTile> floorTiles, Point point, int commandIndex, int floorTileIndex)
+        public BombInitDecCommand(List<Command> commands, List<FloorTile> floorTiles, Point point, int commandIndex, int floorTileIndex)
         {
             _commands = commands;
             _point = point;
@@ -40,13 +40,13 @@ namespace SlidingTile_LevelEditor.Commands
                     Spring = _floorTiles[_floorTileIndex].Spring,
                     Bomb = _floorTiles[_floorTileIndex].Bomb
                 };
-                if (_floorTiles[_floorTileIndex].Bomb != -1)
+                if (_floorTiles[_floorTileIndex].Bomb != 1)
                 {
-                    _floorTiles[_floorTileIndex].Type = FloorTileType.BombMod;
+                    _floorTiles[_floorTileIndex].Type = FloorTileType.BombInit;
                     _floorTiles[_floorTileIndex].Number = 1;
                     _floorTiles[_floorTileIndex].Portal = 0;
                     _floorTiles[_floorTileIndex].Spring = SpringDirection.Up;
-                    _floorTiles[_floorTileIndex].Bomb++;
+                    _floorTiles[_floorTileIndex].Bomb--;
                     _afterChange = new FloorTile
                     {
                         PosX = _floorTiles[_floorTileIndex].PosX,
@@ -71,11 +71,11 @@ namespace SlidingTile_LevelEditor.Commands
                 {
                     PosX = (int)_point.X,
                     PosY = (int)_point.Y,
-                    Type = FloorTileType.BombMod,
+                    Type = FloorTileType.BombInit,
                     Number = 1,
                     Portal = 0,
                     Spring = SpringDirection.Up,
-                    Bomb = 1
+                    Bomb = -1
                 };
                 _floorTiles.Add(floorTile);
                 _afterChange = new FloorTile()
@@ -170,18 +170,18 @@ namespace SlidingTile_LevelEditor.Commands
             string returnText = string.Empty;
             if (_beforChange != null && _afterChange != null)
             {
-                returnText = $"{_commandIndex}; Bomb Mod Inc [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> {_afterChange.Number}, " +
+                returnText = $"{_commandIndex}; Bomb Initial Dec [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> {_afterChange.Number}, " +
                      $"Portal: {_beforChange.Portal} -> {_afterChange.Portal}, Spring: {_beforChange.Spring} -> {_afterChange.Spring}, " +
                      $"Bomb: {_beforChange.Bomb} -> {_afterChange.Bomb}";
             }
             else if (_beforChange == null && _afterChange != null)
             {
-                returnText = $"{_commandIndex}; Bomb Mod Inc [{_point.X},{_point.Y}] Number: null -> {_afterChange.Number}, " +
+                returnText = $"{_commandIndex}; Bomb Initial Dec [{_point.X},{_point.Y}] Number: null -> {_afterChange.Number}, " +
                     $"Portal: null -> {_afterChange.Portal}, Spring: null -> {_afterChange.Spring}, Bomb: null -> {_afterChange.Bomb}";
             }
             else if (_beforChange != null && _afterChange == null)
             {
-                returnText = $"{_commandIndex}; Bomb Mod Inc [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> null, " +
+                returnText = $"{_commandIndex}; Bomb Initial Dec [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> null, " +
                    $"Portal: {_beforChange.Portal} -> null, Spring: {_beforChange.Spring} -> null, Bomb: {_beforChange.Bomb} -> null";
             }
             return returnText;

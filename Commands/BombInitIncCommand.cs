@@ -95,11 +95,33 @@ namespace SlidingTile_LevelEditor.Commands
         {
             if (_beforChange != null)
             {
-                _floorTiles[_floorTileIndex].Type = _beforChange.Type;
-                _floorTiles[_floorTileIndex].Number = _beforChange.Number;
-                _floorTiles[_floorTileIndex].Portal = _beforChange.Portal;
-                _floorTiles[_floorTileIndex].Spring = _beforChange.Spring;
-                _floorTiles[_floorTileIndex].Bomb = _beforChange.Bomb;
+                if (_floorTiles.ElementAtOrDefault(_floorTileIndex) != null)
+                {
+                    _floorTiles[_floorTileIndex] = new FloorTile()
+                    {
+                        PosX = _beforChange.PosX,
+                        PosY = _beforChange.PosY,
+                        Type = _beforChange.Type,
+                        Number = _beforChange.Number,
+                        Portal = _beforChange.Portal,
+                        Spring = _beforChange.Spring,
+                        Bomb = _beforChange.Bomb
+                    };
+                }
+                else
+                {
+                    FloorTile floorTileToInser = new FloorTile()
+                    {
+                        PosX = _beforChange.PosX,
+                        PosY = _beforChange.PosY,
+                        Type = _beforChange.Type,
+                        Number = _beforChange.Number,
+                        Portal = _beforChange.Portal,
+                        Spring = _beforChange.Spring,
+                        Bomb = _beforChange.Bomb
+                    };
+                    _floorTiles.Insert(_floorTileIndex, floorTileToInser);
+                }
             }
             else
             {
@@ -108,32 +130,39 @@ namespace SlidingTile_LevelEditor.Commands
         }
         public override void Redo()
         {
-            if (_floorTiles.ElementAtOrDefault(_floorTileIndex) != null)
+            if (_afterChange != null)
             {
-                _floorTiles[_floorTileIndex] = new FloorTile()
+                if (_floorTiles.ElementAtOrDefault(_floorTileIndex) != null)
                 {
-                    PosX = _afterChange.PosX,
-                    PosY = _afterChange.PosY,
-                    Type = _afterChange.Type,
-                    Number = _afterChange.Number,
-                    Portal = _afterChange.Portal,
-                    Spring = _afterChange.Spring,
-                    Bomb = _afterChange.Bomb
-                };
+                    _floorTiles[_floorTileIndex] = new FloorTile()
+                    {
+                        PosX = _afterChange.PosX,
+                        PosY = _afterChange.PosY,
+                        Type = _afterChange.Type,
+                        Number = _afterChange.Number,
+                        Portal = _afterChange.Portal,
+                        Spring = _afterChange.Spring,
+                        Bomb = _afterChange.Bomb
+                    };
+                }
+                else
+                {
+                    FloorTile floorTileToInser = new FloorTile()
+                    {
+                        PosX = _afterChange.PosX,
+                        PosY = _afterChange.PosY,
+                        Type = _afterChange.Type,
+                        Number = _afterChange.Number,
+                        Portal = _afterChange.Portal,
+                        Spring = _afterChange.Spring,
+                        Bomb = _afterChange.Bomb
+                    };
+                    _floorTiles.Insert(_floorTileIndex, floorTileToInser);
+                }
             }
             else
             {
-                FloorTile floorTileToInser = new FloorTile()
-                {
-                    PosX = _afterChange.PosX,
-                    PosY = _afterChange.PosY,
-                    Type = _afterChange.Type,
-                    Number = _afterChange.Number,
-                    Portal = _afterChange.Portal,
-                    Spring = _afterChange.Spring,
-                    Bomb = _afterChange.Bomb
-                };
-                _floorTiles.Insert(_floorTileIndex, floorTileToInser);
+                _floorTiles.RemoveAt(_floorTileIndex);
             }
         }
         public override string ToString()
@@ -145,12 +174,12 @@ namespace SlidingTile_LevelEditor.Commands
                      $"Portal: {_beforChange.Portal} -> {_afterChange.Portal}, Spring: {_beforChange.Spring} -> {_afterChange.Spring}, " +
                      $"Bomb: {_beforChange.Bomb} -> {_afterChange.Bomb}";
             }
-            else if(_beforChange == null)
+            else if(_beforChange == null && _afterChange != null)
             {
                 returnText = $"{_commandIndex}; Bomb Initial Inc [{_point.X},{_point.Y}] Number: null -> {_afterChange.Number}, " +
                     $"Portal: null -> {_afterChange.Portal}, Spring: null -> {_afterChange.Spring}, Bomb: null -> {_afterChange.Bomb}";
             }
-            else if (_afterChange == null)
+            else if (_beforChange != null && _afterChange == null)
             {
                 returnText = $"{_commandIndex}; Bomb Initial Inc [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> null, " +
                    $"Portal: {_beforChange.Portal} -> null, Spring: {_beforChange.Spring} -> null, Bomb: {_beforChange.Bomb} -> null";

@@ -595,6 +595,17 @@ namespace SlidingTile_LevelEditor
                         PostCommandUpdate();
                     }
                     break;
+                case EditMode.BombInitialDec:
+                    if (point == new Point(0, 0))
+                    {
+                        MessageBox.Show("Cannot change Start floor tile to Bomb Init.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        new BombInitDecCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                        PostCommandUpdate();
+                    }
+                    break;
                 case EditMode.BombModInc:
                     if (point == new Point(0, 0))
                     {
@@ -603,6 +614,17 @@ namespace SlidingTile_LevelEditor
                     else
                     {
                         new BombModIncCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
+                        PostCommandUpdate();
+                    }
+                    break;
+                case EditMode.BombModDec:
+                    if (point == new Point(0, 0))
+                    {
+                        MessageBox.Show("Cannot change Start floor tile to Bomb Mod.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        new BombModDecCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
                         PostCommandUpdate();
                     }
                     break;
