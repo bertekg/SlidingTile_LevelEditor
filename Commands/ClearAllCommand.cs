@@ -32,7 +32,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = tile.Type,
                     Number = tile.Number,
                     Portal = tile.Portal,
-                    Spring = tile.Spring
+                    Spring = tile.Spring,
+                    Bomb = tile.Bomb
                 };
                 _beforChange.Add(newFloorTile);
             }
@@ -40,12 +41,14 @@ namespace SlidingTile_LevelEditor.Commands
             _floorTiles.Add(new FloorTile()
             {
                 PosX = 0, PosY = 0, Type = FloorTileType.Normal,
-                Number = 1, Portal = 0, Spring = SpringDirection.Up
+                Number = 1, Portal = 0, Spring = SpringDirection.Up,
+                Bomb = 0
             });
             _afterChange.Add(new FloorTile() 
             { 
                 PosX = 0, PosY = 0, Type = FloorTileType.Normal,
-                Number = 1, Portal = 0, Spring = SpringDirection.Up
+                Number = 1, Portal = 0, Spring = SpringDirection.Up,
+                Bomb = 0
             });
         }
         public override void Undo()
@@ -60,7 +63,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = tile.Type,
                     Number = tile.Number,
                     Portal = tile.Portal,
-                    Spring = tile.Spring
+                    Spring = tile.Spring,
+                    Bomb = tile.Bomb
                 };
                 _floorTiles.Add(newFloorTile);
             }
@@ -77,7 +81,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = tile.Type,
                     Number = tile.Number,
                     Portal = tile.Portal,
-                    Spring = tile.Spring
+                    Spring = tile.Spring,
+                    Bomb = tile.Bomb
                 };
                 _floorTiles.Add(newFloorTile);
             }

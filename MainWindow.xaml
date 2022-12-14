@@ -409,7 +409,7 @@
                             </Border>
                             <StackPanel>
                                 <Border Name="borderPortalInc">
-                                    <Button Command="local:CustomCommands.EditModePortalInc" ToolTip="Portal INC (Ctrl+6)">
+                                    <Button Command="local:CustomCommands.EditModePortalInc" ToolTip="Portal Inc (Ctrl+6)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Portal.png"/>
                                             <TextBlock Text="+" Foreground="Black" Padding="0,0,0,14"/>
@@ -417,7 +417,7 @@
                                     </Button>
                                 </Border>
                                 <Border Name="borderPortalDec">
-                                    <Button Command="local:CustomCommands.EditModePortalDec" ToolTip="Portal DEC (Ctrl+7)">
+                                    <Button Command="local:CustomCommands.EditModePortalDec" ToolTip="Portal Dec (Ctrl+7)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Portal.png"/>
                                             <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>
@@ -427,7 +427,7 @@
                             </StackPanel>
                             <StackPanel>
                                 <Border Name="borderSpringInc">
-                                    <Button Command="local:CustomCommands.EditModeSpringInc" ToolTip="Sprint INC (Alt+1)">
+                                    <Button Command="local:CustomCommands.EditModeSpringInc" ToolTip="Sprint Inc (Alt+1)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Spring.png"/>
                                             <TextBlock Text="+" Foreground="Black" Padding="0,0,0,14"/>
@@ -435,7 +435,7 @@
                                     </Button>
                                 </Border>
                                 <Border Name="borderSpringDec">
-                                    <Button Command="local:CustomCommands.EditModeSpringDec" ToolTip="Sprint DEC (Alt+2)">
+                                    <Button Command="local:CustomCommands.EditModeSpringDec" ToolTip="Sprint Dec (Alt+2)">
                                         <Grid>
                                             <Image Source="Graphics\Tiles\Spring.png"/>
                                             <TextBlock Text="−" Foreground="Black" Padding="0,0,0,14"/>

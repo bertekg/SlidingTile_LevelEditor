@@ -170,18 +170,18 @@ namespace SlidingTile_LevelEditor.Commands
             string returnText = string.Empty;
             if (_beforChange != null && _afterChange != null)
             {
-                returnText = $"{_commandIndex}; Bomb Initial Inc [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> {_afterChange.Number}, " +
+                returnText = $"{_commandIndex}; Bomb Init Inc [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> {_afterChange.Number}, " +
                      $"Portal: {_beforChange.Portal} -> {_afterChange.Portal}, Spring: {_beforChange.Spring} -> {_afterChange.Spring}, " +
                      $"Bomb: {_beforChange.Bomb} -> {_afterChange.Bomb}";
             }
             else if(_beforChange == null && _afterChange != null)
             {
-                returnText = $"{_commandIndex}; Bomb Initial Inc [{_point.X},{_point.Y}] Number: null -> {_afterChange.Number}, " +
+                returnText = $"{_commandIndex}; Bomb Init Inc [{_point.X},{_point.Y}] Number: null -> {_afterChange.Number}, " +
                     $"Portal: null -> {_afterChange.Portal}, Spring: null -> {_afterChange.Spring}, Bomb: null -> {_afterChange.Bomb}";
             }
             else if (_beforChange != null && _afterChange == null)
             {
-                returnText = $"{_commandIndex}; Bomb Initial Inc [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> null, " +
+                returnText = $"{_commandIndex}; Bomb Init Inc [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> null, " +
                    $"Portal: {_beforChange.Portal} -> null, Spring: {_beforChange.Spring} -> null, Bomb: {_beforChange.Bomb} -> null";
             }
             return returnText;
