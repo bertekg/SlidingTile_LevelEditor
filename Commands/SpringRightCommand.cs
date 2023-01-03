@@ -34,7 +34,8 @@ namespace SlidingTile_LevelEditor.Commands
                 Type = _floorTiles[_floorTileIndex].Type,
                 Number = _floorTiles[_floorTileIndex].Number,
                 Portal = _floorTiles[_floorTileIndex].Portal,
-                Spring = _floorTiles[_floorTileIndex].Spring
+                Spring = _floorTiles[_floorTileIndex].Spring,
+                Bomb = _floorTiles[_floorTileIndex].Bomb
             };
             _floorTiles[_floorTileIndex].Spring--;
             if ((int)_floorTiles[_floorTileIndex].Spring < (int)SpringDirection.Up)
@@ -48,7 +49,8 @@ namespace SlidingTile_LevelEditor.Commands
                 Type = _floorTiles[_floorTileIndex].Type,
                 Number = _floorTiles[_floorTileIndex].Number,
                 Portal = _floorTiles[_floorTileIndex].Portal,
-                Spring = _floorTiles[_floorTileIndex].Spring
+                Spring = _floorTiles[_floorTileIndex].Spring,
+                Bomb = _floorTiles[_floorTileIndex].Bomb
             };
         }
         public override void Undo()
@@ -60,7 +62,8 @@ namespace SlidingTile_LevelEditor.Commands
                 Type = _beforChange.Type,
                 Number = _beforChange.Number,
                 Portal = _beforChange.Portal,
-                Spring = _beforChange.Spring
+                Spring = _beforChange.Spring,
+                Bomb = _beforChange.Bomb
             };
         }
         public override void Redo()
@@ -72,13 +75,15 @@ namespace SlidingTile_LevelEditor.Commands
                 Type = _afterChange.Type,
                 Number = _afterChange.Number,
                 Portal = _afterChange.Portal,
-                Spring = _afterChange.Spring
+                Spring = _afterChange.Spring,
+                Bomb = _afterChange.Bomb
             };
         }
         public override string ToString()
         {
-            return $"{_commandIndex}; Spring Right [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> {_afterChange.Number}" +
-                    $", Portal: {_beforChange.Portal} -> {_afterChange.Portal}, Spring: {_beforChange.Spring} -> {_afterChange.Spring}"; ;
+            return $"{_commandIndex}; Spring Right [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> {_afterChange.Number}, " +
+                    $"Portal: {_beforChange.Portal} -> {_afterChange.Portal}, Spring: {_beforChange.Spring} -> {_afterChange.Spring}, " +
+                    $"Bomb: {_beforChange.Bomb} -> {_afterChange.Bomb}"; ;
         }
     }
 }

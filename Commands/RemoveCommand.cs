@@ -32,7 +32,8 @@ namespace SlidingTile_LevelEditor.Commands
                 Type = _floorTiles[_floorTileIndex].Type,
                 Number = _floorTiles[_floorTileIndex].Number,
                 Portal = _floorTiles[_floorTileIndex].Portal,
-                Spring = _floorTiles[_floorTileIndex].Spring
+                Spring = _floorTiles[_floorTileIndex].Spring,
+                Bomb = _floorTiles[_floorTileIndex].Bomb
             };
             _floorTiles.RemoveAt(_floorTileIndex);
         }
@@ -45,7 +46,8 @@ namespace SlidingTile_LevelEditor.Commands
                 Type = _beforChange.Type,
                 Number = _beforChange.Number,
                 Portal = _beforChange.Portal,
-                Spring = _beforChange.Spring
+                Spring = _beforChange.Spring,
+                Bomb = _beforChange.Bomb
             };
             _floorTiles.Insert(_floorTileIndex, floorTileToInser);
         }
@@ -55,8 +57,9 @@ namespace SlidingTile_LevelEditor.Commands
         }
         public override string ToString()
         {
-            return $"{_commandIndex}; Remove [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> null" +
-                    $", Portal: {_beforChange.Portal} -> null, Spring: {_beforChange.Spring} -> null";
+            return $"{_commandIndex}; Remove [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> null, " +
+                    $"Portal: {_beforChange.Portal} -> null, Spring: {_beforChange.Spring} -> null, " +
+                    $"Bomb: {_beforChange.Bomb} -> null";
         }
     }
 }

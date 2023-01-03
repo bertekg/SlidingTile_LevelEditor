@@ -38,12 +38,14 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = _floorTiles[_floorTileIndex].Type,
                     Number = _floorTiles[_floorTileIndex].Number,
                     Portal = _floorTiles[_floorTileIndex].Portal,
-                    Spring = _floorTiles[_floorTileIndex].Spring
+                    Spring = _floorTiles[_floorTileIndex].Spring,
+                    Bomb = _floorTiles[_floorTileIndex].Bomb 
                 };
                 _floorTiles[_floorTileIndex].Type = FloorTileType.Static;
                 _floorTiles[_floorTileIndex].Number = 0;
                 _floorTiles[_floorTileIndex].Portal = 0;
                 _floorTiles[_floorTileIndex].Spring = SpringDirection.Up;
+                _floorTiles[_floorTileIndex].Bomb = 0;
                 _afterChange = new FloorTile
                 {
                     PosX = _floorTiles[_floorTileIndex].PosX,
@@ -51,7 +53,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = _floorTiles[_floorTileIndex].Type,
                     Number = _floorTiles[_floorTileIndex].Number,
                     Portal = _floorTiles[_floorTileIndex].Portal,
-                    Spring = _floorTiles[_floorTileIndex].Spring
+                    Spring = _floorTiles[_floorTileIndex].Spring,
+                    Bomb = _floorTiles[_floorTileIndex].Bomb
                 };
             }
             else
@@ -64,7 +67,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = FloorTileType.Static,
                     Number = 0,
                     Portal = 0,
-                    Spring = SpringDirection.Up
+                    Spring = SpringDirection.Up,
+                    Bomb = 0
                 };
                 _floorTiles.Add(floorTile);
                 _afterChange = new FloorTile()
@@ -74,7 +78,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = floorTile.Type,
                     Number = floorTile.Number,
                     Portal = floorTile.Portal,
-                    Spring = floorTile.Spring
+                    Spring = floorTile.Spring,
+                    Bomb = floorTile.Bomb
                 };
                 _floorTileIndex = _floorTiles.Count - 1;
             }
@@ -87,6 +92,7 @@ namespace SlidingTile_LevelEditor.Commands
                 _floorTiles[_floorTileIndex].Number = _beforChange.Number;
                 _floorTiles[_floorTileIndex].Portal = _beforChange.Portal;
                 _floorTiles[_floorTileIndex].Spring = _beforChange.Spring;
+                _floorTiles[_floorTileIndex].Bomb = _beforChange.Bomb;
             }
             else
             {
@@ -104,7 +110,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = _afterChange.Type,
                     Number = _afterChange.Number,
                     Portal = _afterChange.Portal,
-                    Spring= _afterChange.Spring
+                    Spring = _afterChange.Spring,
+                    Bomb = _afterChange.Bomb
                 };
             }
             else
@@ -116,7 +123,8 @@ namespace SlidingTile_LevelEditor.Commands
                     Type = _afterChange.Type,
                     Number = _afterChange.Number,
                     Portal = _afterChange.Portal,
-                    Spring= _afterChange.Spring
+                    Spring = _afterChange.Spring,
+                    Bomb = _afterChange.Bomb
                 };
                 _floorTiles.Insert(_floorTileIndex, floorTileToInser);
             }
@@ -127,12 +135,14 @@ namespace SlidingTile_LevelEditor.Commands
             if (_beforChange != null)
             {
                 returnText = $"{_commandIndex}; Static [{_point.X},{_point.Y}] Number: {_beforChange.Number} -> {_afterChange.Number}, " +
-                     $"Portal: {_beforChange.Portal} -> {_afterChange.Portal}, Spring: {_beforChange.Spring} -> {_afterChange.Spring}";
+                     $"Portal: {_beforChange.Portal} -> {_afterChange.Portal}, Spring: {_beforChange.Spring} -> {_afterChange.Spring}, " +
+                     $"Bomb: {_beforChange.Bomb} -> {_afterChange.Bomb}";
             }
             else
             {
-                returnText = $"{_commandIndex}; Static [{_point.X},{_point.Y}] Number: null -> {_afterChange.Number}" +
-                    $", Portal: null -> {_afterChange.Portal}, Spring: null -> {_afterChange.Spring}";
+                returnText = $"{_commandIndex}; Static [{_point.X},{_point.Y}] Number: null -> {_afterChange.Number}, " +
+                    $"Portal: null -> {_afterChange.Portal}, Spring: null -> {_afterChange.Spring}, " +
+                    $"Bomb: null -> {_afterChange.Bomb}";
             }
             return returnText;
         }
