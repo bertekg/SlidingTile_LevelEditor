@@ -600,7 +600,7 @@ namespace SlidingTile_LevelEditor
                     {
                         MessageBox.Show("Cannot change Start floor tile to Bomb Init.", "Wrong Selection", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    else
+                    else if (floorTileIndex >= 0)
                     {
                         new BombInitDecCommand(_commands, _floorTiles, point, _indexCommand + 1, floorTileIndex);
                         PostCommandUpdate();
