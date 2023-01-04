@@ -18,9 +18,9 @@ namespace SlidingTile_LevelEditor.IconXMAL
     /// <summary>
     /// Interaction logic for DeleteAllTiles.xaml
     /// </summary>
-    public partial class DeleteAllTiles : UserControl
+    public partial class DeleteAllTilesIcon : UserControl
     {
-        public DeleteAllTiles()
+        public DeleteAllTilesIcon()
         {
             InitializeComponent();
         }

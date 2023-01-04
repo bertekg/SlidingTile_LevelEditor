@@ -110,13 +110,18 @@
                 <MenuItem Header="Tool">
                     <MenuItem Command="local:CustomCommands.DeleteAllTiles">
                         <MenuItem.Icon>
-                            <icons:DeleteAllTiles/>
+                            <icons:DeleteAllTilesIcon/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
                     <MenuItem Command="local:CustomCommands.Check">
                         <MenuItem.Icon>
                             <icons:CheckIcon/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Icon>
+                            <icons:PreviewProjectIcon/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
@@ -164,10 +169,13 @@
             </Button>
             <Separator/>
             <Button Command="local:CustomCommands.DeleteAllTiles" ToolTip="Delete All Tiles (Ctrl+Delete)">
-                <icons:DeleteAllTiles/>
+                <icons:DeleteAllTilesIcon/>
             </Button>
             <Button Command="local:CustomCommands.Check" ToolTip="Check Level (Ctrl+T)">
                 <icons:CheckIcon/>
+            </Button>
+            <Button ToolTip="Project Results">
+                <icons:PreviewProjectIcon/>
             </Button>
             <Button Command="local:CustomCommands.Options" ToolTip="Options (Alt+O)">
                 <icons:OptionIcon/>
