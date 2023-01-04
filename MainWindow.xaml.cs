@@ -1164,14 +1164,14 @@ namespace SlidingTile_LevelEditor
             checkLevelWindow.Close();
             return retrunVal;
         }
-        private void commandBinding_Option_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void commandBinding_Options_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
-        private void commandBinding_Option_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void commandBinding_Options_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            OptionWindow optionWindow = new OptionWindow();
-            optionWindow.ShowDialog();
+            OptionsWindow optionsWindow = new OptionsWindow();
+            optionsWindow.ShowDialog();
         }
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {

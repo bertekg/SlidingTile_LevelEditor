@@ -6,9 +6,9 @@ namespace SlidingTile_LevelEditor.Windows
     /// <summary>
     /// Interaction logic for OptionWindow.xaml
     /// </summary>
-    public partial class OptionWindow : Window
+    public partial class OptionsWindow : Window
     {
-        public OptionWindow()
+        public OptionsWindow()
         {
             InitializeComponent();
         }
