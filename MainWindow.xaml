@@ -166,7 +166,7 @@
             <Button Command="local:CustomCommands.DeleteAllTiles" ToolTip="Delete All Tiles (Ctrl+Delete)">
                 <icons:DeleteAllTiles/>
             </Button>
-            <Button Command="local:CustomCommands.Check" ToolTip="Check (Ctrl+T)">
+            <Button Command="local:CustomCommands.Check" ToolTip="Check Level (Ctrl+T)">
                 <icons:CheckIcon/>
             </Button>
             <Button Command="local:CustomCommands.Options" ToolTip="Options (Alt+O)">

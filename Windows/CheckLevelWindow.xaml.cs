@@ -21,11 +21,14 @@ namespace SlidingTile_LevelEditor.Windows
             CheckMinimumNumberTiles();
             CheckFloorTileRepeted();
             CheckPortalTile();
-            textBox_totalNumberTests.Text = (_failedTests.Count + _passedTests.Count).ToString();
+            double totalNumerOfTests = _failedTests.Count + _passedTests.Count;
+            textBox_totalNumberTests.Text = totalNumerOfTests.ToString();
             textBox_failNumberTests.Text = _failedTests.Count.ToString();
             listView_passedTest.ItemsSource = _passedTests;
             textBox_passNumberTests.Text = _passedTests.Count.ToString();
             listView_failedTest.ItemsSource = _failedTests;
+            pieFail.Slice = _failedTests.Count / totalNumerOfTests;
+            piePass.Slice = _passedTests.Count / totalNumerOfTests;
         }
         private void CheckPortalTile()
         {

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Check Level" Height="450" Width="800" KeyDown="Window_KeyDown" WindowStartupLocation="CenterScreen">
     <Grid>
@@ -13,13 +14,24 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Total number of tests:" Margin="5" VerticalAlignment="Center"/>
                 <TextBox Name="textBox_totalNumberTests" Text="None" Margin="5" VerticalAlignment="Center" IsReadOnly="True"/>
             </StackPanel>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Margin="5">
+                <Grid.Resources>
+                    <Style TargetType="xctk:Pie">
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="Height" Value="100"/>
+                    </Style>
+                </Grid.Resources>
+                <xctk:Pie Name="piePass" Mode="Manual" Slice="0.5" Fill="Green" SweepDirection="Counterclockwise"/>
+                <xctk:Pie Name="pieFail" Mode="Manual" Slice="0.5" Fill="Red"/>
+            </Grid>
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
@@ -30,8 +42,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Tests fails:" Margin="5" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="Tests failed [Red]:" Margin="5" VerticalAlignment="Center"/>
                         <TextBox Name="textBox_failNumberTests" Text="None" Margin="5" VerticalAlignment="Center" IsReadOnly="True"/>
                     </StackPanel>
                     <GroupBox Header="List of tests failed" Grid.Row="1">
@@ -47,7 +59,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Tests pass:" Margin="5" VerticalAlignment="Center"/>
+                        <TextBlock Text="Tests passed [Green]:" Margin="5" VerticalAlignment="Center"/>
                         <TextBox Name="textBox_passNumberTests" Text="None" Margin="5" VerticalAlignment="Center" IsReadOnly="True"/>
                     </StackPanel>
                     <GroupBox Header="List of tests pass" Grid.Row="1">

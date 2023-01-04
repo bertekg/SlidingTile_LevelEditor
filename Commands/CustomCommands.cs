@@ -17,7 +17,7 @@ namespace SlidingTile_LevelEditor
                 new KeyGesture(Key.Delete, ModifierKeys.Control)
            });
         public static readonly RoutedUICommand Check = new RoutedUICommand
-           ("Check", "Check", typeof(CustomCommands),
+           ("Check Level", "CheckLevel", typeof(CustomCommands),
            new InputGestureCollection()
            {
                 new KeyGesture(Key.T, ModifierKeys.Control)
