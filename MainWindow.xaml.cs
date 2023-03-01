@@ -1173,6 +1173,18 @@ namespace SlidingTile_LevelEditor
             OptionsWindow optionsWindow = new OptionsWindow();
             optionsWindow.ShowDialog();
         }
+
+        private void commandBinding_ProjectResults_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void commandBinding_ProjectResults_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ProjectResultsWindow projectResultsWindow = new ProjectResultsWindow();
+            projectResultsWindow.ShowDialog();
+        }
+
         private bool SaveProject(List<FloorTile> saveObject, string pName, string pPath)
         {
             bool correctSave = false;

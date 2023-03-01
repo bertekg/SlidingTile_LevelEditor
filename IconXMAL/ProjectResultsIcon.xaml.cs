@@ -18,9 +18,9 @@ namespace SlidingTile_LevelEditor.IconXMAL
     /// <summary>
     /// Interaction logic for PreviewProjectIcon.xaml
     /// </summary>
-    public partial class PreviewProjectIcon : UserControl
+    public partial class ProjectResultsIcon : UserControl
     {
-        public PreviewProjectIcon()
+        public ProjectResultsIcon()
         {
             InitializeComponent();
         }

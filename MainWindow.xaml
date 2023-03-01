@@ -18,6 +18,7 @@
         <CommandBinding Command="local:CustomCommands.Exit" CanExecute="commandBinding_Exit_CanExecute" Executed="commandBinding_Exit_Executed"/>
         <CommandBinding Command="local:CustomCommands.DeleteAllTiles" CanExecute="commandBinding_DeleteAllTiles_CanExecute" Executed="commandBinding_DeleteAllTiles_Executed"/>
         <CommandBinding Command="local:CustomCommands.Check" CanExecute="commandBinding_Check_CanExecute" Executed="commandBinding_Check_Executed"/>
+        <CommandBinding Command="local:CustomCommands.ProjectResults" CanExecute="commandBinding_ProjectResults_CanExecute" Executed="commandBinding_ProjectResults_Executed"/>
         <CommandBinding Command="local:CustomCommands.Options" CanExecute="commandBinding_Options_CanExecute" Executed="commandBinding_Options_Executed"/>
         <CommandBinding Command="local:CustomCommands.AboutProgram" CanExecute="commandBinding_AboutProgram_CanExecute" Executed="commandBinding_AboutProgram_Executed"/>
         <CommandBinding Command="local:CustomCommands.MoveViewUp" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewUp_Executed"/>
@@ -119,9 +120,9 @@
                             <icons:CheckIcon/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem Command="local:CustomCommands.ProjectResults">
                         <MenuItem.Icon>
-                            <icons:PreviewProjectIcon/>
+                            <icons:ProjectResultsIcon/>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator/>
@@ -174,8 +175,8 @@
             <Button Command="local:CustomCommands.Check" ToolTip="Check Level (Ctrl+T)">
                 <icons:CheckIcon/>
             </Button>
-            <Button ToolTip="Project Results">
-                <icons:PreviewProjectIcon/>
+            <Button Command="local:CustomCommands.ProjectResults" ToolTip="Project Results (Ctrl+R)">
+                <icons:ProjectResultsIcon/>
             </Button>
             <Button Command="local:CustomCommands.Options" ToolTip="Options (Alt+O)">
                 <icons:OptionIcon/>

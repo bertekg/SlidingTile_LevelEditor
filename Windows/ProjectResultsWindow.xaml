@@ -1,0 +1,12 @@
+﻿<Window x:Class="SlidingTile_LevelEditor.Windows.ProjectResultsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SlidingTile_LevelEditor.Windows"
+        mc:Ignorable="d"
+        Title="ProjectResultsWindow" Height="450" Width="800">
+    <Grid>
+        
+    </Grid>
+</Window>

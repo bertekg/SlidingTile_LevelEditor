@@ -22,6 +22,12 @@ namespace SlidingTile_LevelEditor
            {
                 new KeyGesture(Key.T, ModifierKeys.Control)
            });
+        public static readonly RoutedUICommand ProjectResults = new RoutedUICommand
+           ("Project Results", "ProjectResults", typeof(CustomCommands),
+           new InputGestureCollection()
+           {
+                new KeyGesture(Key.R, ModifierKeys.Control)
+           });
         public static readonly RoutedUICommand Options = new RoutedUICommand
            ("Options", "Options", typeof(CustomCommands),
            new InputGestureCollection()
