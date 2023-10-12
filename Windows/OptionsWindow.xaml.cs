@@ -1,27 +1,23 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace SlidingTile_LevelEditor.Windows
+namespace SlidingTile_LevelEditor.Windows;
+
+public partial class OptionsWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for OptionWindow.xaml
-    /// </summary>
-    public partial class OptionsWindow : Window
+    public OptionsWindow()
     {
-        public OptionsWindow()
-        {
-            InitializeComponent();
-        }
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return || e.Key == Key.Escape || e.Key == Key.Enter || e.Key == Key.Back)
-            {
-                Close();
-            }
-        }
-        private void bClose_Click(object sender, RoutedEventArgs e)
+        InitializeComponent();
+    }
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Return || e.Key == Key.Escape || e.Key == Key.Enter || e.Key == Key.Back)
         {
             Close();
         }
+    }
+    private void ButtonClose_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

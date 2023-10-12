@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Name="bClose" Grid.Column="2" Content="Close"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Margin="10" Padding="5" Click="bClose_Click"/>
+            <Button Name="bClose" Grid.Column="2" Content="Close"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Margin="10" Padding="5" Click="ButtonClose_Click"/>
         </Grid>
     </Grid>
 </Window>

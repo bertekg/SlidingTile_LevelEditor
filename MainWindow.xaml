@@ -9,46 +9,46 @@
         mc:Ignorable="d"
         Title="Sliding Tile - PC Level Editor" Height="720" Width="1280" WindowState="Maximized">
     <Window.CommandBindings>
-        <CommandBinding Command="New" CanExecute=" commandBinding_New_CanExecute" Executed="commandBinding_New_Executed"/>
-        <CommandBinding Command="Open" CanExecute="commandBinding_Open_CanExecute" Executed="commandBinding_Open_Executed"/>
-        <CommandBinding Command="Save" CanExecute="commandBinding_Save_CanExecute" Executed="commandBinding_Save_Executed"/>
-        <CommandBinding Command="SaveAs" CanExecute="commandBinding_SaveAs_CanExecute" Executed="commandBinding_SaveAs_Executed"/>
-        <CommandBinding Command="Undo" CanExecute="commandBinding_Undo_CanExecute" Executed="commandBinding_Undo_Executed"/>
-        <CommandBinding Command="Redo" CanExecute="commandBinding_Redo_CanExecute" Executed="commandBinding_Redo_Executed"/>
-        <CommandBinding Command="local:CustomCommands.Exit" CanExecute="commandBinding_Exit_CanExecute" Executed="commandBinding_Exit_Executed"/>
-        <CommandBinding Command="local:CustomCommands.DeleteAllTiles" CanExecute="commandBinding_DeleteAllTiles_CanExecute" Executed="commandBinding_DeleteAllTiles_Executed"/>
-        <CommandBinding Command="local:CustomCommands.Check" CanExecute="commandBinding_Check_CanExecute" Executed="commandBinding_Check_Executed"/>
-        <CommandBinding Command="local:CustomCommands.ProjectResults" CanExecute="commandBinding_ProjectResults_CanExecute" Executed="commandBinding_ProjectResults_Executed"/>
-        <CommandBinding Command="local:CustomCommands.Options" CanExecute="commandBinding_Options_CanExecute" Executed="commandBinding_Options_Executed"/>
-        <CommandBinding Command="local:CustomCommands.AboutProgram" CanExecute="commandBinding_AboutProgram_CanExecute" Executed="commandBinding_AboutProgram_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewUp" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewUp_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewDown" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewDown_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewLeft" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewLeft_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewRight" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewRight_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewLeftUp" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewLeftUp_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewRightUp" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewRightUp_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewLeftDown" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewLeftDown_Executed"/>
-        <CommandBinding Command="local:CustomCommands.MoveViewRightDown" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_MoveViewRightDown_Executed"/>
-        <CommandBinding Command="local:CustomCommands.FullLevelView" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_FullLevelView_Executed"/>
-        <CommandBinding Command="local:CustomCommands.ZoomOutView" CanExecute="commandBinding_MoveViewCommon_CanExecute" Executed="commandBinding_ZoomOutView_Executed"/>
-        <CommandBinding Command="local:CustomCommands.ZoomInView" CanExecute="commandBinding_ZoomInView_CanExecute" Executed="commandBinding_ZoomInView_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeNormalInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalInc_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeNormalDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeNormalDec_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeIceInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeIceInc_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeIceDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeIceDec_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeStatic" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeStatic_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModePortalInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModePortalInc_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModePortalDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModePortalDec_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeSpringInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringInc_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeSpringDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringDec_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeSpringLeft" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringLeft_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeSpringRight" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeSpringRight_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeBombInitialInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeBombInitialInc_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeBombInitialDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeBombInitialDec_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeBombModInc" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeBombModInc_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeBombModDec" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeBombModDec_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeFinish" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeFinish_Executed"/>
-        <CommandBinding Command="local:CustomCommands.EditModeDeleteTile" CanExecute="commandBinding_EditModeCommon_CanExecute" Executed="commandBinding_EditModeDeleteTile_Executed"/>
+        <CommandBinding Command="New" CanExecute="CommandBinding_New_CanExecute" Executed="CommandBinding_New_Executed"/>
+        <CommandBinding Command="Open" CanExecute="CommandBinding_Open_CanExecute" Executed="CommandBinding_Open_Executed"/>
+        <CommandBinding Command="Save" CanExecute="CommandBinding_Save_CanExecute" Executed="CommandBinding_Save_Executed"/>
+        <CommandBinding Command="SaveAs" CanExecute="CommandBinding_SaveAs_CanExecute" Executed="CommandBinding_SaveAs_Executed"/>
+        <CommandBinding Command="Undo" CanExecute="CommandBinding_Undo_CanExecute" Executed="CommandBinding_Undo_Executed"/>
+        <CommandBinding Command="Redo" CanExecute="CommandBinding_Redo_CanExecute" Executed="CommandBinding_Redo_Executed"/>
+        <CommandBinding Command="local:CustomCommands.Exit" CanExecute="CommandBinding_Exit_CanExecute" Executed="CommandBinding_Exit_Executed"/>
+        <CommandBinding Command="local:CustomCommands.DeleteAllTiles" CanExecute="CommandBinding_DeleteAllTiles_CanExecute" Executed="CommandBinding_DeleteAllTiles_Executed"/>
+        <CommandBinding Command="local:CustomCommands.Check" CanExecute="CommandBinding_Check_CanExecute" Executed="CommandBinding_Check_Executed"/>
+        <CommandBinding Command="local:CustomCommands.ProjectResults" CanExecute="CommandBinding_ProjectResults_CanExecute" Executed="CommandBinding_ProjectResults_Executed"/>
+        <CommandBinding Command="local:CustomCommands.Options" CanExecute="CommandBinding_Options_CanExecute" Executed="CommandBinding_Options_Executed"/>
+        <CommandBinding Command="local:CustomCommands.AboutProgram" CanExecute="CommandBinding_AboutProgram_CanExecute" Executed="CommandBinding_AboutProgram_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewUp" CanExecute="CommandBinding_MoveViewCommon_CanExecute" Executed="CommandBinding_MoveViewUp_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewDown" CanExecute="CommandBinding_MoveViewCommon_CanExecute" Executed="CommandBinding_MoveViewDown_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewLeft" CanExecute="CommandBinding_MoveViewCommon_CanExecute" Executed="CommandBinding_MoveViewLeft_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewRight" CanExecute="CommandBinding_MoveViewCommon_CanExecute" Executed="CommandBinding_MoveViewRight_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewLeftUp" CanExecute="CommandBinding_MoveViewCommon_CanExecute" Executed="CommandBinding_MoveViewLeftUp_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewRightUp" CanExecute="CommandBinding_MoveViewCommon_CanExecute" Executed="CommandBinding_MoveViewRightUp_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewLeftDown" CanExecute="CommandBinding_MoveViewCommon_CanExecute" Executed="CommandBinding_MoveViewLeftDown_Executed"/>
+        <CommandBinding Command="local:CustomCommands.MoveViewRightDown" CanExecute="CommandBinding_MoveViewCommon_CanExecute" Executed="CommandBinding_MoveViewRightDown_Executed"/>
+        <CommandBinding Command="local:CustomCommands.FullLevelView" CanExecute="CommandBinding_MoveViewCommon_CanExecute" Executed="CommandBinding_FullLevelView_Executed"/>
+        <CommandBinding Command="local:CustomCommands.ZoomOutView" CanExecute="CommandBinding_MoveViewCommon_CanExecute" Executed="CommandBinding_ZoomOutView_Executed"/>
+        <CommandBinding Command="local:CustomCommands.ZoomInView" CanExecute="CommandBinding_ZoomInView_CanExecute" Executed="CommandBinding_ZoomInView_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeNormalInc" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeNormalInc_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeNormalDec" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeNormalDec_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeIceInc" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeIceInc_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeIceDec" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeIceDec_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeStatic" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeStatic_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModePortalInc" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModePortalInc_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModePortalDec" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModePortalDec_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeSpringInc" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeSpringInc_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeSpringDec" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeSpringDec_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeSpringLeft" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeSpringLeft_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeSpringRight" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeSpringRight_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeBombInitialInc" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeBombInitialInc_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeBombInitialDec" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeBombInitialDec_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeBombModInc" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeBombModInc_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeBombModDec" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeBombModDec_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeFinish" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeFinish_Executed"/>
+        <CommandBinding Command="local:CustomCommands.EditModeDeleteTile" CanExecute="CommandBinding_EditModeCommon_CanExecute" Executed="CommandBinding_EditModeDeleteTile_Executed"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -228,13 +228,13 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="X Min" Grid.Row="2" Grid.Column="0"/>
-                                    <xctk:IntegerUpDown Name="iudAreaViewDimMinX" Grid.Row="3" Grid.Column="0" Value="-1" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMinX" Grid.Row="3" Grid.Column="0" Value="-1" ValueChanged="IntegerUpDown_AreaViewDim_ValueChanged"/>
                                     <TextBlock Text="X Max" Grid.Row="2" Grid.Column="2"/>
-                                    <xctk:IntegerUpDown Name="iudAreaViewDimMaxX" Grid.Row="3" Grid.Column="2" Value="1" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMaxX" Grid.Row="3" Grid.Column="2" Value="1" ValueChanged="IntegerUpDown_AreaViewDim_ValueChanged"/>
                                     <TextBlock Text="Y Min" Grid.Row="4" Grid.Column="1"/>
-                                    <xctk:IntegerUpDown Name="iudAreaViewDimMinY" Grid.Column="1" Grid.Row="5" Value="-1" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMinY" Grid.Column="1" Grid.Row="5" Value="-1" ValueChanged="IntegerUpDown_AreaViewDim_ValueChanged"/>
                                     <TextBlock Text="Y Max" Grid.Row="0" Grid.Column="1"/>
-                                    <xctk:IntegerUpDown Name="iudAreaViewDimMaxY" Grid.Row="1" Grid.Column="1" Value="1" ValueChanged="iudAreaViewDim_ValueChanged"/>
+                                    <xctk:IntegerUpDown Name="iudAreaViewDimMaxY" Grid.Row="1" Grid.Column="1" Value="1" ValueChanged="IntegerUpDown_AreaViewDim_ValueChanged"/>
                                 </Grid>
                             </GroupBox>
                             <GroupBox Header="View Navigation" Grid.Row="1">
@@ -525,7 +525,7 @@
                     </ScrollViewer>
                 </GroupBox>
                 <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" ResizeBehavior="PreviousAndNext" Height="5"/>
-                <Viewbox Name="vPlaceAllCells" Grid.Row="2" Stretch="Uniform" MouseWheel="vPlaceAllCells_MouseWheel">
+                <Viewbox Name="vPlaceAllCells" Grid.Row="2" Stretch="Uniform" MouseWheel="ViewPlaceAllCells_MouseWheel">
                     <Grid Name="gMainPlaceGrid" ShowGridLines="True">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

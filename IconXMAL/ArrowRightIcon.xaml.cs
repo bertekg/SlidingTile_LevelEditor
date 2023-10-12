@@ -1,28 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
-namespace SlidingTile_LevelEditor.IconXMAL
+namespace SlidingTile_LevelEditor.IconXMAL;
+
+public partial class ArrowRightIcon : UserControl
 {
-    /// <summary>
-    /// Interaction logic for ArrowRightIcon.xaml
-    /// </summary>
-    public partial class ArrowRightIcon : UserControl
+    public ArrowRightIcon()
     {
-        public ArrowRightIcon()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
